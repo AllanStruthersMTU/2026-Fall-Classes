@@ -1,0 +1,334 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,mathtools,booktabs,array,graphicx,subcaption}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\newcommand{\Sop}{\mathcal{S}}
+\newcommand{\cay}{\operatorname{cay}}
+\newcommand{\fl}{\operatorname{fl}}
+\title{Adaptive Structure-Preserving Continuous QR Methods for Sensitivity Growth and Lyapunov Computation\\\large Draft}
+\author{Allan Struthers}
+\date{\today}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+For a nonlinear dynamical system $\dot y=f(y)$, the sensitivity matrix $J$ satisfies $\dot J=A(t)J$, where $A(t)=Df(y(t))$. Direct propagation of $J$ becomes severely ill-scaled when Lyapunov exponents are separated. Continuous QR replaces this growth by an orthogonal evolution and an upper-triangular growth equation. We study two adaptive, structure-preserving algorithms for the orthogonal factor. The first applies a standard embedded explicit Runge--Kutta method to a step-local Cayley-coordinate ODE. The second uses implicit midpoint in Cayley coordinates, computes two half steps before the full step, reuses the refined solution as a high-order predictor for the full-step nonlinear solve, and combines the full and refined endpoints by Richardson extrapolation in a common Cayley chart. Both methods preserve orthogonality algebraically at accepted endpoints. We compare them with naive direct Runge--Kutta integration of the continuous QR equation and with conventional QR-based Lyapunov calculations. A numerical test suite is proposed that includes the Lorenz, R\"ossler, hyperchaotic R\"ossler, Lorenz--96, Sprott, and Chen systems.
+\end{abstract}
+
+\section{Introduction}
+Consider the autonomous system
+\begin{equation}
+ \dot y=f(y), \qquad y(0)=y_0,
+ \label{eq:state}
+\end{equation}
+with variational equation
+\begin{equation}
+ \dot J=A(t)J,\qquad A(t)=Df(y(t)),\qquad J(0)=I.
+ \label{eq:variational}
+\end{equation}
+The singular values of $J(t)$ describe finite-time sensitivity growth, while their long-time logarithmic growth rates are related to Lyapunov exponents. Direct propagation of \eqref{eq:variational} is numerically unattractive over long intervals because the columns of $J$ become exponentially ill-scaled and nearly linearly dependent.
+
+Discrete QR reorthogonalization and continuous orthonormalization are standard remedies; see, among others, Benettin et al.~\cite{Benettin1980}, Dieci, Russell, and Van Vleck~\cite{DieciRussellVanVleck1994,DieciRussellVanVleck1997}, and Bridges and Reich~\cite{BridgesReich2001}. Writing
+\begin{equation}
+ J(t)=Q(t)R(t),\qquad Q^TQ=I,
+ \label{eq:qr}
+\end{equation}
+and defining
+\begin{equation}
+ B=Q^TAQ,
+ \label{eq:B}
+\end{equation}
+we introduce the skew extraction
+\begin{equation}
+ [\Sop(B)]_{ij}=\begin{cases}
+ B_{ij},&i>j,\\
+ 0,&i=j,\\
+ -B_{ji},&i<j.
+ \end{cases}
+ \label{eq:S}
+\end{equation}
+Then the orthogonal factor obeys the closed equation
+\begin{equation}
+ \dot Q=Q\Omega,\qquad \Omega=\Sop(Q^TAQ),
+ \label{eq:qflow}
+\end{equation}
+and the diagonal growth can be accumulated without propagating large or small diagonal entries of $R$:
+\begin{equation}
+ \dot\ell_i=(Q^TAQ)_{ii},\qquad \ell_i=\log R_{ii}.
+ \label{eq:growth}
+\end{equation}
+
+The numerical issue is therefore to integrate \eqref{eq:qflow} accurately and adaptively while respecting $Q^TQ=I$. Gauss--Legendre Runge--Kutta methods preserve quadratic invariants, and unitary integrators for continuous orthonormalization were developed in \cite{DieciRussellVanVleck1994}. Cayley-coordinate approaches to unitary differential systems were developed by Diele, Lopez, and Peluso~\cite{DieleLopezPeluso1998}. Extrapolation on Lie groups was studied by Wensch~\cite{Wensch2001} and Wensch and Casas~\cite{WenschCasas2002}; adaptive Lie-group methods based on embedded pairs are represented by Curry and Owren~\cite{CurryOwren2019}.
+
+This paper investigates two constructions specialized to the continuous QR sensitivity problem. The first restarts a Cayley chart at every accepted step and integrates the resulting skew-coordinate ODE with standard adaptive embedded RK pairs. The second combines implicit midpoint, Cayley reconstruction, step doubling, and predictor reuse. The specialization is important: the triangular extraction $\Sop$, the growth variables \eqref{eq:growth}, and the contraction properties of the midpoint internal solve are all tied directly to continuous QR.
+
+\section{Prior art and relation to the present algorithms}
+Continuous QR methods and their stability for Lyapunov computations are developed in \cite{DieciRussellVanVleck1997}. The geometric Stiefel-manifold viewpoint and the importance of maintaining orthogonality are emphasized in \cite{BridgesReich2001}. Diele, Lopez, and Peluso transform unitary matrix ODEs to skew-Hermitian Cayley coordinates and apply semi-explicit numerical schemes requiring linear matrix solves but no nonlinear iteration \cite{DieleLopezPeluso1998}. Their work establishes that Cayley coordinates are a natural computational device for unitary evolution and discusses restarting when a persistent Cayley chart approaches its singular set.
+
+Wensch's Lie-group extrapolation theory proves the appropriate even-power error expansions for symmetric base methods \cite{Wensch2001}; Wensch and Casas implement extrapolation through Lie-algebra endpoint generators and approximate BCH formulas \cite{WenschCasas2002}. Consequently, midpoint extrapolation on an orthogonal group is not itself new. Our proposed extrapolation should instead be viewed as a continuous-QR specialization in which the common endpoint coordinate is the inverse Cayley chart and the refined two-half-step solution is reused both as extrapolation data and as a high-order predictor for the harder full-step implicit solve.
+
+For conventional adaptive explicit integration we use two reference embedded pairs. Owren--Zennaro order $4(3)$ methods provide an order-matched FSAL comparison \cite{OwrenZennaro1992}. Tsitouras' $5(4)$ pair provides the widely used higher-order reference represented by \texttt{Tsit5} in Julia's OrdinaryDiffEq ecosystem \cite{Tsitouras2011}.
+
+\section{Algorithm I: step-local Cayley embedded RK}
+At the beginning of each accepted macrostep write
+\begin{equation}
+ Q(t_n+\tau)=Q_n C(\tau),\qquad C(0)=I,
+ \label{eq:localQ}
+\end{equation}
+with
+\begin{equation}
+ C=\cay(K)=(I+K)(I-K)^{-1},\qquad K^T=-K,\qquad K(0)=0.
+ \label{eq:cayley}
+\end{equation}
+Let
+\begin{equation}
+ G(\tau)=Q_n^TA(t_n+\tau)Q_n,
+ \label{eq:G}
+\end{equation}
+and
+\begin{equation}
+ B=C^TG C,\qquad \Omega=\Sop(B).
+ \label{eq:localB}
+\end{equation}
+Differentiation of the Cayley map gives the closed skew ODE
+\begin{equation}
+ \boxed{\dot K=\frac12(I+K)\Omega(I-K)}.
+ \label{eq:Kode}
+\end{equation}
+Equivalently,
+\begin{equation}
+ \boxed{\dot K=\frac12\left(\Omega+[K,\Omega]-K\Omega K\right)}.
+ \label{eq:KodeExpanded}
+\end{equation}
+The growth variables are advanced simultaneously by
+\begin{equation}
+ \dot\ell_i=B_{ii}.
+ \label{eq:localgrowth}
+\end{equation}
+Any ordinary explicit RK method applied to \eqref{eq:Kode} evolves in the linear space of skew matrices. At an accepted endpoint,
+\begin{equation}
+ Q_{n+1}=Q_n\cay(K_{n+1})
+ \label{eq:rkendpoint}
+\end{equation}
+is orthogonal to roundoff. We test both \texttt{OwrenZen4} [order $4(3)$, FSAL] and \texttt{Tsit5} [order $5(4)$, FSAL].
+
+\subsection{Dense work model}
+For dense $n\times n$ matrices we use the conventional leading costs
+\begin{equation}
+ \mathrm{GEMM}=2n^3,\qquad \mathrm{LU}=\frac23n^3,
+ \qquad \mathrm{TRSM}(n\ \mathrm{RHS})=2n^3.
+ \label{eq:flops}
+\end{equation}
+The Cayley solve can be organized using one factorization because
+\begin{equation}
+ I+K=(I-K)^T.
+ \label{eq:transposeShift}
+\end{equation}
+Only one triangular half of $B$ is needed to construct $\Sop(B)$ and its diagonal. Detailed measured flop and timing results will be reported together with the theoretical leading-order model.
+
+\section{Algorithm II: extrapolated implicit midpoint with predictor reuse}
+For a midpoint substep of length $\delta$, define
+\begin{equation}
+ G=Q_a^T A(t_a+\delta/2)Q_a.
+ \label{eq:midG}
+\end{equation}
+The Cayley midpoint variable satisfies
+\begin{equation}
+ \boxed{K=\frac{\delta}{2}\Sop\left((I+K)^{-1}G(I-K)^{-1}\right)}.
+ \label{eq:midpointK}
+\end{equation}
+We solve \eqref{eq:midpointK} by fixed-point iteration (with simplified or full Newton as fallback if desired). For a macrostep $h$, first compute two $h/2$ midpoint steps. If their relative rotations are $C_1$ and $C_2$, form
+\begin{equation}
+ C_2^{\mathrm{net}}=C_1C_2
+ \label{eq:netC}
+\end{equation}
+and its inverse-Cayley coordinate
+\begin{equation}
+ K_2=(C_2^{\mathrm{net}}-I)(C_2^{\mathrm{net}}+I)^{-1}.
+ \label{eq:K2}
+\end{equation}
+The refined $K_2$ is then used as the initial predictor for the full-step midpoint solve, producing $K_1$. Locally the predictor error is $O(h^3)$ rather than the $O(h^2)$ error of the elementary linear predictor.
+
+The fourth-order extrapolated endpoint coordinate is
+\begin{equation}
+ \boxed{K_{\mathrm{ext}}=\frac{4K_2-K_1}{3}},
+ \label{eq:richardson}
+\end{equation}
+and the accepted orthogonal endpoint is
+\begin{equation}
+ \boxed{Q_{n+1}=Q_n\cay(K_{\mathrm{ext}})}.
+ \label{eq:midendpoint}
+\end{equation}
+A natural step-doubling indicator is
+\begin{equation}
+ E_2=-\frac13(K_2-K_1),
+ \label{eq:error}
+\end{equation}
+with a conservative controller based on the cubic scaling of the underlying midpoint discrepancy,
+\begin{equation}
+ h_{\mathrm{new}}=\theta h\,\epsilon^{-1/3}.
+ \label{eq:controller}
+\end{equation}
+The accepted solution \eqref{eq:midendpoint} is fourth order, while \eqref{eq:error} controls the second-order step-doubling discrepancy.
+
+If the two half-step internal solves require $r_2$ iterations each and the accurately predicted full-step solve requires $r_1$ iterations, the dense leading-order work model developed for the specialized implementation is
+\begin{equation}
+ W_{\mathrm{MidExt}}\approx\left[27.33+4.667(2r_2+r_1)\right]n^3.
+ \label{eq:midwork}
+\end{equation}
+The experiments will record the actual distributions of $r_1$ and $r_2$, since these determine whether the implicit construction is competitive with explicit FSAL Cayley integration.
+
+\section{Naive comparison solvers}
+We include direct adaptive RK integration of \eqref{eq:qflow}, with no Cayley coordinate. This is the inexpensive baseline but does not preserve $Q^TQ=I$ algebraically. We test
+\begin{enumerate}
+ \item \texttt{OwrenZen4} direct-$Q$ [order $4(3)$, FSAL],
+ \item \texttt{Tsit5} direct-$Q$ [order $5(4)$, FSAL],
+ \item the corresponding step-local Cayley versions,
+ \item extrapolated implicit midpoint [order $4$], and
+ \item a conventional discrete-QR sensitivity/Lyapunov calculation as a reference method.
+\end{enumerate}
+A projected direct-$Q$ variant, with endpoint QR reorthogonalization after each accepted step, should also be included because it is a strong practical baseline.
+
+\section{Test problems}
+The suite is deliberately mixed: low-dimensional canonical chaotic systems expose geometric and long-time behavior, while Lorenz--96 provides a scalable dense sensitivity problem.
+
+\subsection{Lorenz system}
+The standard Lorenz equations \cite{Lorenz1963} are
+\begin{align}
+ \dot x&=\sigma(y-x),\label{eq:lorenz1}\\
+ \dot y&=x(\rho-z)-y,\label{eq:lorenz2}\\
+ \dot z&=xy-\beta z,\label{eq:lorenz3}
+\end{align}
+with
+\begin{equation}
+ (\sigma,\rho,\beta)=(10,28,8/3).
+ \label{eq:lorenzpar}
+\end{equation}
+
+\subsection{R\"ossler system}
+The standard R\"ossler system \cite{Rossler1976} is
+\begin{align}
+ \dot x&=-y-z,\label{eq:ross1}\\
+ \dot y&=x+ay,\label{eq:ross2}\\
+ \dot z&=b+z(x-c),\label{eq:ross3}
+\end{align}
+with the commonly used chaotic parameters
+\begin{equation}
+ (a,b,c)=(0.2,0.2,5.7).
+ \label{eq:rosspar}
+\end{equation}
+
+\subsection{Hyperchaotic R\"ossler system}
+R\"ossler's first hyperchaotic four-dimensional flow \cite{Rossler1979} is
+\begin{align}
+ \dot x&=-y-z,\label{eq:hross1}\\
+ \dot y&=x+ay+w,\label{eq:hross2}\\
+ \dot z&=b+xz,\label{eq:hross3}\\
+ \dot w&=-cz+dw,\label{eq:hross4}
+\end{align}
+with
+\begin{equation}
+ (a,b,c,d)=(0.25,3,0.5,0.05).
+ \label{eq:hrosspar}
+\end{equation}
+This problem is particularly valuable because two positive Lyapunov exponents test the ability to track a genuinely multidirectional unstable subspace.
+
+\subsection{Lorenz--96}
+For dimension $N$, Lorenz--96 is
+\begin{equation}
+ \dot x_i=(x_{i+1}-x_{i-2})x_{i-1}-x_i+F,
+ \qquad i=1,\ldots,N,
+ \label{eq:l96}
+\end{equation}
+with cyclic indices. We use the standard benchmark
+\begin{equation}
+ N=40,\qquad F=8,
+ \label{eq:l96par}
+\end{equation}
+following Lorenz and Emanuel \cite{LorenzEmanuel1998}. Additional runs with $N=10,20,40,80$ will assess scaling.
+
+\subsection{Additional low-dimensional chaotic benchmarks}
+We include selected Sprott flows from the catalog of simple quadratic chaotic systems \cite{Sprott1994}; these provide inexpensive systems with different Jacobian structures and Lyapunov spectra. We also include the Chen attractor \cite{ChenUeta1999}, using the standard parameters reported with the original system. The exact subset and initial conditions will be frozen in the computational appendix before production runs.
+
+\subsection{Linear verification problems}
+Before chaotic tests, each implementation should be verified on constant and time-dependent linear problems for which $J(t)$ or a high-accuracy reference solution is available. We include: (i) diagonal $A$; (ii) a strongly nonnormal upper-triangular $A$; (iii) a rotating symmetric part $A(t)=U(t)DU(t)^T$; and (iv) clustered and repeated instantaneous growth rates. These tests separate implementation error from chaotic trajectory divergence.
+
+\section{Metrics and experimental protocol}
+For each method, problem, and tolerance we record:
+\begin{enumerate}
+ \item wall-clock time, accepted/rejected steps, RHS/Jacobian evaluations, dense factorizations, and GEMM-equivalent work;
+ \item maximum and RMS orthogonality defects
+ \begin{equation}
+ e_Q(t)=\|Q(t)^TQ(t)-I\|_F;
+ \label{eq:orthmetric}
+ \end{equation}
+ \item finite-time Lyapunov estimates
+ \begin{equation}
+ \widehat\lambda_i(T)=\frac{\ell_i(T)-\ell_i(0)}{T};
+ \label{eq:lemetric}
+ \end{equation}
+ \item error in $Q$, subspace/projector error, and error in accumulated $\ell_i$ against a tight-tolerance reference;
+ \item for midpoint extrapolation, distributions of $r_1$, $r_2$, contraction indicators, and nonlinear residuals;
+ \item step-size histories and rejection locations;
+ \item for direct-$Q$ methods, growth of the orthogonality defect and the cost/effect of endpoint QR projection;
+ \item scaling with dimension $N$ on Lorenz--96 and scaling with requested tolerance.
+\end{enumerate}
+Because chaotic trajectories separate exponentially, state-space trajectory error alone is not an adequate long-time metric. Comparisons will therefore distinguish short-time trajectory accuracy from long-time statistical/Lyapunov accuracy.
+
+\section{Standard output graph suite}
+The production scripts should generate the following figure set for every principal test problem.
+
+\begin{figure}[htbp]
+ \centering
+ \fbox{\parbox[c][1.35in][c]{0.9\linewidth}{\centering SLOT A: Work--precision diagram: error in $Q$/projector and $\ell$ versus wall time and GEMM-equivalent work.}}
+ \caption{Work--precision comparison.}
+ \label{fig:workprecision}
+\end{figure}
+
+\begin{figure}[htbp]
+ \centering
+ \fbox{\parbox[c][1.35in][c]{0.9\linewidth}{\centering SLOT B: Orthogonality defect $\|Q^TQ-I\|_F$ versus time for all solvers.}}
+ \caption{Preservation of orthogonality.}
+ \label{fig:orthogonality}
+\end{figure}
+
+\begin{figure}[htbp]
+ \centering
+ \fbox{\parbox[c][1.35in][c]{0.9\linewidth}{\centering SLOT C: Adaptive step size versus time; rejected steps marked.}}
+ \caption{Adaptive step-size histories.}
+ \label{fig:steps}
+\end{figure}
+
+\begin{figure}[htbp]
+ \centering
+ \fbox{\parbox[c][1.35in][c]{0.9\linewidth}{\centering SLOT D: Running finite-time Lyapunov exponents $\widehat\lambda_i(t)$.}}
+ \caption{Convergence of Lyapunov estimates.}
+ \label{fig:lyapunov}
+\end{figure}
+
+\begin{figure}[htbp]
+ \centering
+ \fbox{\parbox[c][1.35in][c]{0.9\linewidth}{\centering SLOT E: Midpoint iteration statistics: histograms/time traces of $r_1$, $r_2$, residuals, and predicted contraction.}}
+ \caption{Internal nonlinear-solve behavior of extrapolated midpoint.}
+ \label{fig:iterations}
+\end{figure}
+
+\begin{figure}[htbp]
+ \centering
+ \fbox{\parbox[c][1.35in][c]{0.9\linewidth}{\centering SLOT F: Dimension scaling on Lorenz--96: runtime and normalized $n^3$ work versus $N$.}}
+ \caption{Dimension scaling.}
+ \label{fig:scaling}
+\end{figure}
+
+\section{Questions to be answered numerically}
+The experiments are intended to determine whether the extra algebra required to remain on the orthogonal group is repaid by improved robustness and larger admissible steps. In particular: (i) does the two-half-step predictor routinely reduce the full midpoint solve to one or two iterations; (ii) at matched fourth order, when does extrapolated midpoint outperform the FSAL Cayley Owren--Zennaro method; (iii) how much accuracy is lost by naive direct-$Q$ RK before endpoint projection becomes necessary; (iv) does the fifth-order Tsitouras method dominate at tight tolerances despite its larger per-step work; and (v) how do these conclusions change with dimension and with multiple positive Lyapunov exponents?
+
+\section{Conclusions and planned extensions}
+The present draft defines two structure-preserving adaptive approaches specialized to continuous QR sensitivity propagation. The first converts the orthogonal evolution to a restarted skew Cayley ODE and delegates adaptivity to standard embedded RK technology. The second uses the symmetry and quadratic-invariant preservation of implicit midpoint, but reduces its practical cost through step doubling and predictor reuse. The numerical study will determine the range in which the implicit method's internal iteration count remains low enough to compete with FSAL explicit methods.
+
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}
