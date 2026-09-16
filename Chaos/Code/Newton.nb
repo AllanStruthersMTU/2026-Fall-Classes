@@ -59231,7 +59231,7 @@ Cell[BoxData[
    Epilog->PointBox[{1.5853147890154893`, 2.1674571906716404`}],
    Frame->True,
    GridLines->Automatic,
-   PlotRange->All]}}, 3]], "Output",
+   PlotRange->All]}}, 1]], "Output",
  CellChangeTimes->{
   3.9984677661753473`*^9, {3.99846781916914*^9, 3.9984678386656895`*^9}, {
    3.9984678889005847`*^9, 3.998467908429268*^9}, {3.9984679427778196`*^9, 
@@ -59323,7 +59323,7 @@ Cell[1788265, 29675, 1738473, 28706, 623, "Output",ExpressionUUID->"a4be1efe-f01
 }, Open  ]],
 Cell[CellGroupData[{
 Cell[3526775, 58386, 2656, 71, 328, "Input",ExpressionUUID->"e9eeba69-3723-4b01-91e4-b96c87f53a25"],
-Cell[3529434, 58459, 13933, 359, 429, "Output",ExpressionUUID->"6ca95388-fd19-4ca7-ad92-f65e4ea7387a"]
+Cell[3529434, 58459, 13933, 359, 413, "Output",ExpressionUUID->"6ca95388-fd19-4ca7-ad92-f65e4ea7387a"]
 }, Open  ]],
 Cell[CellGroupData[{
 Cell[3543404, 58823, 2626, 70, 300, "Input",ExpressionUUID->"57518a43-af67-4bdc-b265-257abeb9c7fe"],
