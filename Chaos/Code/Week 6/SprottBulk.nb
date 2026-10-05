@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     27967,        779]
-NotebookOptionsPosition[     26814,        752]
-NotebookOutlinePosition[     27290,        770]
-CellTagsIndexPosition[     27247,        767]
+NotebookDataLength[     28249,        783]
+NotebookOptionsPosition[     27102,        756]
+NotebookOutlinePosition[     27570,        774]
+CellTagsIndexPosition[     27527,        771]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -689,11 +689,15 @@ Cell[BoxData[{
 Cell["\<\
 I put them in an association rather than a list.  The delayed assignment \
 \[RuleDelayed] means the right hand side is not evaluated until called. An \
-association means you can call things out by names \
+association means you can call things out by name.  This matches up directly \
+with dictionaries in Julia, Python, and MATLAB.   All also have some type of \
+lower level \[OpenCurlyDoubleQuote]struct\[CloseCurlyDoubleQuote] \
+construction. \
 \>", "Text",
  CellChangeTimes->{{4.0001956970688405`*^9, 4.0001957540613422`*^9}, {
-  4.0001969109263287`*^9, 
-  4.000196941961935*^9}},ExpressionUUID->"1f01e76b-f404-4cab-a833-\
+  4.0001969109263287`*^9, 4.000196941961935*^9}, {4.000202689793105*^9, 
+  4.0002027411719456`*^9}, {4.0002027882734413`*^9, 
+  4.000202828254903*^9}},ExpressionUUID->"1f01e76b-f404-4cab-a833-\
 79d24c910925"],
 
 Cell[CellGroupData[{
@@ -752,9 +756,9 @@ Cell["What else do I need to define? What functions do I want? ", "Text",
 },
 WindowSize->{1429, 748.5},
 WindowMargins->{{1601.5, Automatic}, {369, Automatic}},
-TaggingRules->Association["TryRealOnly" -> False],
+TaggingRules-><|"TryRealOnly" -> False|>,
 Magnification->1.5,
-FrontEndVersion->"12.3 for Microsoft Windows (64-bit) (July 9, 2021)",
+FrontEndVersion->"13.3 for Microsoft Windows (64-bit) (July 24, 2023)",
 StyleDefinitions->"Default.nb",
 ExpressionUUID->"68874182-c2ed-41a9-8fd9-d7e8d1291b52"
 ]
@@ -773,13 +777,13 @@ Cell[CellGroupData[{
 Cell[580, 22, 321, 5, 146, "Title",ExpressionUUID->"ee41a007-0d2f-4b6e-9991-30a592e66adf"],
 Cell[904, 29, 660, 11, 87, "Text",ExpressionUUID->"6804a1f1-275c-43ae-8189-fe9d33960021"],
 Cell[1567, 42, 22801, 644, 871, "Input",ExpressionUUID->"75baa84a-ca55-4215-aaff-55207f86e543"],
-Cell[24371, 688, 408, 8, 87, "Text",ExpressionUUID->"1f01e76b-f404-4cab-a833-79d24c910925"],
+Cell[24371, 688, 696, 12, 121, "Text",ExpressionUUID->"1f01e76b-f404-4cab-a833-79d24c910925"],
 Cell[CellGroupData[{
-Cell[24804, 700, 354, 6, 71, "Input",ExpressionUUID->"40d7fa3a-d1e7-42c5-a31d-3fab8c5b0c97"],
-Cell[25161, 708, 1109, 28, 48, "Output",ExpressionUUID->"ab1cf211-ecc8-4c8e-ae4c-7c5ee101d723"],
-Cell[26273, 738, 307, 5, 48, "Output",ExpressionUUID->"b0cee64d-b8b2-45a8-b43c-53a268e268a8"]
+Cell[25092, 704, 354, 6, 71, "Input",ExpressionUUID->"40d7fa3a-d1e7-42c5-a31d-3fab8c5b0c97"],
+Cell[25449, 712, 1109, 28, 48, "Output",ExpressionUUID->"ab1cf211-ecc8-4c8e-ae4c-7c5ee101d723"],
+Cell[26561, 742, 307, 5, 48, "Output",ExpressionUUID->"b0cee64d-b8b2-45a8-b43c-53a268e268a8"]
 }, Open  ]],
-Cell[26595, 746, 203, 3, 52, "Text",ExpressionUUID->"d20414da-e570-4b1a-80d3-9e342b463484"]
+Cell[26883, 750, 203, 3, 52, "Text",ExpressionUUID->"d20414da-e570-4b1a-80d3-9e342b463484"]
 }, Open  ]]
 }
 ]
