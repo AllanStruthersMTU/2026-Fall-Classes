@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     29429,        811]
+NotebookDataLength[     29430,        811]
 NotebookOptionsPosition[     27867,        775]
-NotebookOutlinePosition[     28370,        794]
-CellTagsIndexPosition[     28327,        791]
+NotebookOutlinePosition[     28371,        794]
+CellTagsIndexPosition[     28328,        791]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -775,7 +775,7 @@ Cell["What else do I need to define? What functions do I want? ", "Text",
 },
 WindowToolbars->"EditBar",
 WindowSize->{1429, 743},
-WindowMargins->{{1657.5, Automatic}, {271.5, Automatic}},
+WindowMargins->{{1657.5, Automatic}, {Automatic, -247.5}},
 TaggingRules->Association["TryRealOnly" -> False],
 Magnification->1.5,
 FrontEndVersion->"12.3 for Microsoft Windows (64-bit) (July 9, 2021)",
