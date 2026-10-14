@@ -1,0 +1,104 @@
+% Values match ThreeTanks.tex. Update both if the example data change.
+\begin{frame}{Tank Volumes}
+\begin{enumerate}
+  \item Volume change in $\mathrm{L/min}$ is
+  inflows minus outflows.
+  \[
+    \begin{aligned}
+      v_1'&=2+3-5=0\\
+      v_2'&=5+2-3-4=0\\
+      v_3'&=4-2-2=0
+    \end{aligned}
+  \]
+  \item Volumes remain constant. \hfill
+  $ v_1=60\ \mathrm{L},\qquad v_2=80\ \mathrm{L},\qquad v_3=50\ \mathrm{L}
+  $
+  \item Well mixed means concentration in g/L is
+  \[
+  c_i(t)=y_i(t)/v_i
+  \]
+where $y_i$ is the amount of salt in grams and $v_i$ is the volume in liters. 
+
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Salt Flow Rate}
+\begin{enumerate}
+  \item A volume flow ($q\ \mathrm{L/min}$) at concentration ($c\ \mathrm{g/L}$) carries salt at $qc\ \mathrm{g/min}$.
+  \[
+    q\,c:\qquad
+    \frac{\cancel{\mathrm{L}}}{\mathrm{min}}
+    \frac{\mathrm{g}}{\cancel{\mathrm{L}}}
+    =\frac{\mathrm{g}}{\mathrm{min}}
+  \]
+  \item For example, the inflow brings salt into tank 1 at
+  \[
+    \left(2\,\frac{\cancel{\mathrm{L}}}{\mathrm{min}}\right)
+    \left(3\,\frac{\mathrm{g}}{\cancel{\mathrm{L}}}\right)
+    =6\,\frac{\mathrm{g}}{\mathrm{min}}
+  \]
+  \item Flow from tank 1 to tank 2 carries salt at the rate
+  \[
+    q_{12}c_1(t)=5c_1(t)=5y_1(t)/60=y_1(t)/12\ \mathrm{g/min}
+  \]
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Salt Balances}
+\begin{enumerate}
+  \item Salt mass change in $\mathrm{g/min}$ is inflows minus outflows.
+  \[
+    \begin{aligned}
+      y_1'&=2(3)+3c_2-5c_1
+           =6+3y_2/80-5y_1/60\\[3pt]
+      y_2'&=5c_1+2c_3-(3+4)c_2
+           =5y_1/60+2y_3/50-7y_2/80\\[3pt]
+      y_3'&=4c_2-(2+2)c_3
+           =4y_2/80-4y_3/50
+    \end{aligned}
+  \]
+  \item All concentrations are in $\mathrm{g/L}$. All volume flow rates are in $\mathrm{L/min}$.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Initial Salt Masses}
+\begin{enumerate}
+  \item Salt mass in $\mathrm{g}$ is volume ($v\ \mathrm{L}$) times concentration ($c\ \mathrm{g/L}$)
+  \[
+    y_i(0)=v_i(0)c_i(0),\qquad
+    \cancel{\mathrm{L}}\,\frac{\mathrm{g}}{\cancel{\mathrm{L}}}=\mathrm{g}
+  \]
+  \item The initial salt masses are
+  \[
+    \begin{aligned}
+      y_1(0)&=(60\,\cancel{\mathrm{L}})(2\,\mathrm{g}/\cancel{\mathrm{L}})=120\,\mathrm{g}\\[3pt]
+      y_2(0)&=(80\,\cancel{\mathrm{L}})(1\,\mathrm{g}/\cancel{\mathrm{L}})=80\,\mathrm{g}\\[3pt]
+      y_3(0)&=(50\,\cancel{\mathrm{L}})(0\,\mathrm{g}/\cancel{\mathrm{L}})=0\,\mathrm{g}
+    \end{aligned}
+  \]
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Tank System as a Vector IVP}
+\begin{itemize}
+  \item The salt mass vector $\vect{y}=(y_1,y_2,y_3)$ has units $\mathrm{g}$.
+  \item Collect terms
+  \[
+    \boxed{\vect{y}'=\mat{A}\vect{y}+\vect{b}},\qquad
+    \vect{y}(0)=\begin{pmatrix}120\\80\\0\end{pmatrix}
+  \]
+  \[
+    \mat{A}=\begin{pmatrix}
+      -1/12&3/80&0\\
+      1/12&-7/80&1/25\\
+      0&1/20&-2/25
+    \end{pmatrix},\qquad
+    \vect{b}=\begin{pmatrix}6\\0\\0\end{pmatrix}
+  \]
+  \item Entries of $\mat{A}$ have units $1/\mathrm{min}$. Entries of $\vect{b}$ have units $\mathrm{g/min}$.
+  \item Internal transfers cancel in the total salt balance
+  \[
+    (y_1+y_2+y_3)'=6-2c_3=6-y_3/25
+  \]
+\end{itemize}
+\end{frame}

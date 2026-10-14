@@ -1,0 +1,21 @@
+# MA3521 — Introduction to ODEs
+
+- Support lectures, assignments, exams, and solutions for 179 engineering sophomores and juniors.
+- Balance engineering models and interpretation with solution techniques. Do not include proofs.
+- Prioritize brevity in materials and responses. Include only what is needed to teach the point or answer the request.
+- Use MKS units throughout: meters, kilograms, seconds, and consistent derived SI units. Tank diagrams may use L, L/min, and g/L. Prefer small, clean numbers for teaching examples. Avoid unit prefixes and powers-of-ten multipliers unless requested. Examples need not model realistic scales.
+- When deriving a physical equation, show the units of its quantities and explicitly cancel units in products or quotients so students can follow the dimensional reasoning.
+- Use simple punctuation. Prefer periods to semicolons.
+- Use clear, concise language, readable equations and figures, and examples appropriate to the course level. Define symbols and state assumptions, units, parameters, and initial conditions where relevant.
+- Keep materials manageable for a large class; make questions and grading expectations unambiguous.
+- Retain the MTU Beamer theme and shared formatting for slides. Give each frame one teaching purpose; split crowded frames instead of shrinking text.
+- Use capital letters for matrices and lowercase letters for scalar and vector functions. Write vectors in bold with \vect{...}, Use \vect{y} for the default state vector. Give distinct objects distinct notation.
+- Keep simple quotients compact: write (expression)/m rather than (1/m)(expression). Use a stacked fraction only when it improves readability.
+- Use lowercase v for volume.
+- Follow existing file structure and notation. Use t for time and y for the default dependent variable unless the material establishes another convention.
+- Make routine requested edits directly. Ask about consequential teaching decisions or substantive ambiguities.
+- Respect the instructor's edits. Read the latest file before changing it, preserve manual changes, and keep edits focused. If mentioned edits are missing on disk, ask the instructor to save first. Never force an editor reload or overwrite unsaved work.
+- Check mathematical correctness and consistency. Preserve the instructor's voice; flag uncertain claims or sources rather than inventing details.
+- Do not compile, render, run BibTeX, or produce a PDF unless asked. When asked, build the owning main document, inspect the output, and report any limitations.
+- Keep task-created temporary files separate and remove only those files when finished.
+- Explicit instructor requests take precedence over this file.
