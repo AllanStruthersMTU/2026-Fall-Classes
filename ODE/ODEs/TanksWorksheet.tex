@@ -1,0 +1,45 @@
+\documentclass[11pt,letterpaper]{article}
+\input{WorksheetHeader.tex}
+\input{Figures/TankDiagram.tex}
+
+% Problem 1 has a full-width workspace and answers anchored at the bottom.
+\newcommand{\TankProblemOne}[1]{%
+\begingroup
+\setlength{\parskip}{3pt}
+\setlength{\arraycolsep}{2pt}
+\renewcommand{\ODETankHeading}[2]{%
+  \node[font=\bfseries] at (0,3.12) {$T_{##1}$ (##2 L)};}
+\renewcommand{\ODETankLabels}[4]{%
+  \pgfmathtruncatemacro{\InitialSalt}{##3*##4}
+  \node[anchor=north,inner sep=1pt,font=\fontsize{7}{8}\selectfont] at (0,-.20) {%
+    $v_{##1}(0)=##3\,\mathrm{L},\;
+     s_{##1}(0)=\InitialSalt\,\mathrm{g}$};}
+\renewcommand{\AnswerEntry}{%
+  \rule[-0.14in]{0pt}{0.43in}%
+  \makebox[0.85in]{\textcolor{black!18}{\rule[-0.10in]{0.76in}{0.35pt}}}}
+\noindent{\small\textbf{MA3521 --- Well Mixed Tanks 1}}\hfill
+\fbox{\rule[-0.30in]{0pt}{0.42in}\makebox[0.43\linewidth][l]{Name:}}\par
+\par\noindent
+\resizebox{\linewidth}{!}{\ThreeTankDiagram{#1}}
+\par
+The IVP $\vect{s}'=A\vect{s}+\vect{b}$,
+$\vect{s}(0)=\vect{s}_0$ makes sense for
+$0<t<\boxed{\rule{0pt}{0.28in}\hspace{0.75in}}$
+with\par\noindent$\displaystyle
+\begin{aligned}
+\vect{v}(t)&=\AnswerVector\;\vect{s}_0=\AnswerVector\;\vect{b}=\AnswerVector\\[2pt]
+A&=\AnswerMatrix
+\end{aligned}$\par
+\endgroup
+}
+\begin{document}
+\newgeometry{margin=0.25in,headheight=0pt,headsep=0pt,footskip=0pt}
+% Volume rates: (1,-2,2) L/min. First boundary: tank 3 full at t=25.
+\TankProblemOne{%
+  capacity1=100,volume1=60,concentration1=2,
+  capacity2=120,volume2=80,concentration2=1,
+  capacity3=100,volume3=50,concentration3=0,
+  inflow=3,inflowconcentration=3,
+  flow12=5,flow21=3,flow23=6,flow32=2,outflow=2
+}
+\end{document}

@@ -11,6 +11,14 @@
   flow23/.store in=\ODEqtwothree, flow32/.store in=\ODEqthreetwo,
   outflow/.store in=\ODEqout}
 
+% Label hook. Worksheets can override locally without changing lecture diagrams.
+\newcommand{\ODETankLabels}[4]{%
+  \node[align=center,anchor=north] at (0,-.48) {$\begin{aligned}
+    v_{#1,\max}&=#2\ \mathrm{L}\\[2pt]
+    v_{#1}(0)&=#3\ \mathrm{L}\\[2pt]
+    c_{#1}(0)&=#4\ \mathrm{g/L}
+  \end{aligned}$};}
+\newcommand{\ODETankHeading}[2]{\node[font=\bfseries] at (0,3.12) {Tank #1};}
 % One cylindrical tank: index, horizontal position, capacity, initial volume,
 % initial concentration. The liquid height follows initial volume/capacity.
 \newcommand{\ODETank}[5]{%
@@ -21,12 +29,8 @@
     \draw[mtuGreenLight,fill=mtuGreenLight!20] (0,\ODElevel) ellipse[x radius=.9,y radius=.17];
     \draw[thick] (-.9,2.6)--(-.9,0) arc[start angle=180,end angle=360,x radius=.9,y radius=.17] -- (.9,2.6);
     \draw[thick] (0,2.6) ellipse[x radius=.9,y radius=.17];
-    \node[font=\bfseries] at (0,3.12) {Tank #1};
-    \node[align=center,anchor=north] at (0,-.48) {$\begin{aligned}
-      v_{#1,\max}&=#3\ \mathrm{L}\\[2pt]
-      v_{#1}(0)&=#4\ \mathrm{L}\\[2pt]
-      c_{#1}(0)&=#5\ \mathrm{g/L}
-    \end{aligned}$};
+    \ODETankHeading{#1}{#3}
+    \ODETankLabels{#1}{#3}{#4}{#5}
     \coordinate (tank#1wh) at (-.9,1.95);
     \coordinate (tank#1eh) at (.9,1.95);
     \coordinate (tank#1wl) at (-.9,.7);
