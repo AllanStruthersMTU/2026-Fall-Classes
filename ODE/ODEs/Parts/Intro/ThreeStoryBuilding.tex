@@ -1,10 +1,11 @@
 \begin{frame}{Three-Story Building}
 \centering
-% Enter numbers only. Units are added by the diagram: kg, N/m, and N s/m.
+% Shared diagram supplies displacement/time units and the specified base-motion formula.
+% Mechanical parameters are numeric. basemotion is a math expression.
 % Offsets change the drawn shape, not the displacement labels or model.
 \resizebox{!}{4.7cm}{%
 \ThreeStoryBuilding{
-  baseoffset=.30,offset1=.65,offset2=1.05,offset3=1.45,
+  basemotion={\sin(t)},baseoffset=.30,offset1=.65,offset2=1.05,offset3=1.45,
   mass1=4,mass2=3,mass3=2,
   stiffness1=4,stiffness2=3,stiffness3=2,
   damping1=2,damping2=1,damping3=1

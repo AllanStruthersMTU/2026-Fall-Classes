@@ -11,14 +11,13 @@
   flow23/.store in=\ODEqtwothree, flow32/.store in=\ODEqthreetwo,
   outflow/.store in=\ODEqout}
 
-% Label hook. Worksheets can override locally without changing lecture diagrams.
+% Shared compact labels used by both lectures and worksheets.
+\newcommand{\ODETankHeading}[2]{%
+  \node[font=\bfseries] at (0,3.12) {$T_{#1}$ (#2 L)};}
 \newcommand{\ODETankLabels}[4]{%
-  \node[align=center,anchor=north] at (0,-.48) {$\begin{aligned}
-    v_{#1,\max}&=#2\ \mathrm{L}\\[2pt]
-    v_{#1}(0)&=#3\ \mathrm{L}\\[2pt]
-    c_{#1}(0)&=#4\ \mathrm{g/L}
-  \end{aligned}$};}
-\newcommand{\ODETankHeading}[2]{\node[font=\bfseries] at (0,3.12) {Tank #1};}
+  \pgfmathtruncatemacro{\InitialSalt}{#3*#4}
+  \node[anchor=north,inner sep=1pt,font=\fontsize{7}{8}\selectfont] at (0,-.20)
+  {$v_{#1}(0)=#3\,\mathrm{L},\;s_{#1}(0)=\InitialSalt\,\mathrm{g}$};}
 % One cylindrical tank: index, horizontal position, capacity, initial volume,
 % initial concentration. The liquid height follows initial volume/capacity.
 \newcommand{\ODETank}[5]{%

@@ -5,13 +5,19 @@
 - Prioritize brevity in materials and responses. Include only what is needed to teach the point or answer the request.
 - Use MKS units throughout: meters, kilograms, seconds, and consistent derived SI units. Tank diagrams may use L, L/min, and g/L. Prefer small, clean numbers for teaching examples. Avoid unit prefixes and powers-of-ten multipliers unless requested. Examples need not model realistic scales.
 - When deriving a physical equation, show the units of its quantities and explicitly cancel units in products or quotients so students can follow the dimensional reasoning.
-- Use simple punctuation. Prefer periods to semicolons.
+- Use simple punctuation. Avoid unnecessary colons and semicolons in prose. Omit commas, periods, and other sentence punctuation in displayed mathematics unless they clarify the mathematical meaning. Preserve meaningful punctuation such as vector-entry separators. Always hyphenate well-mixed, including in headings.
 - Use clear, concise language, readable equations and figures, and examples appropriate to the course level. Define symbols and state assumptions, units, parameters, and initial conditions where relevant.
 - Keep materials manageable for a large class; make questions and grading expectations unambiguous.
+- Label the two parts of the front-page worksheet problem 1a and 1b. Label the corresponding back-page parts 2a and 2b. Use lowercase letters to match Gradescope.
+- Use two-sided worksheets: a problem worked in class on the front, with the compact course heading and name box, and a separate student problem on the back. Omit the repeated heading and name box on the back to give students more working space.
+- Keep front-page name boxes exactly the same size and position on every worksheet. Use the shared WorksheetHeading and WorksheetNameBox commands in WorksheetHeader.tex, with the standard page margins. Do not resize or reposition individual name boxes.
+- Expect many worksheets. Preserve the evolving structure of TanksWorksheet.tex and reuse WorksheetHeader.tex: article pages, minimal wording, compact headings, a generous name box, narrow margins, no page numbers or footer, ample open working space, and left-aligned answer blanks with faint entry guides. Keep related blanks close together. Reuse existing diagram tools and adapt this layout to the problem.
 - Retain the MTU Beamer theme and shared formatting for slides. Give each frame one teaching purpose; split crowded frames instead of shrinking text.
-- Use capital letters for matrices and lowercase letters for scalar and vector functions. Write vectors in bold with \vect{...}, Use \vect{y} for the default state vector. Give distinct objects distinct notation.
+- Use capital letters for matrices and lowercase letters for scalar and vector functions. Write vectors through the custom command \vect{...}, currently defined as \mathbf{...} for math boldface. Keep the formatting behind this command so it can be changed centrally. Do not apply raw vector-formatting commands in document bodies. Use \vect{y} for the default state vector. Give distinct objects distinct notation.
+- Do not emphasize row versus column vector orientation in introductory worksheets. Use compact tuple notation and stacking such as z=(y,y') when the meaning is clear.
+- Always enclose function arguments in parentheses, including trigonometric functions. Write \sin(t), not \sin t, so function arguments and units are unambiguous.
 - Keep simple quotients compact: write (expression)/m rather than (1/m)(expression). Use a stacked fraction only when it improves readability.
-- Use lowercase v for volume.
+- Use lowercase v for volume and lowercase f for force.
 - Follow existing file structure and notation. Use t for time and y for the default dependent variable unless the material establishes another convention.
 - Make routine requested edits directly. Ask about consequential teaching decisions or substantive ambiguities.
 - Respect the instructor's edits. Read the latest file before changing it, preserve manual changes, and keep edits focused. If mentioned edits are missing on disk, ask the instructor to save first. Never force an editor reload or overwrite unsaved work.

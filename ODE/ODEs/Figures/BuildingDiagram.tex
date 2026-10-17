@@ -1,9 +1,10 @@
 % Reusable shear-building sketch. Displacements are absolute, measured from rest.
 % Numeric data: masses in kg, stiffnesses in N/m, damping in N s/m.
 % Drawing offsets are independent of physical units.
+% basemotion accepts a math expression, for example basemotion={\sin(t)}.
 \usetikzlibrary{arrows.meta,calc}
 \pgfkeys{/ode building/.is family,/ode building,
-  baseoffset/.store in=\ODEbase,
+  baseoffset/.store in=\ODEbase, basemotion/.store in=\ODEbasemotion,
   offset1/.store in=\ODEbone,offset2/.store in=\ODEbtwo,offset3/.store in=\ODEbthree,
   mass1/.store in=\ODEbmone,mass2/.store in=\ODEbmtwo,mass3/.store in=\ODEbmthree,
   stiffness1/.store in=\ODEbkone,stiffness2/.store in=\ODEbktwo,stiffness3/.store in=\ODEbkthree,
@@ -23,7 +24,7 @@
 \newcommand{\ThreeStoryBuilding}[1]{%
   \begingroup
   \pgfkeys{/ode building/.cd,
-    baseoffset=.30,offset1=.65,offset2=1.05,offset3=1.45,
+    basemotion={\sin(t)},baseoffset=.30,offset1=.65,offset2=1.05,offset3=1.45,
     mass1=4,mass2=3,mass3=2,
     stiffness1=4,stiffness2=3,stiffness3=2,
     damping1=2,damping2=1,damping3=1,#1}
@@ -36,7 +37,7 @@
     % The datum is offset for legibility. Arrows are schematic, not to scale.
     % Shape offsets control the cubic column geometry independently.
     \draw[ref] (-3.15,-.05)--(-3.15,4.37);
-    \node[anchor=south,align=center,font=\small] at (-2.65,4.42) {Displacements};
+    \node[anchor=south,font=\small] at (1.5,4.85) {Displacements: $\vect{y}(t)=(y_1(t),y_2(t),y_3(t))$ (m),\quad $t$ in seconds.};
     \node[gray,anchor=north,font=\small] at (-3.15,-.1) {$0$};
     % Light rest-position outline.
 
@@ -80,6 +81,6 @@
 
     \draw[motion] (-3.15,-.02)--({\ODEbase-1.5},-.02);
     \node[above,mtuGreen] at (-2.6,-.02) {$y_0(t)$};
-    \node[anchor=west,align=left,font=\small] at (3.35,-.13) {Prescribed base motion $y_0(t)$};
+    \node[anchor=west,align=left,font=\small] at (3.35,-.13) {$y_0(t)=\ODEbasemotion\;\mathrm{m}$};
   \end{tikzpicture}%
   \endgroup}

@@ -2,29 +2,23 @@
 \input{WorksheetHeader.tex}
 \input{Figures/TankDiagram.tex}
 
-% Problem 1 has a full-width workspace and answers anchored at the bottom.
-\newcommand{\TankProblemOne}[1]{%
+% Shared problem layout. Optional argument 1 includes the front-page heading.
+\newcommand{\TankProblem}[2][1]{%
 \begingroup
 \setlength{\parskip}{3pt}
 \setlength{\arraycolsep}{2pt}
-\renewcommand{\ODETankHeading}[2]{%
-  \node[font=\bfseries] at (0,3.12) {$T_{##1}$ (##2 L)};}
-\renewcommand{\ODETankLabels}[4]{%
-  \pgfmathtruncatemacro{\InitialSalt}{##3*##4}
-  \node[anchor=north,inner sep=1pt,font=\fontsize{7}{8}\selectfont] at (0,-.20) {%
-    $v_{##1}(0)=##3\,\mathrm{L},\;
-     s_{##1}(0)=\InitialSalt\,\mathrm{g}$};}
 \renewcommand{\AnswerEntry}{%
-  \rule[-0.14in]{0pt}{0.43in}%
-  \makebox[0.85in]{\textcolor{black!18}{\rule[-0.10in]{0.76in}{0.35pt}}}}
-\noindent{\small\textbf{MA3521 --- Well Mixed Tanks 1}}\hfill
-\fbox{\rule[-0.30in]{0pt}{0.42in}\makebox[0.43\linewidth][l]{Name:}}\par
+  \rule[-0.16in]{0pt}{0.50in}%
+  \makebox[0.95in]{\textcolor{black!18}{\rule[-0.12in]{0.86in}{0.35pt}}}}
+\ifnum#1=1\relax
+\WorksheetHeading{Well-Mixed Tanks 1}
+\fi
 \par\noindent
-\resizebox{\linewidth}{!}{\ThreeTankDiagram{#1}}
+\resizebox{\linewidth}{!}{\ThreeTankDiagram{#2}}
 \par
 The IVP $\vect{s}'=A\vect{s}+\vect{b}$,
 $\vect{s}(0)=\vect{s}_0$ makes sense for
-$0<t<\boxed{\rule{0pt}{0.28in}\hspace{0.75in}}$
+$0<t<\boxed{\rule{0pt}{0.34in}\hspace{0.90in}}$
 with\par\noindent$\displaystyle
 \begin{aligned}
 \vect{v}(t)&=\AnswerVector\;\vect{s}_0=\AnswerVector\;\vect{b}=\AnswerVector\\[2pt]
@@ -35,11 +29,21 @@ A&=\AnswerMatrix
 \begin{document}
 \newgeometry{margin=0.25in,headheight=0pt,headsep=0pt,footskip=0pt}
 % Volume rates: (1,-2,2) L/min. First boundary: tank 3 full at t=25.
-\TankProblemOne{%
+\TankProblem{%
   capacity1=100,volume1=60,concentration1=2,
   capacity2=120,volume2=80,concentration2=1,
   capacity3=100,volume3=50,concentration3=0,
   inflow=3,inflowconcentration=3,
   flow12=5,flow21=3,flow23=6,flow32=2,outflow=2
+}
+\newpage
+% Student problem. Volume rates: (-2,3,-3) L/min.
+% First boundary: tank 3 empty at t=20.
+\TankProblem[2]{%
+  capacity1=100,volume1=80,concentration1=1,
+  capacity2=120,volume2=40,concentration2=0,
+  capacity3=100,volume3=60,concentration3=2,
+  inflow=2,inflowconcentration=4,
+  flow12=6,flow21=2,flow23=4,flow32=3,outflow=4
 }
 \end{document}
