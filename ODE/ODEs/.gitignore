@@ -9,5 +9,6 @@
 !*.toc
 !*.nav
 !*.sty
+!*.png
 # 4. (Optional) Make sure Git doesn't ignore your .gitignore file itself
 !.gitignore

@@ -1,0 +1,24 @@
+\begin{frame}{ODE Definitions and Terminology}
+\begin{itemize}
+\setlength{\itemsep}{0pt}\setlength{\parsep}{0pt}
+  \item An \keypoint{ODE} relates functions of one variable to their derivatives
+  \begin{itemize}
+  \setlength{\itemsep}{0pt}\setlength{\parsep}{0pt}
+    \item \keypoint{Order} is the highest derivative order present
+    \item \keypoint{Autonomous} means no explicit dependence on $t$
+    \item An \keypoint{Equilibrium Solution} of $\vect{y}'=\vect{f}(\vect{y})$
+    is constant $\vect{y}=\vect{y}_*$ with $\vect{f}(\vect{y}_*)=\vect{0}$
+    \item An \keypoint{Initial Condition (IC)} specifies $\vect{y}(t_0)=\vect{y}_0$
+    \item An \keypoint{Initial Value Problem (IVP)} is an \keypoint{ODE} with initial conditions
+    \item A \keypoint{Solution} satisfies the \keypoint{ODE} and IC on an interval containing $t_0$
+    \item A scalar \keypoint{ODE} is \keypoint{Separable} if $y'=g(t)h(y)$
+  \end{itemize}
+  \item A \keypoint{Linear ODE} has form $\vect{y}'=\mat{A}(t)\vect{y}+\vect{b}(t)$
+  with coefficients independent of $\vect{y}$
+  \begin{itemize}
+  \setlength{\itemsep}{0pt}\setlength{\parsep}{0pt}
+    \item \keypoint{Constant Coefficient (CC)} means $\mat{A}$ and $\vect{b}$ do not depend on $t$
+    \item The \keypoint{Forcing} is $\vect{b}(t)$. \keypoint{Homogeneous} means $\vect{b}(t)=\vect{0}$
+  \end{itemize}
+\end{itemize}
+\end{frame}
