@@ -1,0 +1,18 @@
+\begin{frame}{Separation of Variables}
+\begin{itemize}
+  \item A scalar ODE is \keypoint{Separable} if it can be written
+  \[
+    y'= \frac{dy}{dt} = g(t)h(y)
+  \]
+\begin{itemize}
+  \item Multiply by $dt$, divide by $h(y)$, \keypoint{Separate Variables} and integrate
+  \[
+    dy=g(t)h(y)\,dt
+    \quad\Longrightarrow\quad
+    \frac{dy}{h(y)}=g(t)\,dt
+    \quad\Longrightarrow\quad
+    \int\frac{dy}{h(y)}=\int g(t)\,dt+C
+  \]  \item If there is an initial condition, use it to determine $C$. 
+\end{itemize}
+\end{itemize}
+\end{frame}

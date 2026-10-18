@@ -1,0 +1,29 @@
+\begin{frame}{$u'=a u$ \quad vs \quad $\vect{y}'=\mat{A}\vect{y}$}
+\begin{itemize}
+  \item The scalar equation $u'=au$ has solution $u(t)=ce^{at}$
+  \item Try a solution of the form $\vect{y}(t)=e^{rt}\vect{v}$, with constant $r$ and $\vect{v}\ne\vect{0}$
+  \begin{itemize}
+    \item Substitute into $\vect{y}'=\mat{A}\vect{y}$ and cancel $e^{rt}$
+    \[
+      re^{rt}\vect{v}=e^{rt}\mat{A}\vect{v}
+      \quad\Longrightarrow\quad
+      \mat{A}\vect{v}=r\vect{v}
+    \]
+    \item The form $\vect{y}_i(t)=e^{\lambda_i t}\vect{v}_i$ is a solution if $\lambda_i$ and $\vect{v}_i$ are an eigenvalue--eigenvector pair
+  \end{itemize}
+  \item The ODE $\vect{y}'= A \vect{y}$ is linear and homogeneous.
+  If 
+  $A\vect{v}_1 = \lambda_1 \vect{v}_1$ and 
+  $A\vect{v}_2 = \lambda_2 \vect{v}_2$ 
+  a more general solution of $\vect{y}'= A \vect{y}$ is the linear combination 
+  \[
+    \vect{y}(t)=c_1e^{\lambda_1t}\vect{v}_1+c_2e^{\lambda_2t}\vect{v}_2
+  \]
+  \item With $n$ LI eigenvectors 
+  $A\vect{v}_i = \lambda_i \vect{v}_i$ 
+  all solutions are given by the  \keypoint{Superposition}  
+  \[
+  \vect{y}(t)= \sum_{k=1}^n c_i e^{\lambda_i t}\vect{v}_i
+  \]
+\end{itemize}
+\end{frame}

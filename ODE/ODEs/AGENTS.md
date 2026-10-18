@@ -23,6 +23,8 @@
 - Keep simple quotients compact: write (expression)/m rather than (1/m)(expression). Use a stacked fraction only when it improves readability.
 - Use lowercase v for volume and lowercase f for force.
 - Follow existing file structure and notation. Use t for time and y for the default dependent variable unless the material establishes another convention.
+- Focus work within the active directory and its subdirectories, such as the current week folder. Read, search, and edit only the files needed for the task there. Do not scan parent folders, sibling weeks, other projects, or the whole course for context unless the instructor explicitly requests it. Use local dependencies. If a needed file is missing, report it before looking outside the active directory.
+- Keep project guidance in this top-level AGENTS.md. Subdirectories inherit it. Do not create or propagate secondary AGENTS.md files unless the instructor explicitly requests a directory-specific exception.
 - Make routine requested edits directly. Ask about consequential teaching decisions or substantive ambiguities.
 - Respect the instructor's edits. Read the latest file before changing it, preserve manual changes, and keep edits focused. If mentioned edits are missing on disk, ask the instructor to save first. Never force an editor reload or overwrite unsaved work.
 - Check mathematical correctness and consistency. Preserve the instructor's voice; flag uncertain claims or sources rather than inventing details.

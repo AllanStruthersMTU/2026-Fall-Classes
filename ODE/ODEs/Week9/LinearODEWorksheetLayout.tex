@@ -1,0 +1,33 @@
+% Shared layout for scalar first-order linear ODE worksheets.
+% Load after WorksheetHeader.tex. Box only the answer locations.
+\newcommand{\LinearBlank}[1][2in]{%
+  \boxed{\rule[-0.15in]{0pt}{0.52in}\makebox[\dimexpr#1+0.2in\relax]{}}}
+% Arguments: problem number, equation, initial time, initial value.
+\newcommand{\LinearProblem}[4]{%
+\begingroup
+\setlength{\parskip}{5pt}
+\ifnum#1=1\relax
+\WorksheetHeading{Linear ODEs}
+\fi
+\textbf{Problem #1}\quad $#2\qquad y(#3)=#4$\par
+
+\textbf{#1a. Put the ODE in standard form $y'+p(t)y=q(t)$.}\par
+\noindent$\displaystyle p(t)=\LinearBlank\qquad q(t)=\LinearBlank$\par
+
+\textbf{#1b. Find an integrating factor.}\par
+\noindent$\displaystyle
+\mu(t)=\exp\left(\int\LinearBlank[1.6in]\,dt\right)=\LinearBlank[1.8in]
+$\par
+\vspace{0.35in}
+
+\textbf{#1c. Multiply by $\mu(t)$ and integrate.}\par
+\noindent$\displaystyle (\mu y)'=\LinearBlank[3in]$\par
+\noindent$\displaystyle
+\mu(t)y(t)=\int\LinearBlank[1.8in]\,dt+C=\LinearBlank[1.8in]+C
+$\par
+\vspace{0.55in}
+
+\textbf{#1d. Use the initial condition to evaluate $C$.}\par
+\noindent$\displaystyle C=\LinearBlank$\par
+\vfill
+\endgroup}

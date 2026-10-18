@@ -1,0 +1,48 @@
+\begin{frame}{Linear Algebra: You should be able to \dots }
+\begin{itemize}
+  \item Set up and solve a 
+  \keypoint{Linear System (LS)}
+   $\mat{A}\vect{x}=\vect{b}$ using $\vect{x}_c$ and $\vect{x}_p$.
+ \par\hspace*{1em}$
+    \begin{aligned}
+      2x_1-x_2+x_3 &= 3\\
+      x_1+3x_2 &= 7\\
+      -x_2+2x_3 &= 4
+    \end{aligned}
+    \quad\Longrightarrow\quad
+    \underbrace{\begin{pmatrix}
+      2 & -1 & 1\\
+      1 & 3 & 0\\
+      0 & -1 & 2
+    \end{pmatrix}}_{\mat{A}}
+    \underbrace{\begin{pmatrix}x_1\\x_2\\x_3\end{pmatrix}}_{\vect{x}}
+    =
+    \underbrace{\begin{pmatrix}3\\7\\4\end{pmatrix}}_{\vect{b}}
+  $
+ 
+  \item Compute eigenvalues 
+  $\lambda_1,\lambda_2,\ldots$ and eigenvectors $\vect{v}_1,\vect{v}_2,\ldots$
+  for $\mat{A}\in\mathbb{R}^{n\times n}$.  
+    \[
+      \vect{v}_i\ne\vect{0}
+      \quad \& \quad
+      	\mat{A}\vect{v}_i=\lambda_i\vect{v}_i
+      \qquad
+      \Longrightarrow
+      \qquad
+      \mat{A}
+      \underbrace{\begin{pmatrix}
+        \vect{v}_1 & \vect{v}_2 & \cdots
+      \end{pmatrix}}_{\mat{V}}
+      =
+      \mat{V}
+      \underbrace{\operatorname{diag}(\lambda_1,\lambda_2,\ldots)}_{\Lambda}
+    \]
+    \begin{itemize}
+    \item Be able to interpret complex 
+    $\alpha \pm \beta i$ eigenvalue pairs.
+    \item Remember what \keypoint{Linear Independent (LI)} means.
+    \end{itemize}
+    \item Use a computational tool for Linear Algebra.  
+\end{itemize}
+\end{frame}
