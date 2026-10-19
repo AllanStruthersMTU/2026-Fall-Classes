@@ -1,0 +1,31 @@
+% Shared guided layout for the separation-of-variables worksheet series.
+% Load after WorksheetHeader.tex.
+\newcommand{\SeparationBlank}[1][2in]{%
+  \boxed{\rule[-0.12in]{0pt}{0.42in}\makebox[#1]{}}}
+% Arguments: problem number, ODE right-hand side, initial time, initial value.
+\newcommand{\SeparationProblem}[4]{%
+\begingroup
+\setlength{\parskip}{5pt}
+\ifnum#1=1\relax
+\WorksheetHeading{Separation of Variables}
+\fi
+\textbf{Problem #1}\quad $y'=#2,\qquad y(#3)=#4$
+\par
+
+\textbf{#1a. Identify the factors in $y'=g(t)h(y)$.}\par
+\noindent$\displaystyle
+  g(t)=\SeparationBlank\qquad h(y)=\SeparationBlank
+$\par
+\textbf{#1b. Write the integrals. Do not evaluate.}\par
+\noindent$\displaystyle
+  \int\SeparationBlank[2.2in]\,dy
+  =\int\SeparationBlank[2.2in]\,dt+C
+$\par
+\textbf{#1c. Evaluate the integrals.}\par
+\noindent$\displaystyle
+  \SeparationBlank[2.2in]=\SeparationBlank[2.2in]+C
+$\par
+\textbf{#1d. Evaluate the constant.}\par
+\noindent$\displaystyle C=\SeparationBlank$\par
+\vfill
+\endgroup}
