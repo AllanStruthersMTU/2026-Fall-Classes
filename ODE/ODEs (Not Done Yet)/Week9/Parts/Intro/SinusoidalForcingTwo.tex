@@ -1,0 +1,46 @@
+\begin{frame}{Sinusoidal Forcing \qquad $\vect{y}'=\overbrace{\begin{pmatrix}-2&1\\1&-2\end{pmatrix}}^{\mat{A}}\vect{y}+\overbrace{\begin{pmatrix}5\sin(2t)\\-4\sin(2t)+7\cos(2t)\end{pmatrix}}^{\vect{f}(t)}$}
+\small
+\setlength{\abovedisplayskip}{1pt}
+\setlength{\belowdisplayskip}{1pt}
+\setlength{\abovedisplayshortskip}{1pt}
+\setlength{\belowdisplayshortskip}{1pt}
+\begin{itemize}
+\setlength{\itemsep}{1pt}
+  \item Try $\vect{y}_p(t)=\vect{a}\sin(2t)+\vect{b}\cos(2t)$ which gives
+  $\vect{y}_p'(t)=2\vect{a}\cos(2t)-2\vect{b}\sin(2t)$ in the ODE
+  \[
+    {\color{blue}2\vect{a}\cos(2t)}-{\color{red}2\vect{b}\sin(2t)}
+    ={\color{red}\mat{A}\vect{a}\sin(2t)}+{\color{blue}\mat{A}\vect{b}\cos(2t)}
+    +{\color{red}\begin{pmatrix}5\\-4\end{pmatrix}\sin(2t)}
+    +{\color{blue}\begin{pmatrix}0\\7\end{pmatrix}\cos(2t)}
+  \]
+  Match sine and cosine terms
+  \[
+    {\color{red}\mat{A}\vect{a}+2\vect{b}=-\begin{pmatrix}5\\-4\end{pmatrix}}
+    \qquad {\color{blue}2\vect{a}-\mat{A}\vect{b}=\begin{pmatrix}0\\7\end{pmatrix}}
+    \quad\Longrightarrow\quad
+    \begin{pmatrix}{\color{red}\mat{A}}&{\color{red}2\mat{I}}\\{\color{blue}2\mat{I}}&{\color{blue}-\mat{A}}\end{pmatrix}
+    \begin{pmatrix}{\color{red}\vect{a}}\\{\color{blue}\vect{b}}\end{pmatrix}
+    =\begin{pmatrix}{\color{red}-5}\\[-3pt]{\color{red}4}\\[-3pt]{\color{blue}0}\\[-3pt]{\color{blue}7}\end{pmatrix}
+  \]
+  \[
+    \left[\begin{array}{rr|rr|r}
+      {\color{red}-2}&{\color{red}1}&{\color{red}2}&{\color{red}0}&{\color{red}-5}\\
+      {\color{red}1}&{\color{red}-2}&{\color{red}0}&{\color{red}2}&{\color{red}4}\\\hline
+      {\color{blue}2}&{\color{blue}0}&{\color{blue}2}&{\color{blue}-1}&{\color{blue}0}\\
+      {\color{blue}0}&{\color{blue}2}&{\color{blue}-1}&{\color{blue}2}&{\color{blue}7}
+    \end{array}\right]
+    \sim\left[\begin{array}{rrrr|r}
+      1&0&0&0&2\\0&1&0&0&1\\0&0&1&0&-1\\0&0&0&1&2
+    \end{array}\right]
+    \quad\Longrightarrow\quad
+    \vect{a}=\begin{pmatrix}2\\1\end{pmatrix}
+    \qquad \vect{b}=\begin{pmatrix}-1\\2\end{pmatrix}
+  \]
+  \item General solution
+  $\vect{y}(t)=\begin{pmatrix}2\\1\end{pmatrix}\sin(2t)
+  +\begin{pmatrix}-1\\2\end{pmatrix}\cos(2t)
+  +c_1e^{-t}\begin{pmatrix}1\\1\end{pmatrix}
+  +c_2e^{-3t}\begin{pmatrix}1\\-1\end{pmatrix}$
+\end{itemize}
+\end{frame}

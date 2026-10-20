@@ -1,0 +1,33 @@
+\begin{frame}{Undetermined Coefficients \quad $\vect{y}'=\mat{A}\vect{y}+\vect{f}(t)$ \quad constant $\mat{A}\in\mathbb{R}^{n\times n}$}
+\small
+\setlength{\abovedisplayskip}{2pt}
+\setlength{\belowdisplayskip}{2pt}
+Compute $\mat{A}\vect{v}_i=\lambda_i\vect{v}_i$ for $i=1,\dots n$ and write down
+\[
+  \vect{y}_c(t)=\sum_{i=1}^n c_i e^{\lambda_i t}\vect{v}_i
+\]
+Choose $\vect{y}_p$ form and determine coefficients vectors by
+substituting into the ODE.
+\begin{itemize}
+\setlength{\itemsep}{4pt}
+  \item \keypoint{Exponentials}
+  $\vect{f}(t)=\vect{u}e^{\lambda t}$.
+  Try $\vect{y}_p(t)=\vect{a}e^{\lambda t}$.
+  \item \keypoint{Sines and cosines}
+  $\vect{f}(t)=\vect{u}\sin(\omega t)+\vect{v}\cos(\omega t)$.
+  Try $\vect{y}_p(t)=\vect{a}\sin(\omega t)+\vect{b}\cos(\omega t)$.
+  \begin{itemize}
+    \item Include both sine and cosine even when only one appears in the forcing.
+  \end{itemize}
+  \item \keypoint{Polynomials}
+  $\vect{f}(t)=\sum_{k=0}^{m}\vect{u}_k t^k$.
+  Try $\vect{y}_p(t)=\sum_{k=0}^{m}\vect{a}_k t^k$.
+  \begin{itemize}
+    \item Include every power from $t^m$ down to the constant term.
+  \end{itemize}
+  \item \keypoint{Superposition}
+  If $\vect{f}=\vect{f}_1+\vect{f}_2$ add particular solutions
+  $\vect{y}_p=\vect{y}_{p,1}+\vect{y}_{p,2}$.
+\end{itemize}
+General solution $\vect{y}=\vect{y}_c+\vect{y}_p$.  What can go wrong?
+\end{frame}

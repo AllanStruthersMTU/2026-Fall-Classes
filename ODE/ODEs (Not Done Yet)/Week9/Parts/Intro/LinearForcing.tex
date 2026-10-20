@@ -1,0 +1,45 @@
+\begin{frame}{Linear Forcing \qquad $\vect{y}'=\overbrace{\begin{pmatrix}-2&1\\1&-2\end{pmatrix}}^{\mat{A}}\vect{y}+\overbrace{\begin{pmatrix}6\\-3\end{pmatrix}t+\begin{pmatrix}0\\3\end{pmatrix}}^{\vect{f}(t)}$}
+\small
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+\begin{itemize}
+\setlength{\itemsep}{3pt}
+  \item Try $\vect{y}_p(t)=\vect{a}t+\vect{b}$ which gives $\vect{y}_p'=\vect{a}$ in the ODE and match powers of $t$
+  \[
+    {\color{blue}\vect{a}}={\color{red}\mat{A}\vect{a}t}
+    +{\color{blue}\mat{A}\vect{b}}
+    +{\color{red}\begin{pmatrix}6\\-3\end{pmatrix}t}
+    +{\color{blue}\begin{pmatrix}0\\3\end{pmatrix}}
+    \quad\Longrightarrow\quad
+    {\color{red}\mat{A}\vect{a}=-\begin{pmatrix}6\\-3\end{pmatrix}}
+    \qquad
+    {\color{blue}\mat{A}\vect{b}=\vect{a}-\begin{pmatrix}0\\3\end{pmatrix}}
+  \]
+  \[
+    \color{red}
+    \mat{A}\vect{a}=-\begin{pmatrix}6\\-3\end{pmatrix}
+    =\begin{pmatrix}-6\\3\end{pmatrix}
+    \quad\Longrightarrow\quad
+    \left[\begin{array}{rr|r}-2&1&-6\\1&-2&3\end{array}\right]
+    \sim\left[\begin{array}{rr|r}1&0&3\\0&1&0\end{array}\right]
+    \quad\Longrightarrow\quad\vect{a}=\begin{pmatrix}3\\0\end{pmatrix}
+  \]
+  \[
+    \color{blue}
+    \mat{A}\vect{b}=\vect{a}-\begin{pmatrix}0\\3\end{pmatrix}
+    =\begin{pmatrix}3\\-3\end{pmatrix}
+    \quad\Longrightarrow\quad
+    \left[\begin{array}{rr|r}-2&1&3\\1&-2&-3\end{array}\right]
+    \sim\left[\begin{array}{rr|r}1&0&-1\\0&1&1\end{array}\right]
+    \quad\Longrightarrow\quad\vect{b}=\begin{pmatrix}-1\\1\end{pmatrix}
+  \]
+  \item General solution
+  \[
+    \vect{y}(t)=\vect{y}_p(t)+\vect{y}_c(t)
+    =\begin{pmatrix}3\\0\end{pmatrix}t+\begin{pmatrix}-1\\1\end{pmatrix}
+    +c_1e^{-t}\begin{pmatrix}1\\1\end{pmatrix}
+    +c_2e^{-3t}\begin{pmatrix}1\\-1\end{pmatrix}.
+  \]
+  \item As before initial conditions $\vect{y}(0)=\vect{y}_0$ determine the constants.
+\end{itemize}
+\end{frame}

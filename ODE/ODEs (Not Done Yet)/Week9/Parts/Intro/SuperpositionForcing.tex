@@ -1,0 +1,30 @@
+\begin{frame}{Superposition \quad $\vect{y}'=\overbrace{\begin{pmatrix}-2&1\\1&-2\end{pmatrix}}^{\mat{A}}\vect{y}+{\color{red!30!white}\overbrace{\begin{pmatrix}7\\2\end{pmatrix}e^{-4t}}^{\vect{f}_1(t)}}+{\color{blue!25!white}\overbrace{\begin{pmatrix}5\sin(2t)\\-4\sin(2t)+7\cos(2t)\end{pmatrix}}^{\vect{f}_2(t)}}$}
+\small
+\setlength{\abovedisplayskip}{1pt}
+\setlength{\belowdisplayskip}{1pt}
+\setlength{\abovedisplayshortskip}{1pt}
+\setlength{\belowdisplayshortskip}{1pt}
+\begin{itemize}
+\setlength{\itemsep}{1pt}
+  \item We already found particular solutions for each forcing function
+  \[
+    {\color{red}\vect{y}_{p,1}(t)=\begin{pmatrix}-4\\1\end{pmatrix}e^{-4t}}
+    \qquad
+    {\color{blue}\vect{y}_{p,2}(t)=\begin{pmatrix}2\\1\end{pmatrix}\sin(2t)
+    +\begin{pmatrix}-1\\2\end{pmatrix}\cos(2t)}
+  \]
+  \item Their sum $\vect{y}_p={\color{red}\vect{y}_{p,1}}+{\color{blue}\vect{y}_{p,2}}$ is a particular solution because
+  \[
+    \vect{y}_p'={\color{red}\vect{y}_{p,1}'}+{\color{blue}\vect{y}_{p,2}'}
+    ={\color{red}\mat{A}\vect{y}_{p,1}+\vect{f}_1}+{\color{blue}\mat{A}\vect{y}_{p,2}+\vect{f}_2}
+    =\mat{A}\underbrace{\left({\color{red}\vect{y}_{p,1}}+{\color{blue}\vect{y}_{p,2}}\right)}_{\vect{y}_p}
+    +{\color{red}\vect{f}_1}+{\color{blue}\vect{f}_2}
+  \]
+  \item General solution
+  $\vect{y}(t)={\color{red}\begin{pmatrix}-4\\1\end{pmatrix}e^{-4t}}
+  +{\color{blue}\begin{pmatrix}2\\1\end{pmatrix}\sin(2t)
+  +\begin{pmatrix}-1\\2\end{pmatrix}\cos(2t)}
+  +c_1e^{-t}\begin{pmatrix}1\\1\end{pmatrix}
+  +c_2e^{-3t}\begin{pmatrix}1\\-1\end{pmatrix}$
+\end{itemize}
+\end{frame}

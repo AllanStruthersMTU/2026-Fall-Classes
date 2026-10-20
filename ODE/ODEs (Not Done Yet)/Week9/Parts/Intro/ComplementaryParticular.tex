@@ -1,0 +1,21 @@
+\begin{frame}{Complementary and Particular Solutions for $\vect{y}'=\mat{A}(t)\vect{y}+\vect{b}(t)$}
+For a \keypoint{first-order linear system} the \keypoint{general solution (GS)} has the form
+\[
+  \boxed{\vect{y}(t)=\vect{y}_c(t)+\vect{y}_p(t).}
+\]
+\begin{itemize}
+  \item The \keypoint{complementary solution} $\vect{y}_c$ satisfies
+  $\vect{y}_c'=\mat{A}(t)\vect{y}_c$.
+  \begin{itemize}
+    \item Contains the arbitrary constants of integration $\vect{c}$.
+    \item We know how to compute it for constant coefficients.
+  \end{itemize}
+  \item A \keypoint{particular solution} $\vect{y}_p$ satisfies
+  $\vect{y}_p'=\mat{A}(t)\vect{y}_p+\vect{b}(t)$.
+  \begin{itemize}
+    \item Any method that finds one such solution is fine.
+  \end{itemize}
+  \item $\vect{y}(0)=\vect{y}_c(0)+\vect{y}_p(0)=\vect{y}_0$.
+  Initial conditions determine the constants $\vect{c}$.
+\end{itemize}
+\end{frame}
