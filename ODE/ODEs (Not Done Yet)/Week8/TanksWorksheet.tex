@@ -9,7 +9,14 @@
 \setlength{\arraycolsep}{2pt}
 \renewcommand{\AnswerEntry}{%
   \rule[-0.16in]{0pt}{0.50in}%
-  \makebox[0.95in]{\textcolor{black!18}{\rule[-0.12in]{0.86in}{0.35pt}}}}
+  \makebox[0.95in]{\textcolor{black}{\rule[-0.12in]{0.86in}{0.4pt}}}}
+% Keep vector writing space identical, without the matrix entry guides.
+\renewcommand{\AnswerVector}{%
+  \begingroup
+  \renewcommand{\AnswerEntry}{%
+    \rule[-0.16in]{0pt}{0.50in}\makebox[0.95in]{}}
+  \begin{pmatrix}\AnswerEntry\\\AnswerEntry\\\AnswerEntry\end{pmatrix}%
+  \endgroup}
 \ifnum#1=1\relax
 \WorksheetHeading{Well-Mixed Tanks}
 \fi
