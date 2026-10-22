@@ -1,0 +1,45 @@
+\documentclass[11pt,letterpaper]{article}
+\input{WorksheetHeader.tex}
+\newcommand{\SystemBlank}[2]{%
+  \vcenter{\hbox{$\boxed{\rule{0pt}{#2}\makebox[#1]{}}$}}}
+\newcommand{\SystemVectorBlank}[2]{%
+  \vcenter{\hbox{$\boxed{%
+    \left(\vcenter{\hbox{\rule{0pt}{#2}\makebox[#1]{}}}\right)}$}}}
+\newcommand{\EigenvalueSystemProblem}[3]{%
+  \begingroup
+  \setlength{\parskip}{3pt}
+  \textbf{Problem #1}\quad Find the GS, then use the IC to determine the constants
+  \[
+    \vect{y}'=A\vect{y}
+    \qquad A=\begin{pmatrix}#2\end{pmatrix}
+    \qquad \vect{y}(0)=\begin{pmatrix}#3\end{pmatrix}
+  \]
+  \textbf{#1a. Eigenvalues and eigenvectors}\par
+  $\displaystyle\det(A-\lambda I)=\SystemBlank{3.5in}{0.7in}=0$\par
+  \vspace{0.04in}
+  $\displaystyle\lambda_1=\SystemBlank{0.55in}{0.55in}\qquad
+    \vect{v}_1=\SystemVectorBlank{1in}{1in}$\par
+  \vspace{0.04in}
+  $\displaystyle\lambda_2=\SystemBlank{0.55in}{0.55in}\qquad
+    \vect{v}_2=\SystemVectorBlank{1in}{1in}$\par
+  \vfill
+  \textbf{#1b. General solution}\par
+  $\displaystyle\vect{y}_c(t)=\SystemBlank{0.46\linewidth}{1in}$\par
+  Write down $B\vect{c}=\vect{b}$ to solve for $\vect{c}=\begin{pmatrix}c_1\\c_2\end{pmatrix}$\par
+  $\displaystyle B=\SystemVectorBlank{1.25in}{1.25in}\qquad
+    \vect{b}=\SystemVectorBlank{0.65in}{1in}$\par
+  $\displaystyle\vect{y}(t)=\SystemBlank{0.46\linewidth}{1in}$\par
+  \endgroup
+}
+\begin{document}
+\WorksheetHeading{Eigenvalue Systems}
+\EigenvalueSystemProblem{1}{2&3\\3&2}{2\\0}
+% Instructor check: eigenpairs (5,(1,1)), (-1,(1,-1)).
+% GS: y(t)=c_1 exp(5t)(1,1)+c_2 exp(-t)(1,-1).
+% IC gives c_1=1, c_2=1.
+\newpage
+\EigenvalueSystemProblem{2}{1&2\\3&2}{1\\4}
+% Instructor check: eigenpairs (4,(2,3)), (-1,(1,-1)).
+% GS: y(t)=c_1 exp(4t)(2,3)+c_2 exp(-t)(1,-1).
+% IC gives c_1=1, c_2=-1.
+\end{document}
