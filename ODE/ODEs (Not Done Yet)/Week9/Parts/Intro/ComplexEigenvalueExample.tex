@@ -1,0 +1,22 @@
+\begin{frame}{Complex Eigenvalues and Eigenvectors \qquad $\vect{y}'=\mat{A}\vect{y}$}
+Take the real matrix
+\[
+  \mat{A}=\begin{pmatrix}-1&-2\\2&-1\end{pmatrix}
+  \qquad
+  \det(\mat{A}-\lambda I)=(\lambda+1)^2+4=0
+\]
+Its eigenvalues and eigenvectors are
+\[
+  \lambda_1=-1+2i
+  \qquad \vect{v}_1=\begin{pmatrix}1\\-i\end{pmatrix}
+  \qquad
+  \lambda_2=-1-2i
+  \qquad \vect{v}_2=\begin{pmatrix}1\\i\end{pmatrix}
+\]
+The complex general solution is
+\[
+  \boxed{\vect{y}(t)=c_1e^{(-1+2i)t}\begin{pmatrix}1\\-i\end{pmatrix}
+    +c_2e^{(-1-2i)t}\begin{pmatrix}1\\i\end{pmatrix}}
+  \qquad c_1,c_2\in\mathbb{C}
+\]
+\end{frame}

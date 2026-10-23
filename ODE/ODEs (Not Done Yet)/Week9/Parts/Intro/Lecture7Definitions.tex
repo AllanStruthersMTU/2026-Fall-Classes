@@ -1,0 +1,29 @@
+\begin{frame}{ODE Definitions and Terminology}
+\begin{itemize}
+  \item A \keypoint{first-order linear IVP} is
+  $\vect{y}'=\mat{A}(t)\vect{y}+\vect{f}(t)$ with $\vect{y}(0)=\vect{y}_0$.
+  \begin{itemize}
+    \item The \keypoint{general solution (GS)} is
+    $\vect{y}(t)=\vect{y}_c(t)+\vect{y}_p(t)$.
+    \item The \keypoint{complementary solution} $\vect{y}_c$ 
+    (containing constants $\vect{c}$) satisfies
+    $\vect{y}_c'=\mat{A}(t)\vect{y}_c+\vect{0}$.
+    \item A \keypoint{particular solution} $\vect{y}_p$ 
+   (no undetermined constants) satisfies
+    $\vect{y}_p'=\mat{A}(t)\vect{y}_p+\vect{f}(t)$.
+  \item The constants $\vect{c}$ in the GS are determined by solving the LS  $\vect{y}_c(0)+\vect{y}_p(0)=\vect{y}_0$.
+\end{itemize}
+  \item \keypoint{Constant Coefficient} means $\mat{A}$ is independent of $t$.
+  \begin{itemize}
+    \item Eigenpairs satisfying $\mat{A}\vect{v}_i=\lambda_i\vect{v}_i$ give solutions
+    $e^{\lambda_i t}\vect{v}_i$ of 
+    $\vect{y}'= \mat{A} \vect{y}$
+    \item With a complete LI set of eigenvectors
+    $\vect{y}_c(t)=\sum_{i=1}^n c_i e^{\lambda_i t}\vect{v}_i$.
+  \item \keypoint{Undetermined Coefficients} guesses a $\vect{y}_p$
+  form by looking at $\vect{f}(t)$. The coefficients are determined 
+  by substituting 
+  into the ODE $\vect{y}_p'=\mat{A}(t)\vect{y}_p+\vect{f}(t)$.
+\end{itemize}
+\end{itemize}
+\end{frame}
