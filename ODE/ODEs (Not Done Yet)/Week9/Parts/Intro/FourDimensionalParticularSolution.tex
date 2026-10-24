@@ -1,0 +1,37 @@
+\begin{frame}{$\vect{y}'=\mat{A}\vect{y}+e^{2t}(1,-1,0,0)^T+\cos(3t)(3,-2,3,2)^T\quad\text{Particular Solution }\vect{y}_p=\vect{y}_{p_1}+\vect{y}_{p_2}$}
+% Half the current display glue on this slide only.
+\abovedisplayskip=\glueexpr\abovedisplayskip/2\relax
+\belowdisplayskip=\glueexpr\belowdisplayskip/2\relax
+\abovedisplayshortskip=\glueexpr\abovedisplayshortskip/2\relax
+\belowdisplayshortskip=\glueexpr\belowdisplayshortskip/2\relax
+\begin{itemize}
+  \item Substitute $\vect{y}_{p_1}=\vect{a}e^{2t}$ and  $\vect{y}_{p_1}'=2\vect{a}e^{2t}$ in 
+  $\boxed{\vect{y}_{p_1}' =\mat{A}\vect{y}_{p_1}+e^{2t}(1,-1,0,0)^T}$ to get
+  \[
+    2\vect{a}e^{2t}=\mat{A}\vect{a}e^{2t}+e^{2t}(1,-1,0,0)^T
+    \ \Longrightarrow\ (2I-\mat{A})\vect{a}=(1,-1,0,0)^T
+    \ \Longrightarrow\ \vect{a}=(-1,1,0,0)^T
+  \]
+  \item Substitute $\vect{y}_{p_2}=\vect{b}{\color{blue}\cos(3t)}+\vect{c}{\color{red}\sin(3t)}$ and $\vect{y}_{p_2}'=-3\vect{b}{\color{red}\sin(3t)}+3\vect{c}{\color{blue}\cos(3t)}$ 
+  %in %$\boxed{\vect{y}_{p_2}'=\mat{A}\vect{y}_{p_2}+{\color{blue}\cos(3t)}(3,-2,%3,2)^T}$ to get
+  \[
+    \begin{gathered}
+      -3\vect{b}{\color{red}\sin(3t)}+3\vect{c}{\color{blue}\cos(3t)}=(\mat{A}\vect{b}+(3,-2,3,2)^T){\color{blue}\cos(3t)}+\mat{A}\vect{c}{\color{red}\sin(3t)}\\
+      \begin{aligned}
+        {\color{blue}3\vect{c}}&={\color{blue}\mat{A}\vect{b}}+{\color{blue}(3,-2,3,2)^T}\\
+        -{\color{red}3\vect{b}}&={\color{red}\mat{A}\vect{c}}
+      \end{aligned}
+      \;\Longrightarrow\;
+      \begin{aligned}
+        \vect{b}&=(1/2,-1,1/2,1)^T\\
+        \vect{c}&=(3/2,0,3/2,0)^T
+      \end{aligned}
+    \end{gathered}
+  \]
+\end{itemize}
+\[
+  \boxed{\vect{y}_p(t)=e^{2t}\begin{pmatrix}-1\\1\\0\\0\end{pmatrix}
+    +(1/2)\begin{pmatrix}1\\-2\\1\\2\end{pmatrix}\cos(3t)
+    +(3/2)\begin{pmatrix}1\\0\\1\\0\end{pmatrix}\sin(3t)}
+\]
+\end{frame}

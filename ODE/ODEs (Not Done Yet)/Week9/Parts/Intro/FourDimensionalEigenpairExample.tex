@@ -1,0 +1,41 @@
+\begin{frame}[t]{ $\vect{y}'=\mat{A}\vect{y}+\vect{f}(t)$
+	\quad Complementary Solution $y_c$}
+\csname beamer@frametopskip\endcsname=0pt\relax
+\begingroup
+\setlength{\abovedisplayskip}{0pt}
+\setlength{\abovedisplayshortskip}{0pt}
+\setlength{\belowdisplayskip}{2pt}
+\setlength{\belowdisplayshortskip}{2pt}
+\vspace{-0.25in}
+\[
+  \mat{A}=\begin{pmatrix}
+    1&-2&-2&0\\-2&1&4&2\\-2&-2&1&0\\-2&-2&0&-3
+  \end{pmatrix}
+  \quad
+  \begin{array}{r@{\,=\,}r@{}l}
+    \lambda_1&-1&{}+2i\\
+    \lambda_2&-1&{}-2i\\
+    \lambda_3&\phantom{-}3&\\
+    \lambda_4&-1&
+  \end{array}
+  \quad
+  V=\bordermatrix{
+    &\vect{v}_1&\vect{v}_2&\vect{v}_3&\vect{v}_4\cr
+    &1&1&-1&-1\cr
+    &-i&+i&1&0\cr
+    &1&1&0&-1\cr
+    &+i&-i&0&1\cr
+  }
+\]
+\endgroup
+For $c_1,c_2,c_3,c_4\in\mathbb{R}$ the real GS is
+\[
+  \vect{y}_c(t)=\sum_{k=1}^{4}c_k\vect{y}_k(t)
+  =c_1e^{-t}\begin{pmatrix}\phantom{-}\cos(2t)\\\phantom{-}\sin(2t)\\\phantom{-}\cos(2t)\\-\sin(2t)\end{pmatrix}
+  +c_2e^{-t}\begin{pmatrix}\phantom{-}\sin(2t)\\-\cos(2t)\\\phantom{-}\sin(2t)\\\phantom{-}\cos(2t)\end{pmatrix}
+  +c_3e^{3t}\begin{pmatrix}-1\\\phantom{-}1\\\phantom{-}0\\\phantom{-}0\end{pmatrix}
+  +c_4e^{-t}\begin{pmatrix}-1\\\phantom{-}0\\-1\\\phantom{-}1\end{pmatrix}
+\]
+For $c_3\ne0$ the complementary solution satisfies
+$\vect{y}_c(t)\sim c_3e^{3t}\vect{v}_3$ as $t\to\infty$.
+\end{frame}

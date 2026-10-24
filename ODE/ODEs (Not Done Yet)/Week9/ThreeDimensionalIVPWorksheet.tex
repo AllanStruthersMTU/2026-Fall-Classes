@@ -1,0 +1,104 @@
+\documentclass[11pt,letterpaper]{article}
+\input{WorksheetHeader.tex}
+\setlength{\parskip}{5pt}
+\newcommand{\IVPBlank}[2]{%
+  \vcenter{\hbox{$\boxed{\rule{0pt}{#2}\makebox[#1]{}}$}}}
+\newcommand{\IVPWork}[1]{%
+  \par\noindent\fbox{\parbox[t][#1][t]{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}{%
+    \vfill\textcolor{black!18}{\rule{\linewidth}{0.3pt}}}}\par}
+\begin{document}
+\WorksheetHeading{A Forced $3\times3$ IVP}
+Solve the IVP completely and determine its leading behavior as $t\to\infty$
+\[
+  \vect{y}'=A\vect{y}+e^{-2t}\begin{pmatrix}-4\\-4\\-4\end{pmatrix}
+  +t\begin{pmatrix}2\\2\\0\end{pmatrix}
+  \qquad A=\begin{pmatrix}-4&2&4\\-2&1&3\\-4&3&3\end{pmatrix}
+  \qquad\vect{y}(0)=\begin{pmatrix}3\\1\\4\end{pmatrix}
+\]
+\textbf{1a. Eigenvalues}\par
+$\displaystyle\det(A-\lambda I)=\IVPBlank{5.6in}{0.65in}=0$
+\par
+$\displaystyle\lambda_+=\IVPBlank{1in}{0.35in}\quad
+\lambda_-=\IVPBlank{1in}{0.35in}\quad
+\lambda_3=\IVPBlank{1in}{0.35in}$
+\par Use $\operatorname{Im}(\lambda_+)>0$
+\textbf{1b. Eigenvectors}\par
+Row reduce $[A-\lambda_+I\mid\vect{0}]$ and find $\vect{v}_+$ with third entry $1$
+\IVPWork{1.35in}
+$\displaystyle\vect{v}_+=\IVPBlank{1.6in}{0.65in}\quad
+\vect{v}_-=\overline{\vect{v}_+}=\IVPBlank{1.6in}{0.65in}$
+\par Row reduce $[A-\lambda_3I\mid\vect{0}]$ and find $\vect{v}_3$ with first entry $1$
+\IVPWork{1.15in}
+$\displaystyle\vect{v}_3=\IVPBlank{1.6in}{0.65in}$
+
+\newpage
+\textbf{2a. Real complementary solution}\par
+Write $\vect{v}_+=\vect{p}+i\vect{q}$ with real vectors $\vect{p},\vect{q}$
+\par
+$\displaystyle\vect{p}=\IVPBlank{1.5in}{0.6in}\quad
+\vect{q}=\IVPBlank{1.5in}{0.6in}$
+\par Expand $e^{\lambda_+t}\vect{v}_+$ and separate its real and imaginary parts
+\IVPWork{1in}
+$\displaystyle\vect{y}_1(t)=\operatorname{Re}(e^{\lambda_+t}\vect{v}_+)=\IVPBlank{5in}{0.65in}$
+\par
+$\displaystyle\vect{y}_2(t)=\operatorname{Im}(e^{\lambda_+t}\vect{v}_+)=\IVPBlank{5in}{0.65in}$
+\par
+$\displaystyle\vect{y}_3(t)=e^{\lambda_3t}\vect{v}_3=\IVPBlank{5in}{0.65in}$
+\par
+$\displaystyle\vect{y}_c(t)=\sum_{k=1}^{3}c_k\vect{y}_k(t)=\IVPBlank{4.5in}{0.65in}$
+\vfill
+\textbf{2b. Exponential particular solution}\par
+For $\vect{f}_1(t)=e^{-2t}(-4,-4,-4)^T$ try $\vect{y}_{p_1}(t)=\vect{a}e^{-2t}$
+\par
+$\displaystyle\vect{y}_{p_1}'(t)=\IVPBlank{3in}{0.4in}$
+\par Substitute into $\vect{y}_{p_1}'=A\vect{y}_{p_1}+\vect{f}_1$ and cancel the exponential
+\IVPWork{0.65in}
+$\displaystyle\IVPBlank{1.6in}{0.45in}\vect{a}=\IVPBlank{1.6in}{0.55in}
+\quad\vect{a}=\IVPBlank{1.6in}{0.55in}$
+\par
+$\displaystyle\vect{y}_{p_1}(t)=\IVPBlank{5in}{0.65in}$
+
+\newpage
+\textbf{3a. Linear particular solution}\par
+For $\vect{f}_2(t)=t(2,2,0)^T$ try $\vect{y}_{p_2}(t)=\vect{b}t+\vect{d}$
+\par
+$\displaystyle\vect{y}_{p_2}'(t)=\IVPBlank{2in}{0.4in}$
+\par Substitute into $\vect{y}_{p_2}'=A\vect{y}_{p_2}+\vect{f}_2$ and collect powers of $t$
+\IVPWork{1.1in}
+Match the coefficient of $t$ and the constant term
+\par
+$\displaystyle A\vect{b}=\IVPBlank{1.8in}{0.55in}\qquad
+A\vect{d}=\IVPBlank{1.8in}{0.55in}$
+\par Solve these linear systems
+\IVPWork{1.3in}
+$\displaystyle\vect{b}=\IVPBlank{1.8in}{0.65in}\qquad
+\vect{d}=\IVPBlank{1.8in}{0.65in}$
+\par
+$\displaystyle\vect{y}_{p_2}(t)=\IVPBlank{5.5in}{0.7in}$
+\vfill
+\textbf{3b. Particular and general solutions}\par
+$\displaystyle\vect{y}_p(t)=\vect{y}_{p_1}(t)+\vect{y}_{p_2}(t)=\IVPBlank{4.8in}{0.8in}$
+\par
+$\displaystyle\vect{y}(t)=\vect{y}_c(t)+\vect{y}_p(t)=\IVPBlank{5.2in}{0.8in}$
+
+\newpage
+\textbf{4a. Initial condition}\par
+$\displaystyle\vect{y}_p(0)=\IVPBlank{1.8in}{0.6in}\qquad
+\vect{y}_0-\vect{y}_p(0)=\IVPBlank{1.8in}{0.6in}$
+\par Write $M\vect{c}=\vect{y}_0-\vect{y}_p(0)$ with
+$M=[\vect{y}_1(0)\ \vect{y}_2(0)\ \vect{y}_3(0)]$
+\par
+$\displaystyle M=\IVPBlank{2.3in}{0.85in}\qquad
+\vect{c}=\begin{pmatrix}c_1\\c_2\\c_3\end{pmatrix}$
+\par Form the augmented matrix and row reduce
+\IVPWork{1.55in}
+$\displaystyle\vect{c}=\IVPBlank{2in}{0.65in}$
+\vfill
+\textbf{4b. IVP solution and leading behavior}\par
+Substitute the constants and both particular contributions
+\par
+$\displaystyle\vect{y}(t)=\IVPBlank{6.4in}{1in}$
+\par Identify the term that dominates as $t\to\infty$
+\IVPWork{0.65in}
+$\displaystyle\vect{y}(t)\sim\IVPBlank{4.8in}{0.8in}\quad\text{as }t\to\infty$
+\end{document}

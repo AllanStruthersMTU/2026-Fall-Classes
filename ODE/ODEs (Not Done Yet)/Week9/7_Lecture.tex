@@ -2,10 +2,22 @@
 % Use the installed scalable Computer Modern font map.
 \ifdefined\pdfmapfile\pdfmapfile{+cm-super-t1.map}\fi
 \input{LectureHeader}
+% Slightly smaller list indents in lecture seven only.
+\setlength{\leftmargini}{1.6em}
+\setlength{\leftmarginii}{1.6em}
+\setlength{\leftmarginiii}{1.6em}
+\setlength{\labelwidth}{\dimexpr\leftmargini-\labelsep\relax}
 \title{Ordinary Differential Equations}
 \date{}
 \lecturenum{7}
 \begin{document}
 \include{Parts/Intro/Lecture7Definitions}
 \include{Parts/Intro/ComplexEigenvalueExample}
+\include{Parts/Intro/ComplexExponentials}
+\include{Parts/Intro/RealFormsComplexEigenpairs}
+\include{Parts/Intro/ComplexEigenpairRecipe}
+\include{Parts/Intro/FourDimensionalEigenpairExample}
+\include{Parts/Intro/FourDimensionalParticularSolution}
+\include{Parts/Intro/FourDimensionalInitialCondition}
+\include{Parts/LinearSystemSummary}
 \end{document}
