@@ -1,0 +1,89 @@
+\documentclass[11pt,letterpaper]{article}
+\input{WorksheetHeader.tex}
+\setlength{\parskip}{5pt}
+\newcommand{\IVPBlank}[2]{%
+  \vcenter{\hbox{$\boxed{\rule{0pt}{#2}\makebox[#1]{}}$}}}
+\newcommand{\IVPWork}[1]{%
+  \par\noindent\fbox{\parbox[t][#1][t]{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}{%
+    \vfill\textcolor{black!18}{\rule{\linewidth}{0.3pt}}}}\par}
+% Exact outer dimensions include the frame, with zero internal padding.
+\newlength{\IVPMatrixSide}
+\newlength{\IVPVectorWidth}
+\setlength{\IVPMatrixSide}{1.4in}
+\setlength{\IVPVectorWidth}{0.84in}
+\newcommand{\IVPShape}[2]{%
+  \vcenter{\hbox{\begingroup\setlength{\fboxsep}{0pt}\setlength{\fboxrule}{0.4pt}%
+  \fbox{\rule{0pt}{\dimexpr#2-2\fboxrule\relax}%
+  \makebox[\dimexpr#1-2\fboxrule\relax]{}}\endgroup}}}
+\newcommand{\IVPMatrixBlank}{\IVPShape{\IVPMatrixSide}{\IVPMatrixSide}}
+\newcommand{\IVPVectorBlank}{\IVPShape{\IVPVectorWidth}{\IVPMatrixSide}}
+\begin{document}
+\WorksheetHeading{A Forced $3\times3$ IVP}
+Solve the IVP and determine behavior as $t\to\infty$. 
+\[
+  \vect{y}'=A\vect{y}+e^{-2t}\begin{pmatrix}-4\\-4\\-4\end{pmatrix}
+  +t\begin{pmatrix}2\\2\\0\end{pmatrix}
+  \qquad A=\begin{pmatrix}-4&2&4\\-2&1&3\\-4&3&3\end{pmatrix}
+  \qquad\vect{y}(0)=\vect{y}_0=\begin{pmatrix}3\\1\\4\end{pmatrix}
+\]
+\textbf{a. Eigenvalues and eigenvectors}\par
+$\displaystyle\lambda_1=\IVPBlank{1in}{0.35in}\quad
+\lambda_2=\IVPBlank{1in}{0.35in}\quad
+\lambda_3=\IVPBlank{1in}{0.35in}$
+\par
+$\displaystyle V=[\vect{v}_1\ \vect{v}_2\ \vect{v}_3]=\boxed{\AnswerMatrix}$
+
+\textbf{b. Real complementary solution}\quad
+$\vect{y}_c(t)=c_1\vect{y}_1(t)+c_2\vect{y}_2(t)+c_3\vect{y}_3(t)$\par
+Write down three linearly independent real solutions
+\par
+\begingroup
+\newlength{\IVPTripleWidth}
+\newlength{\IVPTripleMeasure}
+\newlength{\IVPTripleGap}
+\setlength{\IVPTripleGap}{0.12in}
+\setlength{\IVPTripleWidth}{\linewidth}
+\settowidth{\IVPTripleMeasure}{$\displaystyle\vect{y}_1(t)={}$}
+\addtolength{\IVPTripleWidth}{-\IVPTripleMeasure}
+\settowidth{\IVPTripleMeasure}{$\displaystyle\vect{y}_2(t)={}$}
+\addtolength{\IVPTripleWidth}{-\IVPTripleMeasure}
+\settowidth{\IVPTripleMeasure}{$\displaystyle\vect{y}_3(t)={}$}
+\addtolength{\IVPTripleWidth}{-\IVPTripleMeasure}
+% Measure the actual boxed macro so padding/rules are fully included.
+\settowidth{\IVPTripleMeasure}{$\IVPBlank{0pt}{0.85in}$}
+\setlength{\IVPTripleWidth}{\dimexpr(\IVPTripleWidth-3\IVPTripleMeasure-2\IVPTripleGap-2sp)/3\relax}
+\noindent\hbox{%
+\hbox{$\displaystyle\vect{y}_1(t)={}$}\hbox{$\IVPBlank{\IVPTripleWidth}{0.85in}$}%
+\hspace{\IVPTripleGap}%
+\hbox{$\displaystyle\vect{y}_2(t)={}$}\hbox{$\IVPBlank{\IVPTripleWidth}{0.85in}$}%
+\hspace{\IVPTripleGap}%
+\hbox{$\displaystyle\vect{y}_3(t)={}$}\hbox{$\IVPBlank{\IVPTripleWidth}{0.85in}$}}%
+\endgroup
+
+\textbf{c. Exponential forcing} \quad$\vect{f}_1(t)=e^{-2t}(-4,-4,-4)^T$
+
+Try $\vect{y}_{p_1}(t)=\vect{a}e^{-2t}$\quad$\displaystyle\vect{y}_{p_1}'(t)=\IVPBlank{3in}{0.35in}$
+\par Substitute into $\vect{y}_{p_1}'=A\vect{y}_{p_1}+\vect{f}_1$ and cancel the exponential.\par
+$\displaystyle\IVPMatrixBlank\vect{a}=\IVPVectorBlank\qquad\vect{y}_{p_1}(t)=\IVPShape{1in}{\IVPMatrixSide}$
+
+\textbf{d. Linear forcing} \quad
+	$\vect{f}_2(t)=t(2,2,0)^T$
+
+Try $\vect{y}_{p_2}(t)=\vect{b}t+\vect{d}$\quad$\displaystyle\vect{y}_{p_2}'(t)=\IVPBlank{2in}{0.35in}$
+\par Substitute into $\vect{y}_{p_2}'=A\vect{y}_{p_2}+\vect{f}_2$ and match the coefficient of $t$ and the constant term and solve
+
+$\displaystyle\vect{y}_{p_2}(t)=\IVPBlank{5.5in}{1.4in}$
+
+\textbf{e. Particular and general solutions}\par
+$\displaystyle\vect{y}_p(t)=\vect{y}_{p_1}(t)+\vect{y}_{p_2}(t)=\IVPBlank{4.8in}{0.8in}$
+\par
+$\displaystyle\vect{y}(t)=\vect{y}_c(t)+\vect{y}_p(t)=\IVPBlank{5.2in}{0.8in}$
+
+\textbf{f. Initial condition in GS $\vect{y}(t)=\vect{y}_c(t)+\vect{y}_{p_1}(t)+\vect{y}_{p_2}(t) $}
+
+Write down the augmented matrix you would row reduce to solve for the 
+constants $\vect{c}$ to satisfy $\vect{y}(0)=xxx$.  
+
+\textbf{g. IVP solution and leading behavior}\par
+Solve for $\vect{c}$ and fill in the asymptotic behavior. 
+\end{document}
