@@ -1,0 +1,17 @@
+\documentclass[11pt,letterpaper]{article}
+\input{WorksheetHeader.tex}
+\input{LinearODEWorksheetLayout.tex}
+
+\begin{document}
+% Front problem.
+% Instructor check: p=2t/(1+t^2), mu=1+t^2.
+% Substitutions: u=1+t^2 for integral p; u=t^2 for the forcing integral.
+% (1+t^2)y=sin(t^2)+C, C=2. The solution exists for all real t.
+\LinearProblem{1}{(1+t^2)y'+2ty=2t\cos(t^2)}{0}{2}
+\newpage
+% Back problem. No repeated heading or name box.
+% Instructor check: p=3t^2/(2+t^3), mu=2+t^3 on t>-cuberoot(2).
+% Substitutions: u=2+t^3 for integral p; u=t^3 for the forcing integral.
+% (2+t^3)y=exp(t^3)+C. The IC gives C=1.
+\LinearProblem{2}{(2+t^3)y'+3t^2y=3t^2e^{t^3}}{0}{1}
+\end{document}

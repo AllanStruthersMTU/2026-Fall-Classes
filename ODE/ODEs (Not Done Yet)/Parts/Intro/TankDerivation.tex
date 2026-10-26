@@ -1,0 +1,121 @@
+% Matches the front problem in TanksWorksheet.tex.
+\begin{frame}{Tank Volumes}
+\begin{itemize}
+  \item Volume change is inflow minus outflow, in $\mathrm{L/min}$.
+  \[
+  \begin{aligned}
+    v_1'&=3+3-5=1 & \hspace{1cm}v_1(t)&=60+t\\
+    v_2'&=5+2-3-6=-2 & \hspace{1cm}v_2(t)&=80-2t\\
+    v_3'&=6-2-2=2 & \hspace{1cm}v_3(t)&=50+2t
+  \end{aligned}
+  \]
+  \item Volumes are in liters. The flow rates do not balance.
+  \item Well-mixed means $c_i(t)=s_i(t)/v_i(t)$, where $s_i$ is salt mass in grams.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{When Does the Tank Model Make Sense?}
+\begin{itemize}
+  \item Each volume must stay positive and below capacity.
+  \[
+  \begin{aligned}
+    0<60+t<100&\quad\Longrightarrow\quad 0\leq t<40\\
+    0<80-2t<120&\quad\Longrightarrow\quad 0\leq t<40\\
+    0<50+2t<100&\quad\Longrightarrow\quad 0\leq t<25
+  \end{aligned}
+  \]
+  \item Tank 3 fills first, at $t=25$ minutes.
+  \item The model applies for $0\leq t<25$. Overflow changes things!
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Salt Flow Rate}
+\begin{itemize}
+  \item A flow carries salt at rate $qc$.
+  \[
+    \frac{\cancel{\mathrm L}}{\mathrm{min}}
+    \frac{\mathrm g}{\cancel{\mathrm L}}=\frac{\mathrm g}{\mathrm{min}}
+  \]
+  \begin{itemize}
+    \item For instance, the external flow brings salt into tank 1 at
+    \[
+      q_{\mathrm{in}}c_{\mathrm{in}}
+      =\left(3\,\frac{\cancel{\mathrm L}}{\mathrm{min}}\right)
+       \left(3\,\frac{\mathrm g}{\cancel{\mathrm L}}\right)
+      =9\,\frac{\mathrm g}{\mathrm{min}}.
+    \]
+    \item For instance, the pipe from tank 1 to tank 2 brings salt into tank 2 at the rate
+    \[
+      q_{12}c_1(t)=\frac{5s_1(t)}{v_1(t)}
+      =\frac{5s_1(t)}{\underbrace{60+t}_{\text{volume }v_1(t)}}
+      \quad\mathrm{g/min}.
+    \]
+    The same pipe sucks salt \textcolor{red}{out} of tank 1 at 
+    $ {\color{red}-}q_{12}c_1(t)={\color{red}-}5s_1(t)/(60+t)\,\mathrm{g/min}$.
+  \end{itemize}
+\end{itemize}
+\end{frame}
+\begin{frame}{Salt Balances}
+\begin{itemize}
+  \item Salt mass change is salt inflow minus salt outflow.
+  \[
+  \begin{aligned}
+    s_1'&=9+3c_2-5c_1\\[4pt]
+    s_2'&=5c_1+2c_3-9c_2\\[4pt]
+    s_3'&=6c_2-4c_3
+  \end{aligned}
+  \]
+  \item Substitute the source tank's concentration:
+  \[
+    c_1=s_1/(60+t),\qquad
+    c_2=s_2/(80-2t),\qquad
+    c_3=s_3/(50+2t).
+  \]
+  \item Salt rates are in $\mathrm{g/min}$. Concentrations are in $\mathrm{g/L}$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Initial Salt Masses}
+\begin{itemize}
+  \item The diagram gives initial salt masses directly:
+  \[
+    s_1(0)=120\ \mathrm g,\qquad s_2(0)=80\ \mathrm g,\qquad s_3(0)=0\ \mathrm g.
+  \]
+  \item Concentration is salt mass divided by volume. For example,
+  \[
+    c_1(0)=\frac{120\,\mathrm g}{60\,\mathrm L}=2\,\mathrm{g/L}.
+  \]
+  \item Thus $\vect{s}_0=(120,80,0)$ in grams.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Tank System as a Vector IVP}
+\[
+  \vect{s}'=\mat{A}(t)\vect{s}+\vect{b},\qquad
+  \vect{s}(0)=\begin{pmatrix}120\\80\\0\end{pmatrix}
+\]
+\[
+\mat{A}(t)=\begin{pmatrix}
+  -5/(60+t)&3/(80-2t)&0\\[4pt]
+  5/(60+t)&-9/(80-2t)&2/(50+2t)\\[4pt]
+  0&6/(80-2t)&-4/(50+2t)
+\end{pmatrix},\quad
+\vect{b}=\begin{pmatrix}9\\0\\0\end{pmatrix}.
+\]
+\begin{itemize}
+  \item $\mat{A}(t)$ varies with time because the volumes change.
+  \item Entries of $\mat{A}$ have units $\mathrm{min}^{-1}$.
+  Entries of $\vect{b}$ have units $\mathrm{g/min}$.
+  \item The physical model applies for $0\leq t<25$ minutes.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Total Salt Balance}
+\begin{itemize}
+  \item Add the three salt balances. Internal transfers cancel.
+  \[
+    (s_1+s_2+s_3)'=9-2c_3=9-2s_3/(50+2t).
+  \]
+  \item Total salt changes only through the external inlet and outlet.
+\end{itemize}
+\end{frame}

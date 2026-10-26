@@ -1,0 +1,24 @@
+\begin{frame}{Linear ODEs}
+\begin{itemize}
+  \item 
+  $\vect{y}'=\mat{A}(t)\vect{y}+\vect{b}(t)$
+  is a \keypoint{Linear ODE}. Coefficients are functions of $t$ but not $\vect{y}$.
+  \begin{itemize}
+  	\item It is \keypoint{Constant Coefficient} (CC) if
+  	 $A$ and $b$ do not depend on $t$.  
+  	 \item It is \keypoint{Homogeneous} if the \keypoint{forcing} term $\vect{b}(t)=0$.
+  \end{itemize}
+  \item From Calculus One we know the solution of $y'=ay+0$ is $y=y(0) e^{at}$. From Calculus Two we know the definition
+  \[
+  e^{at} = 1 + (at)+ \frac{1}{2!} (a t)^2 + \frac{1}{2!} (at)^3 + \dots = \sum_{k=0}^\infty \frac{1}{k!} (at)^k
+  \]
+  \item $\vect{y}(t)=e^{t\mat{A}} \vect{y}(0)$ solves the 
+  CC  homogeneous system
+  $\vect{y}'=\mat{A}\vect{y}+\vect{0}$ where
+   \[
+  e^{t\mat{A}}=\mat{I}+t\mat{A}
+  +\frac{t^2\mat{A}^2}{2!}+\frac{t^3\mat{A}^3}{3!}+\cdots
+  =\sum_{j=0}^{\infty}\frac{t^k\mat{A}^k}{k!}
+  \]
+\end{itemize}
+\end{frame}

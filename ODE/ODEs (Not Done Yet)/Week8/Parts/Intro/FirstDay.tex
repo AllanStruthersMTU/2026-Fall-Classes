@@ -1,0 +1,80 @@
+\begin{frame}{Ordinary Differential Equation}
+\begin{itemize}
+  \item \keypoint{Ordinary Differential Equations (ODE)} relate a function $y(t)$ to its derivatives.
+  \item An \keypoint{Autonomous} ODE has no explicit dependence on $t$.
+  \item The order of the highest derivative in an ODE is the \keypoint{Order}.
+  \item A first order \keypoint{Initial Value Problem (IVP)} is an ODE with an \newline \keypoint{Initial Condition (IC)} $y(t_0)=y_0$.
+  \item A function satisfying the IC and the 
+  ODE for $a<t_0<b$ solves the IVP on $(a,b)$.
+\end{itemize}
+\begin{block}{Example: Solution of a First-Order IVP}
+Solve the IVP $y'=2y$, $y(0)=3$.
+\[
+  \text{The solution of the IVP is}\qquad \boxed{y(t)=3e^{2t}}
+\]
+Check: $y'(t)=6e^{2t}=2y(t)$ and $y(0)=3$.
+\end{block}
+\end{frame}
+
+\begin{frame}{Second Order to First Order}
+\begin{enumerate}
+  \item Start with a second-order IVP
+  \[
+    y''=g(t,y,y'),\qquad y(t_0)=a_1,\qquad y'(t_0)=a_2
+  \]
+  \item Define $y_1=y$ and $y_2=y'$. Then
+  \[
+    \begin{aligned}
+      y_1'&=y_2 & y_1(t_0)&=a_1 \\
+      y_2'&=g(t,y_1,y_2) & y_2(t_0)&=a_2
+    \end{aligned}
+  \]
+  \item With $\vect{y}=(y_1,y_2)$ and $\vect{y}_0=(a_1,a_2)$, write
+  \[
+    \vect{y}'=\vect{f}(t,\vect{y}),\qquad
+    \vect{y}(t_0)=\vect{y}_0,\qquad
+    \vect{f}(t,\vect{y})=\begin{pmatrix}y_2\\g(t,y_1,y_2)\end{pmatrix}
+  \]
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Mass and Spring}
+\begin{block}{Example: Second Order to First Order}
+\begin{itemize}
+  \item A mass $m>0$, damping coefficient $c\geq0$, spring stiffness $k>0$, and applied force $g(t)$ give
+  \[
+    my''+cy'+ky=g(t)
+  \]
+  \item Displacement $y_1=y$ and velocity $y_2=y'$ give
+  \[
+    \underbrace{\begin{pmatrix} y_1 \\ y_2 \end{pmatrix}'}_{\vect{y}'}
+    =\underbrace{\begin{pmatrix}
+      y_2 \\
+      \bigl(g(t)-cy_2-ky_1\bigr)/m
+    \end{pmatrix}}_{\vect{f}(t,\vect{y})}
+    \qquad\Longleftrightarrow\qquad
+    \boxed{\vect{y}'=\vect{f}(t,\vect{y})}
+  \]
+  \item Initial displacement and velocity supply the two initial values.
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Existence and Uniqueness}
+\begin{block}{First-order IVP}
+If $\vect{f}$ and its Jacobian $D_{\vect{y}}\vect{f}$ (with entries $\partial f_i/\partial y_j$) are continuous near $(t_0,\vect{y}_0)$, then
+\[
+  \vect{y}'=\vect{f}(t,\vect{y}),\qquad \vect{y}(t_0)=\vect{y}_0
+\]
+has a unique local solution.
+\end{block}
+\begin{block}{$n$th-order IVP}
+If $g$ and its partials wrt  $y,y',\ldots,y^{(n-1)}$ are continuous near the IC , then the IVP
+\[
+  y^{(n)}=g(t,y,y',\ldots,y^{(n-1)}),\qquad
+  y^{(j)}(t_0)=a_j\quad (j=0,\ldots,n-1)
+\]
+has a unique local solution.
+\end{block}
+Set $\vect{y}=(y,y',\ldots,y^{(n-1)})$ to obtain a first-order system.
+\end{frame}

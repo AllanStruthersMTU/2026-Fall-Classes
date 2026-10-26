@@ -1,0 +1,26 @@
+% Common article worksheet layout. Load after \documentclass.
+\usepackage[margin=0.25in,headheight=0pt,headsep=0pt,footskip=0pt]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{tikz,graphicx}
+\definecolor{mtuGreen}{RGB}{0,79,42}
+\definecolor{mtuGreenLight}{RGB}{60,133,90}
+\definecolor{mtuGreenPale}{RGB}{223,236,227}
+\newcommand{\vect}[1]{\mathbf{#1}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{8pt}
+\pagestyle{empty}
+% Fixed name-box dimensions and page position shared by every worksheet.
+\newcommand{\WorksheetNameBox}{%
+  \begingroup\setlength{\fboxsep}{3pt}\setlength{\fboxrule}{0.4pt}%
+  \fbox{\rule[-0.30in]{0pt}{0.42in}\makebox[4.24in][l]{Name:}}%
+  \endgroup}
+\newcommand{\WorksheetHeading}[1]{%
+  \noindent{\small\textbf{MA3521 --- #1}}\hfill\WorksheetNameBox\par}
+% A blank entry with fixed writing room, usable inside a matrix.
+\newcommand{\AnswerEntry}{\rule[-0.17in]{0pt}{0.47in}\makebox[0.67in]{}}
+\newcommand{\AnswerVector}{\begin{pmatrix}\AnswerEntry\\\AnswerEntry\\\AnswerEntry\end{pmatrix}}
+\newcommand{\AnswerMatrix}{\begin{pmatrix}
+  \AnswerEntry&\AnswerEntry&\AnswerEntry\\
+  \AnswerEntry&\AnswerEntry&\AnswerEntry\\
+  \AnswerEntry&\AnswerEntry&\AnswerEntry
+\end{pmatrix}}

@@ -1,0 +1,31 @@
+\begin{frame}{Complex Eigenpairs \qquad $\vect{y}'=\begin{pmatrix}-1&-2\\2&-1\end{pmatrix}\vect{y}=\mat{A}\vect{y}$}
+	\begin{itemize}
+		\item $\boxed{\lambda=-1\pm2i}$ since
+		$\det(\mat{A}-\lambda I)=(\lambda+1)^2+4=0
+		 \Longrightarrow (\lambda+1)^2=-4$ 
+		 \item $\boxed{\lambda_1=-1+2i}\quad\boxed{\vect{v}_1= (1,-i)}$ since 
+		 $(\mat{A}-\lambda_1 I)\vect{v}_1=\vect{0}$
+		 \[
+		 \mat{A}-(-1+2i)I=\begin{pmatrix}-2i&-2\\2&-2i\end{pmatrix}
+		 \qquad
+		 \left[\begin{array}{rr|r}-2i&-2&0\\2&-2i&0\end{array}\right]
+		 \sim
+		 \left[\begin{array}{rr|r}1&-i&0\\0&0&0\end{array}\right]
+		 \]
+		 \item $\boxed{\lambda_2=-1-2i}\quad\boxed{\vect{v}_2= (1,+i)}$ since 
+		 $(\mat{A}-\lambda_2 I)\vect{v}_2=\vect{0}$
+		 \[
+		 \mat{A}-(-1-2i)I=\begin{pmatrix}+2i&-2\\2&+2i\end{pmatrix}
+		 \qquad
+		 \left[\begin{array}{rr|r}+2i&-2&0\\2&+2i&0\end{array}\right]
+		 \sim
+		 \left[\begin{array}{rr|r}1&+i&0\\0&0&0\end{array}\right]
+		 \]
+\item For $c_1,c_2\in\mathbb{C}$ the general solution is 
+\end{itemize}
+\[
+  \boxed{\vect{y}(t)=c_1e^{(-1+2i)t}\begin{pmatrix}1\\-i\end{pmatrix}
+    +c_2e^{(-1-2i)t}\begin{pmatrix}1\\+i\end{pmatrix}}
+\]
+\end{frame}
+

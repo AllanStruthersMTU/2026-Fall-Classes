@@ -1,0 +1,35 @@
+\begin{frame}{Real Form from $\lambda_{\pm}=\alpha\pm\beta i$
+and $\vect{v}_{\pm}=\vect{a}\pm\vect{b}i$
+}
+\begin{itemize}
+  \item Expand
+  $e^{\lambda_+t}\vect{v}_+
+  =e^{\alpha t}\left[
+  ({\color{blue}\vect{a}\cos(\beta t)}-{\color{blue}\vect{b}\sin(\beta t)})
+  +{\color{red}i}({\color{red}\vect{a}\sin(\beta t)}+{\color{red}\vect{b}\cos(\beta t)})
+  \right]$. \newline
+  Real and imaginary parts give two real solutions
+  \[
+    \boxed{\vect{y}_1 = e^{\alpha t}
+    	(\vect{a}\cos(\beta t)-\vect{b}\sin(\beta t))}
+  \quad
+    \boxed{\vect{y}_2 = e^{\alpha t}
+    	(\vect{a}\sin(\beta t)+\vect{b}\cos(\beta t)}
+  \]
+  \item The real solution form, for $\vect{c}=\begin{pmatrix}c_1\\c_2\end{pmatrix}\in\mathbb{R}^2$, is
+  \[
+  \vect{y}(t)= \boxed{
+  	c_1 e^{\alpha t}
+  	(\vect{a}\cos(\beta t)-\vect{b}\sin(\beta t))
+  	+ 
+  	c_2 e^{\alpha t}
+  	(\vect{a}\sin(\beta t)+\vect{b}\cos(\beta t))
+  }
+  \]
+  As $t\rightarrow\infty$ the ith component
+  $\boxed{\sim e^{\alpha t} \cos(\beta t + \phi_i)}$.  
+  \item Solve the linear system
+  $\begin{pmatrix}\vect{a}&\vect{b}\end{pmatrix}\vect{c}=\vect{y}_0$
+  to determine $c_1$ and $c_2$ to satisfy $\vect{y}(0)=\vect{y}_0$.
+\end{itemize}
+\end{frame}

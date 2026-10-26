@@ -1,0 +1,33 @@
+\begin{frame}{Summary 
+		\quad$\vect{y}'=\mat{A}\vect{y}+\vect{f}_1(t)+\vect{f}_2(t)$
+		\quad
+		$\vect{y}=\vect{y}_c+\vect{y}_p=\sum_{k=1}^{n}c_k\vect{y}_k+\vect{y}_{p_1}+\vect{y}_{p_2}$}
+\begin{itemize}
+  \item \keypoint{Complementary Solution} If $\mat{A}\vect{v}_k = \lambda_k \vect{v}_k$ for $1\leq k \leq n$  
+  and $M=[\vect{v}_1\ \vect{v}_2 \dots  \vect{v}_n]$ is invertible 
+  construct
+   $\vect{y}_c(t) = \sum_{k=1}^{4}d_k e^{\lambda_t}k 
+  \vect{v}_k$ from $n$ LI real solutions.
+  \begin{itemize}
+  % Increase subitem glue by 50%, with 3pt minimum clearance for boxes.
+  \itemsep=\glueexpr\itemsep*3/2+3pt\relax
+  	\item Real eigenvalue $\lambda$ and eigenvector $\vect{v}$ give 
+  	the real solution $\boxed{e^{\lambda t}\vect{v}}$
+  \item Conjugate eigenvalues
+  $\lambda = \alpha \pm \beta i$ and
+  eigenvectors 
+  $\vect{v} = \vect{a} \pm \vect{b} i$
+  give two real solutions 
+  $\boxed{e^{\alpha t}(\vect{a}\cos(\beta t)-\vect{b}\sin(\beta t))}$ and
+  $\boxed{e^{\alpha t}(\vect{a}\sin(\beta t)+\vect{b}\cos(\beta t))}$
+  \end{itemize}
+  \item \keypoint{Particular solution} construct
+  $\vect{y}_p(t) = \vect{y}_{p_1}(t)+\vect{y}_{p_2}(t)$ where $\vect{y}_{p_j}'(t)=\mat{A}\vect{y}_{p_j}(t)+\vect{f}_j(t)$.
+  Match undetermined coefficients in $\vect{a}_0+\vect{a}_1t+\cdots$ 
+  for a polynomial in $\vect{a} e^{\gamma t}$ for an exponential, 
+  and $\vect{a}\cos(\omega t)+\vect{b}\sin(\omega t)$ for a sinusoid.
+  \item \keypoint{IC} Solve 
+  $M \vect{c} =\vect{y}_0-\vect{y}_p(0)$ with
+  $\mat{M}=\begin{pmatrix}\vect{y}_1(0)&\cdots&\vect{y}_n(0)\end{pmatrix}$ to enforce IC $\vect{y}(0)=\vect{y}_0$.
+\end{itemize}
+\end{frame}

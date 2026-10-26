@@ -1,0 +1,42 @@
+\begingroup
+% Compact title padding for this slide only.
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip
+  \begin{beamercolorbox}[wd=\paperwidth,ht=1cm,dp=0.1cm,leftskip=1em,rightskip=1em,vmode]{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle\par
+  \end{beamercolorbox}
+}
+\begin{frame}{Real forms for complex eigenpairs \qquad $\vect{y}'=\begin{pmatrix}-1&-2\\2&-1\end{pmatrix}\vect{y}=\mat{A}\vect{y}$}
+\setlength{\abovedisplayskip}{1pt}
+\setlength{\belowdisplayskip}{1pt}
+\setlength{\abovedisplayshortskip}{0pt}
+\setlength{\belowdisplayshortskip}{0pt}
+	\begin{itemize}
+\setlength{\itemsep}{2pt}
+		\item $\boxed{\lambda_{\pm}=-1\pm2i}\qquad\boxed{\vect{v}_+=\begin{pmatrix}1\\-i\end{pmatrix}}\qquad\boxed{\vect{v}_-=\begin{pmatrix}1\\+i\end{pmatrix}}\qquad\boxed{\vect{v}_{\pm}=\begin{pmatrix}1\\\mp i\end{pmatrix}}$
+    \[
+      \begin{aligned}
+        e^{(-1+2i)t}\vect{v}_+&={\color{blue}e^{-t}}({\color{blue}\cos(2t)}+{\color{red}i\sin(2t)})\begin{pmatrix}{\color{blue}1}\\-{\color{red}i}\end{pmatrix}
+        ={\color{blue}e^{-t}}\left[{\color{blue}\begin{pmatrix}\cos(2t)\\\sin(2t)\end{pmatrix}}+{\color{red}i}\begin{pmatrix}{\color{red}\sin(2t)}\\-{\color{red}\cos(2t)}\end{pmatrix}\right]\\
+        e^{(-1-2i)t}\vect{v}_-&={\color{blue}e^{-t}}({\color{blue}\cos(2t)}-{\color{red}i\sin(2t)})\begin{pmatrix}{\color{blue}1}\\+{\color{red}i}\end{pmatrix}
+        ={\color{blue}e^{-t}}\left[{\color{blue}\begin{pmatrix}\cos(2t)\\\sin(2t)\end{pmatrix}}-{\color{red}i}\begin{pmatrix}{\color{red}\sin(2t)}\\-{\color{red}\cos(2t)}\end{pmatrix}\right]
+      \end{aligned}
+    \]
+    \begin{itemize}
+\setlength{\itemsep}{2pt}
+    \item Adding gives
+    $\boxed{2 e^{-t}\begin{pmatrix}\cos(2t)\\\sin(2t)\end{pmatrix}}$.
+    Subtracting gives
+    $\boxed{2 i e^{-t}
+    \begin{pmatrix}
+    	\phantom{+}\sin(2t) \\
+    	-\cos(2t)
+    \end{pmatrix}}
+    $
+    \end{itemize}
+\end{itemize}
+For $c_1,c_2\in\mathbb{R}$\quad$\displaystyle \boxed{\vect{y}(t)=c_1e^{-t}\begin{pmatrix}\cos(2t)\\\sin(2t)\end{pmatrix}
+    +c_2e^{-t}\begin{pmatrix}\phantom{+}\sin(2t)\\-\cos(2t)\end{pmatrix}}$
+\end{frame}
+
+\endgroup

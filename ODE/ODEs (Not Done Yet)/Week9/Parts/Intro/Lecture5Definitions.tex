@@ -1,0 +1,26 @@
+\begin{frame}{ODE Definitions and Terminology}
+\begin{itemize}
+  \item An \keypoint{IVP} is an \keypoint{ODE} relating $\vect{y}(t)$ to its derivatives, with an \keypoint{IC} $\vect{y}(t_0)=y_0$
+  \begin{itemize}
+    \item Highest derivative is \keypoint{Order}. A \keypoint{Solution} satisfies ODE and IC on $a<t_0<b$
+    \item \keypoint{Autonomous} no explicit $t$. \keypoint{Equilibrium} a constant solution $\vect{f}(\vect{y}_*)=\vect{0}$
+    \item An ODE \keypoint{General Solution} contains all solutions with constants determined by ICs.
+  \end{itemize}
+  \item \keypoint{Separable} form $y'=g(t)h(y)$; linear \keypoint{Standard Form} is $y'+p(t)y=q(t)$
+  \item  $\vect{y}'=\mat{A}(t)\vect{y}+\vect{b}(t)$
+  is \keypoint{Linear}.
+  \newline
+  $\mat{A}(t)$ constant is \keypoint{Constant Coefficient (CC)}.
+  $b=0$ is \keypoint{Homogeneous}. 
+
+    \item The general solution of CC homogeneous ODE $\vect{y}'=\mat{A}\vect{y}$
+    is
+    \[  
+    \vect{y}(t)=\sum_{i=1}^n c_i e^{\lambda_i t}\vect{v}_i
+    \]
+    provided $\vect{v}_1, \vect{v}_2,\ldots \vect{v}_n$ is 
+    a complete LI set of eigenvectors for $\mat{A}$. 
+    \newline The constants 
+     $\vect{c}$ satisfy $\vect{V}\vect{c}=\vect{y}(0)$.   
+\end{itemize}
+\end{frame}

@@ -1,0 +1,57 @@
+\documentclass[11pt,letterpaper]{article}
+\input{WorksheetHeader.tex}
+\input{Figures/TankDiagram.tex}
+
+% Shared problem layout. Optional argument 1 includes the front-page heading.
+\newcommand{\TankProblem}[2][1]{%
+\begingroup
+\setlength{\parskip}{3pt}
+\setlength{\arraycolsep}{2pt}
+\renewcommand{\AnswerEntry}{%
+  \rule[-0.16in]{0pt}{0.50in}%
+  \makebox[0.95in]{\textcolor{black}{\rule[-0.12in]{0.86in}{0.4pt}}}}
+% Keep vector writing space identical, without the matrix entry guides.
+\renewcommand{\AnswerVector}{%
+  \begingroup
+  \renewcommand{\AnswerEntry}{%
+    \rule[-0.16in]{0pt}{0.50in}\makebox[0.95in]{}}
+  \begin{pmatrix}\AnswerEntry\\\AnswerEntry\\\AnswerEntry\end{pmatrix}%
+  \endgroup}
+\ifnum#1=1\relax
+\WorksheetHeading{Well-Mixed Tanks}
+\fi
+\noindent\textbf{Problem #1}\par
+\par\noindent
+\resizebox{\linewidth}{!}{\ThreeTankDiagram{#2}}
+\par
+The IVP $\vect{s}'=A\vect{s}+\vect{b}$,
+$\vect{s}(0)=\vect{s}_0$ makes sense for
+$0<t<\boxed{\rule{0pt}{0.34in}\hspace{0.90in}}$
+with\par\noindent$\displaystyle
+\begin{aligned}
+\vect{v}(t)&=\AnswerVector\;\vect{s}_0=\AnswerVector\;\vect{b}=\AnswerVector\\[2pt]
+A&=\AnswerMatrix
+\end{aligned}$\par
+\endgroup
+}
+\begin{document}
+\newgeometry{margin=0.25in,headheight=0pt,headsep=0pt,footskip=0pt}
+% Volume rates: (1,-2,2) L/min. First boundary: tank 3 full at t=25.
+\TankProblem{%
+  capacity1=100,volume1=60,concentration1=2,
+  capacity2=120,volume2=80,concentration2=1,
+  capacity3=100,volume3=50,concentration3=0,
+  inflow=3,inflowconcentration=3,
+  flow12=5,flow21=3,flow23=6,flow32=2,outflow=2
+}
+\newpage
+% Student problem. Volume rates: (-2,3,-3) L/min.
+% First boundary: tank 3 empty at t=20.
+\TankProblem[2]{%
+  capacity1=100,volume1=80,concentration1=1,
+  capacity2=120,volume2=40,concentration2=0,
+  capacity3=100,volume3=60,concentration3=2,
+  inflow=2,inflowconcentration=4,
+  flow12=6,flow21=2,flow23=4,flow32=3,outflow=4
+}
+\end{document}

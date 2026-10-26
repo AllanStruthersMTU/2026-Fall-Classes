@@ -1,0 +1,14 @@
+# 1. Ignore all files at the root level
+*
+# 2. Allow directories so Git can search them for your allowed files
+!*/
+# 3. Explicitly keep your allowed file extensions
+!*.tex
+!*.nb
+!*.pdf
+!*.toc
+!*.nav
+!*.sty
+!*.png
+# 4. (Optional) Make sure Git doesn't ignore your .gitignore file itself
+!.gitignore

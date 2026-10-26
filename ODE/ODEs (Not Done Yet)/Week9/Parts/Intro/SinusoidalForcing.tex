@@ -1,0 +1,48 @@
+\begin{frame}{Sinusoidal Forcing \qquad $\vect{y}'=\overbrace{\begin{pmatrix}-2&1\\1&-2\end{pmatrix}}^{\mat{A}}\vect{y}+\overbrace{\begin{pmatrix}8\\-2\end{pmatrix}\sin(t)}^{\vect{f}(t)}$}
+\small
+\setlength{\abovedisplayskip}{2pt}
+\setlength{\belowdisplayskip}{2pt}
+\begin{itemize}
+\setlength{\itemsep}{3pt}
+  \item Try $\vect{y}_p(t)=\vect{a}\sin(t)+\vect{b}\cos(t)$ which gives
+  $\vect{y}_p'(t)=\vect{a}\cos(t)-\vect{b}\sin(t)$ in the ODE
+  \[
+    {\color{blue}\vect{a}\cos(t)}-{\color{red}\vect{b}\sin(t)}
+    ={\color{red}\mat{A}\vect{a}\sin(t)}
+    +{\color{blue}\mat{A}\vect{b}\cos(t)}
+    +{\color{red}\begin{pmatrix}8\\-2\end{pmatrix}\sin(t)}
+  \]
+  Match sine and cosine terms
+  \[
+    {\color{red}\mat{A}\vect{a}+\vect{b}=-\begin{pmatrix}8\\-2\end{pmatrix}}
+    \qquad {\color{blue}\vect{a}-\mat{A}\vect{b}=\vect{0}}
+    \quad\Longrightarrow\quad
+    \begin{pmatrix}{\color{red}\mat{A}}&{\color{red}\mat{I}}\\{\color{blue}\mat{I}}&{\color{blue}-\mat{A}}\end{pmatrix}
+    \begin{pmatrix}{\color{red}\vect{a}}\\{\color{blue}\vect{b}}\end{pmatrix}
+    =\begin{pmatrix}{\color{red}-\begin{pmatrix}8\\-2\end{pmatrix}}\\{\color{blue}\vect{0}}\end{pmatrix}
+  \]
+  \[
+    \left[\begin{array}{rr|rr|r}
+      {\color{red}-2}&{\color{red}1}&{\color{red}1}&{\color{red}0}&{\color{red}-8}\\
+      {\color{red}1}&{\color{red}-2}&{\color{red}0}&{\color{red}1}&{\color{red}2}\\\hline
+      {\color{blue}1}&{\color{blue}0}&{\color{blue}2}&{\color{blue}-1}&{\color{blue}0}\\
+      {\color{blue}0}&{\color{blue}1}&{\color{blue}-1}&{\color{blue}2}&{\color{blue}0}
+    \end{array}\right]
+    \sim\left[\begin{array}{rrrr|r}
+      1&0&0&0&3\\
+      0&1&0&0&0\\
+      0&0&1&0&-2\\
+      0&0&0&1&-1
+    \end{array}\right]
+    \quad\Longrightarrow\quad
+    \vect{a}=\begin{pmatrix}3\\0\end{pmatrix}
+    \qquad
+    \vect{b}=\begin{pmatrix}-2\\-1\end{pmatrix}
+  \]
+  \item General solution
+  $\vect{y}(t)=\begin{pmatrix}3\\0\end{pmatrix}\sin(t)
+  +\begin{pmatrix}-2\\-1\end{pmatrix}\cos(t)
+  +c_1e^{-t}\begin{pmatrix}1\\1\end{pmatrix}
+  +c_2e^{-3t}\begin{pmatrix}1\\-1\end{pmatrix}$
+\end{itemize}
+\end{frame}

@@ -1,0 +1,19 @@
+\begin{frame}{Scalar First-Order Linear ODE\quad $a_1(t)y'+a_0(t)y=f(t)$}
+\begin{itemize}
+  \item \keypoint{Standard Form} is $y'(t)+p(t)y(t)=q(t)$. In other words, just divide by $a_1(t)$.
+  \item The aim is to muliply by $\mu(t)$ to collapse the terms on the RHS. We want
+  \[
+    \mu y'+\mu p(t)y=(\mu y)'=\mu y'+\mu' y
+  \]
+
+  \item The terms match if $\mu'=p(t)\mu$. The \keypoint{Integrating Factor} is the solution 
+  \[
+    \mu(t)=\exp\left(\int p(t)\,dt\right)
+    \quad\Longrightarrow\quad (\mu y)'=\mu q(t)
+  \]
+  \item Integrate\quad
+  $\boxed{\displaystyle\mu(t)y(t)=\int\mu q\,dt+C=\mu(t_0)y(t_0)+\int_{t_0}^{t}\mu(\tau)q(\tau)\,d\tau}$
+  \item If there is an initial condition, use it to determine $C$. If forced divide by $\mu(t)$ to get
+  \par\centerline{$\boxed{y(t)=\left(\int\mu(t)q(t)\,dt+C\right)/\mu(t)}$}
+\end{itemize}
+\end{frame}

@@ -1,0 +1,40 @@
+\begin{frame}{Eigenvalues 
+		$\mat{A} \vect{v}_i = \lambda_i \vect{v}_i$ \quad for \quad $\mat{A}=\begin{pmatrix}1&2\\2&1\end{pmatrix}$}
+\begin{itemize}
+  % Apply after Beamer initializes the list font and spacing.
+  \setlength{\abovedisplayskip}{3pt}
+  \setlength{\belowdisplayskip}{3pt}
+  \setlength{\abovedisplayshortskip}{3pt}
+  \setlength{\belowdisplayshortskip}{3pt}
+  \setlength{\itemsep}{0pt}
+  \item Eigenvalues satisfy $\det(\mat{A}-\lambda\mat{I})=0$
+  \[
+    \det\begin{pmatrix}1-\lambda&2\\2&1-\lambda\end{pmatrix}
+    =(1-\lambda)^2-4=(\lambda-3)(\lambda+1)=0
+    \quad\Longrightarrow\quad
+    \lambda_1=3,\ \lambda_2=-1
+  \]
+  \item For $\lambda_1=3$, solve $(\mat{A}-3\mat{I})\vect{x}=\vect{0}$
+  \[
+    \begin{pmatrix}-2&2\\2&-2\end{pmatrix}
+    \begin{pmatrix}x_1\\x_2\end{pmatrix}=\vect{0}
+    \;\Longrightarrow\; x_1=x_2
+    \;\Longrightarrow\; \vect{v}_1=\begin{pmatrix}1\\1\end{pmatrix}
+  \]
+  \item For eigenvectors $\vect{v}_1=(1,1)$ and $\vect{v}_2=(1,-1)$
+  \[
+    \mat{A}\vect{v}_1=
+    \begin{pmatrix}1&2\\2&1\end{pmatrix}\begin{pmatrix}1\\1\end{pmatrix}
+    =\begin{pmatrix}3\\3\end{pmatrix}=3\vect{v}_1
+    \qquad
+    \mat{A}\vect{v}_2=
+    \begin{pmatrix}1&2\\2&1\end{pmatrix}\begin{pmatrix}1\\-1\end{pmatrix}
+    =\begin{pmatrix}-1\\1\end{pmatrix}=-\vect{v}_2
+  \]
+  \begin{itemize}
+    \setlength{\itemsep}{0pt}
+    \item $\boxed{\lambda_1=\phantom{-}3}$ so $\mat{A}$ preserves the direction of $\vect{v}_1$ and triples  its length. 
+    \item $\boxed{\lambda_2=-1}$ so $\mat{A}$ reverses the direction of $\vect{v}_2$ while preserving its length. 
+  \end{itemize}
+\end{itemize}
+\end{frame}

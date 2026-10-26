@@ -1,0 +1,72 @@
+\documentclass[11pt,letterpaper]{article}
+\input{WorksheetHeader.tex}
+\input{Figures/BuildingDiagram.tex}
+
+\newcommand{\BuildingEntry}{%
+  \rule[-0.12in]{0pt}{0.36in}%
+  \makebox[0.49in]{\textcolor{black!18}{\rule[-0.09in]{0.44in}{0.35pt}}}}
+\newcommand{\BuildingSixVector}{\begin{pmatrix}
+\BuildingEntry\\\BuildingEntry\\\BuildingEntry\\
+\BuildingEntry\\\BuildingEntry\\\BuildingEntry
+\end{pmatrix}}
+\newcommand{\BuildingSixMatrix}{\begin{pmatrix}
+\BuildingEntry&\BuildingEntry&\BuildingEntry&\BuildingEntry&\BuildingEntry&\BuildingEntry\\
+\BuildingEntry&\BuildingEntry&\BuildingEntry&\BuildingEntry&\BuildingEntry&\BuildingEntry\\
+\BuildingEntry&\BuildingEntry&\BuildingEntry&\BuildingEntry&\BuildingEntry&\BuildingEntry\\
+\BuildingEntry&\BuildingEntry&\BuildingEntry&\BuildingEntry&\BuildingEntry&\BuildingEntry\\
+\BuildingEntry&\BuildingEntry&\BuildingEntry&\BuildingEntry&\BuildingEntry&\BuildingEntry\\
+\BuildingEntry&\BuildingEntry&\BuildingEntry&\BuildingEntry&\BuildingEntry&\BuildingEntry
+\end{pmatrix}}
+
+% Narrower entry guides for the simpler mass and damping matrices.
+\newcommand{\BuildingSmallMatrix}{\begingroup
+\renewcommand{\AnswerEntry}{%
+  \rule[-0.12in]{0pt}{0.36in}%
+  \makebox[0.33in]{\textcolor{black!18}{\rule[-0.09in]{0.28in}{0.35pt}}}}
+\AnswerMatrix\endgroup}
+% Shared layout: problem number, diagram data, initial positions, initial velocities.
+\newcommand{\BuildingProblem}[4]{%
+\begingroup
+\setlength{\parskip}{3pt}
+\setlength{\arraycolsep}{2pt}
+\renewcommand{\AnswerEntry}{\BuildingEntry}
+\ifnum#1=1\relax
+\WorksheetHeading{Three-Story Building}
+\fi
+\noindent\parbox[b]{0.49\linewidth}{%
+\resizebox{\linewidth}{!}{\ThreeStoryBuilding{#2}}}%
+\hfill\parbox[b]{0.48\linewidth}{%
+Initial displacements: $\vect{y}(0)=#3$ m.\par
+Of course, $\vect{y}'(t)=(y_1'(t),y_2'(t),y_3'(t)).$\par
+Initial velocities: $\vect{y}'(0)=#4$ m/s.\par
+}\par
+\vspace{5pt}\hrule\vspace{5pt}
+
+\textbf{#1a.} Fill in $M\vect{y}''+C\vect{y}'+K\vect{y}=\vect{b}(t)$. Do not solve.
+
+\noindent$\displaystyle M=\BuildingSmallMatrix\; C=\BuildingSmallMatrix\; K=\AnswerMatrix\;\vect{b}(t)=\AnswerVector$\par
+\vfill\hrule\vspace{5pt}
+\textbf{#1b.} With $\vect{z}=(\vect{y},\vect{y}')=(y_1,y_2,y_3,y_1',y_2',y_3')$, fill in $\vect{z}'=A\vect{z}+\vect{g}(t)$ and $\vect{z}(0)=\vect{z}_0$.
+
+\noindent$\displaystyle
+A=\BuildingSixMatrix\;\vect{g}(t)=\BuildingSixVector\;\vect{z}_0=\BuildingSixVector
+$\par
+\endgroup
+}
+\begin{document}
+% Front: matches Lecture 1. Positions in m. Velocities in m/s.
+\BuildingProblem{1}{%
+  basemotion={\sin(t)},baseoffset=.30,offset1=.65,offset2=1.05,offset3=1.45,
+  mass1=4,mass2=3,mass3=2,
+  stiffness1=4,stiffness2=3,stiffness3=2,
+  damping1=2,damping2=1,damping3=1
+}{(0,-1,0)}{(0,0,2)}
+\newpage
+% Back: separate student problem. No repeated heading or name box.
+\BuildingProblem{2}{%
+  basemotion={2\sin(t)},baseoffset=.20,offset1=.55,offset2=.95,offset3=1.30,
+  mass1=3,mass2=2,mass3=1,
+  stiffness1=6,stiffness2=4,stiffness3=2,
+  damping1=3,damping2=2,damping3=1
+}{(0,0,1)}{(-1,0,0)}
+\end{document}

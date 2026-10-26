@@ -1,0 +1,35 @@
+\begin{frame}{$\vect{y}'=\mat{A}\vect{y}+\vect{f}(t)$
+	with 
+	Initial condition \quad 
+	$\boxed{\vect{y}(0)=\vect{y}_0=(-2,0,0,3)^T}$}
+% Slightly tighter display spacing on this slide only (7/8).
+\abovedisplayskip=\glueexpr\abovedisplayskip*7/8\relax
+\belowdisplayskip=\glueexpr\belowdisplayskip*7/8\relax
+\abovedisplayshortskip=\glueexpr\abovedisplayshortskip*7/8\relax
+\belowdisplayshortskip=\glueexpr\belowdisplayshortskip*7/8\relax
+Plug in $t=0$
+\[
+  \begin{aligned}
+    \vect{y}_p(0)&=(-1,1,0,0)^T+(1/2)(1,-2,1,2)^T=(-1/2,0,1/2,1)^T\\
+    \vect{y}_c(0)&=\vect{y}_0-\vect{y}_p(0)
+    =(-2,0,0,3)^T-(-1/2,0,1/2,1)^T=(-3/2,0,-1/2,2)^T
+  \end{aligned}
+\]
+With 
+$M=[\vect{y}_1(0)\ \vect{y}_2(0)\ \vect{y}_3(0)\ \vect{y}_4(0)]$ 
+the LS for the IC is $M\vect{c}=(-3/2,0,-1/2,2)^T$
+\[
+  \left[\begin{array}{rrrr|r}
+    1&0&-1&-1&-3/2\\0&-1&1&0&0\\1&0&0&-1&-1/2\\0&1&0&1&2
+  \end{array}\right]
+  \sim
+  \left[\begin{array}{rrrr|r}
+    1&0&-1&-1&-3/2\\0&1&-1&0&0\\0&0&1&0&1\\0&0&0&1&1
+  \end{array}\right]
+  \Longrightarrow
+  \vect{c}=\begin{pmatrix}1/2\\1\\1\\1\end{pmatrix}
+\]
+IVP solution\quad
+$\displaystyle
+\boxed{\vect{y}(t)=\vect{y}_c(t)+\vect{y}_p(t)=\sum_{k=1}^{4}c_k\vect{y}_k(t)+\vect{y}_{p_1}(t)+\vect{y}_{p_2}(t)}$
+\end{frame}
