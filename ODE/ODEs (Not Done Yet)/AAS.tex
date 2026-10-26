@@ -1,0 +1,35 @@
+\documentclass{article}
+\usepackage{amsmath,pgffor,etoolbox}
+
+% Adjustable settings.
+\newcommand{\M}{3}
+\newcommand{\N}{5}
+\newcommand{\MatrixEntry}{\alpha XX}
+
+% Build the matrix.
+\gdef\MatrixBody{}
+\foreach \i in {1,...,\M} {
+	\gappto\MatrixBody{\MatrixEntry}
+	\foreach \j in {2,...,\N} {
+		\gappto\MatrixBody{&\MatrixEntry}
+	}
+	\gappto\MatrixBody{\\}
+}
+
+\begin{document}
+	
+\[
+\boxed{
+	\begin{bmatrix}
+		\MatrixBody
+	\end{bmatrix}
+}\]
+\quad
+\[
+\boxed{
+	\begin{matrix}
+		\MatrixBody
+	\end{matrix}
+}\]
+	
+\end{document}

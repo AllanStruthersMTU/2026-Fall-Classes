@@ -1,0 +1,99 @@
+% Updated: 2026-10-26 10:26:34 America/New_York (EDT)
+\documentclass[11pt]{article}
+\usepackage[letterpaper,landscape,margin=0.65in]{geometry}
+\usepackage{amsmath}
+\usepackage{pgffor,etoolbox}
+
+% Editable spacing. Matrix cells are square; vectors use one column.
+\newcommand{\CellPadding}{4pt}
+\newcommand{\CellHeightFactor}{1.4}
+\newcommand{\DividerPadding}{2pt}
+
+% Working sizes are local to each box.
+\newsavebox{\CellSample}
+\newlength{\CellSide}
+\newlength{\WritingWidth}
+\newlength{\WritingHeight}
+\newlength{\LeftBlockWidth}
+
+% Center on the math axis so parentheses fit the actual writing height.
+\newcommand{\WritingRegion}[2]{%
+  \vcenter{\hbox{\rule{0pt}{#2}\makebox[#1]{}}}}
+
+% Build one row, then repeat it. The caller supplies \AnswerCell.
+\newcommand{\AnswerArray}[2]{
+  \gdef\AnswerRow{\AnswerCell}
+  \edef\ExtraColumns{\number\numexpr#2-1\relax}
+  \foreach \col in {1,...,\ExtraColumns} {
+    \gappto\AnswerRow{&\AnswerCell}
+  }
+  \gdef\AnswerBody{}
+  \foreach \row in {1,...,#1} {
+    \gappto\AnswerBody{\AnswerRow\\}
+  }
+  \begin{array}{*{#2}{c}}\AnswerBody\end{array}
+}
+
+% Styles arrange the same array. The outer box is added by AnswerBox.
+\newcommand{\AnswerStyleplain}[2]{\AnswerArray{#1}{#2}}
+\newcommand{\AnswerStylematrix}[2]{
+  \left(\AnswerArray{#1}{#2}\right)
+}
+\newcommand{\AnswerStyleaugmented}[2]{
+  \edef\LeftColumns{\number\numexpr#2-1\relax}
+  \left(
+    \begin{array}{@{}c|c@{}}
+      \AnswerArray{#1}{\LeftColumns}\hspace{\DividerPadding}&
+      \hspace{\DividerPadding}\AnswerArray{#1}{1}
+    \end{array}
+  \right)
+}
+
+% Same arguments: [style]{rows}{columns}{points}{sample text}.
+% Measure the sample once and use square, invisible cells.
+\newcommand{\AnswerBox}[5][plain]{%
+  \begingroup
+  \sbox{\CellSample}{\fontsize{#4}{#4}\selectfont #5}%
+  \setlength{\CellSide}{#4pt}%
+  \setlength{\CellSide}{\CellHeightFactor\CellSide}%
+  \ifdim\wd\CellSample>\CellSide
+    \setlength{\CellSide}{\wd\CellSample}%
+  \fi
+  \addtolength{\CellSide}{\CellPadding}%
+  \setlength{\WritingWidth}{#3\CellSide}%
+  \setlength{\WritingHeight}{#2\CellSide}%
+  \def\AnswerCell{\WritingRegion{\CellSide}{\CellSide}}%
+  % Cells already have their full size; arrays add no extra spacing.
+  \setlength{\arraycolsep}{0pt}%
+  \renewcommand{\arraystretch}{0}%
+  % For example, style matrix calls \AnswerStylematrix.
+  \ensuremath{\boxed{\csname AnswerStyle#1\endcsname{#2}{#3}}}%
+  \endgroup}
+
+\newcommand{\MatrixAnswerBox}[4]{\AnswerBox[matrix]{#1}{#2}{#3}{#4}}
+% Columns include the RHS. A square n-by-n left block needs n+1 total columns.
+\newcommand{\AugmentedAnswerBox}[4]{\AnswerBox[augmented]{#1}{#2}{#3}{#4}}
+\newcommand{\VectorAnswerBox}[3]{\MatrixAnswerBox{#1}{1}{#2}{#3}}
+
+\pagestyle{empty}
+\begin{document}
+\begin{tabular}{@{}lccc@{}}
+  & Plain & Parentheses & Augmented\\[6pt]
+  1 row, 2 columns
+    & \AnswerBox{1}{2}{24}{00}
+    & \MatrixAnswerBox{1}{2}{24}{00}
+    & \AugmentedAnswerBox{1}{2}{24}{00}\\[12pt]
+  2 rows, 3 columns
+    & \AnswerBox{2}{3}{24}{00}
+    & \MatrixAnswerBox{2}{3}{24}{00}
+    & \AugmentedAnswerBox{2}{3}{24}{00}\\[12pt]
+  3 rows, 3 columns (augmented 4)
+    & \AnswerBox{3}{3}{24}{00}
+    & \MatrixAnswerBox{3}{3}{24}{00}
+    & \AugmentedAnswerBox{3}{4}{24}{00}\\[12pt]
+  3 rows, 1 column (augmented 2)
+    & \AnswerBox{3}{1}{24}{00}
+    & \MatrixAnswerBox{3}{1}{24}{00}
+    & \AugmentedAnswerBox{3}{2}{24}{00}
+\end{tabular}
+\end{document}

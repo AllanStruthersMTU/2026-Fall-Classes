@@ -1,0 +1,92 @@
+\documentclass[11pt]{article}
+\usepackage[letterpaper,landscape,margin=0.65in]{geometry}
+\usepackage{amsmath}
+
+% Editable spacing. Matrix cells are square; vectors use one column.
+\newcommand{\CellPadding}{4pt}
+\newcommand{\CellHeightFactor}{1.4}
+\newcommand{\DividerPadding}{2pt}
+
+% Working sizes are local to each box.
+\newsavebox{\CellSample}
+\newlength{\CellSide}
+\newlength{\WritingWidth}
+\newlength{\WritingHeight}
+\newlength{\LeftBlockWidth}
+
+% Center on the math axis so parentheses fit the actual writing height.
+\newcommand{\WritingRegion}[2]{%
+  \vcenter{\hbox{\rule{0pt}{#2}\makebox[#1]{}}}}
+
+% Same arguments: [style]{rows}{columns}{points}{sample text}.
+% Measure one invisible sample. Square cells replace phantom arrays.
+\newcommand{\AnswerBox}[5][plain]{%
+  \begingroup
+  \sbox{\CellSample}{\fontsize{#4}{#4}\selectfont #5}%
+  \setlength{\CellSide}{#4pt}%
+  \setlength{\CellSide}{\CellHeightFactor\CellSide}%
+  \ifdim\wd\CellSample>\CellSide
+    \setlength{\CellSide}{\wd\CellSample}%
+  \fi
+  \addtolength{\CellSide}{\CellPadding}%
+  \setlength{\WritingWidth}{#3\CellSide}%
+  \setlength{\WritingHeight}{#2\CellSide}%
+  \def\BoxStyle{#1}%
+  \def\PlainStyle{plain}%
+  \def\AugmentedStyle{augmented}%
+  \ensuremath{\boxed{%
+    \ifx\BoxStyle\PlainStyle
+      \WritingRegion{\WritingWidth}{\WritingHeight}%
+    \else
+      \left(
+      \ifx\BoxStyle\AugmentedStyle
+        \setlength{\LeftBlockWidth}{\WritingWidth}%
+        \addtolength{\LeftBlockWidth}{-\CellSide}%
+        \setlength{\arraycolsep}{\DividerPadding}%
+        \begin{array}{@{}c|c@{}}
+          \WritingRegion{\LeftBlockWidth}{\WritingHeight}&
+          \WritingRegion{\CellSide}{\WritingHeight}
+        \end{array}%
+      \else
+        \WritingRegion{\WritingWidth}{\WritingHeight}%
+      \fi
+      \right)
+    \fi
+  }}%
+  \endgroup}
+
+\newcommand{\MatrixAnswerBox}[4]{\AnswerBox[matrix]{#1}{#2}{#3}{#4}}
+% Columns include the RHS. A square n-by-n left block needs n+1 total columns.
+\newcommand{\AugmentedAnswerBox}[4]{\AnswerBox[augmented]{#1}{#2}{#3}{#4}}
+\newcommand{\VectorAnswerBox}[3]{\MatrixAnswerBox{#1}{1}{#2}{#3}}
+
+\pagestyle{empty}
+\begin{document}
+\section*{Worksheet answer boxes}
+Use \texttt{\{rows\}\{columns\}\{points\}\{sample text\}}.
+Cell size is the larger of the sample width and the scaled point size, plus padding.
+The sample stays invisible. Adjust the three spacing settings above to change the look.
+
+\bigskip
+\begin{tabular}{@{}lccc@{}}
+  & Plain & Parentheses & Augmented\\[6pt]
+  1 row & \AnswerBox{1}{2}{24}{00}
+        & \MatrixAnswerBox{1}{2}{24}{00}
+        & \AugmentedAnswerBox{1}{2}{24}{00}\\[12pt]
+  2 rows & \AnswerBox{2}{3}{24}{00}
+         & \MatrixAnswerBox{2}{3}{24}{00}
+         & \AugmentedAnswerBox{2}{3}{24}{00}\\[12pt]
+  3 rows & \AnswerBox{3}{3}{24}{00}
+         & \MatrixAnswerBox{3}{3}{24}{00}
+         & \AugmentedAnswerBox{3}{4}{24}{00}
+\end{tabular}
+
+\bigskip
+\verb|\MatrixAnswerBox{3}{3}{24}{00}| gives a square matrix writing area.\par
+\verb|\VectorAnswerBox{3}{24}{00}| has the same height and one-column width.\par
+\verb|\AugmentedAnswerBox{3}{4}{24}{00}| adds one RHS column to a square left block.
+
+\medskip
+Boxes use standard \verb|\boxed| padding.
+Parentheses surround the writing region; the augmented divider stays visible.
+\end{document}

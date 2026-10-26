@@ -1,0 +1,47 @@
+% Updated: 2026-10-26 09:53:38 America/New_York (EDT)
+\documentclass{article}
+\usepackage[letterpaper,landscape,margin=0.65in]{geometry}
+\usepackage{amsmath,pgffor,etoolbox}
+
+% Answer boxes use {rows}{columns}{point size}{phantom text}.
+% Augmented boxes require at least two columns.
+% Build one row, then repeat that row. The caller supplies \AnswerCell.
+\newcommand{\AnswerArray}[2]{
+  \gdef\AnswerRow{\AnswerCell}
+  \foreach \col in {1,...,#2-1} {
+    % Expand row with seperators and cells
+    \xappto\AnswerRow{& \AnswerCell}
+  }
+  \gdef\AnswerBody{}
+  \foreach \row in {1,...,#1} {
+    \gappto\AnswerBody{\AnswerRow\\}
+  }
+  \begin{array}{*{#2}{c}}\AnswerBody\end{array}
+}
+% Demonstration calls, in their original order.
+\begin{document}
+	
+	\boxed{ 
+  \section*{Quiz answer boxes: phantom arrays}
+  Every entry is an invisible \texttt{MMM} set at 24\,pt.
+  Arguments are \texttt{\{rows\}\{columns\}\{pts\}\{letters\}}; the augmented column count includes the right-hand column.
+
+  \bigskip
+  \begin{tabular}{@{}lccc@{}}
+    & Plain & Parentheses & Augmented\\[6pt]
+    $1\times2$ & \AnswerBox{1}{2}{24}{MMM} & \MatrixAnswerBox{1}{2}{24}{MMM} & \AugmentedAnswerBox{1}{2}{24}{MMM}\\[14pt]
+    $2\times3$ & \AnswerBox{2}{3}{24}{MMM} & \MatrixAnswerBox{2}{3}{24}{MMM} & \AugmentedAnswerBox{2}{3}{24}{MMM}\\[14pt]
+    $3\times3$ & \AnswerBox{3}{3}{24}{MMM} & \MatrixAnswerBox{3}{3}{24}{MMM} & \AugmentedAnswerBox{3}{3}{24}{MMM}
+  \end{tabular}
+
+  \bigskip\noindent
+  \verb|\AnswerBox{2}{3}{24}{MMM}|\par
+  \verb|\MatrixAnswerBox{2}{3}{24}{MMM}|\par
+  \verb|\AugmentedAnswerBox{2}{3}{24}{MMM}|
+
+  \medskip\noindent
+  The outer box uses the standard \verb|\boxed| command from \texttt{amsmath},
+  with its default gap (\verb|\fboxsep|, normally 3\,pt). Parentheses and the augmentation rule are standard
+  LaTeX array notation. Sizes now follow the 24\,pt \texttt{MMM} block rather
+  than a prescribed golden ratio. All macro definitions are included at the top of this file.
+\end{document}
