@@ -1,0 +1,52 @@
+\documentclass{article}
+\usepackage{calc}
+
+% Core macro: \matrixbox{width}{height}{type}
+% Notice the [3] here telling LaTeX to look for 3 arguments
+\newcommand{\matrixbox}[3]{%
+	\framebox(#1,#2){%
+		\vbox to #2 ex{%
+			\vfil
+			\hbox to #1 ex{%
+				\hfil
+				\csname mbrender#3\endcsname{#1}{#2}%
+				\hfil
+			}%
+			\vfil
+		}%
+	}%
+}
+
+% Render variants (each takes width [#1] and height [#2] as arguments)
+\newcommand{\mbrendernothing}[2]{}
+
+\newcommand{\mbrenderparen}[2]{%
+	\left(
+	\vcenter{\hrule height 0pt width \dimexpr #1 ex - 1.5em\relax \vskip \dimexpr #2 ex - 1ex\relax}
+	\right)%
+}
+
+\newcommand{\mbrenderaugmented}[2]{%
+	\left(
+	\vcenter{\hrule height 0pt width \dimexpr 0.6#1 ex - 0.75em\relax \vskip \dimexpr #2 ex - 1ex\relax}
+	\,\right|\,%
+	\vcenter{\hrule height 0pt width \dimexpr 0.4#1 ex - 0.75em\relax \vskip \dimexpr #2 ex - 1ex\relax}
+	\right)%
+}
+
+\begin{document}
+	
+	\section*{Simplified Matrix Boxes}
+	
+	% Usage: \matrixbox{width}{height}{type}
+	Default (nothing): \matrixbox{110}{40}{nothing}
+	
+	\vspace{1em}
+	
+	Parenthesis variant: \matrixbox{88}{52}{paren}
+	
+	\vspace{1em}
+	
+%	Augmented variant: \matrixbox{10}{5}{augmented}
+	
+\end{document}
