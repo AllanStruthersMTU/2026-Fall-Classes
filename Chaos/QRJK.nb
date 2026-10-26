@@ -1,0 +1,388 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 15.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     13527,        380]
+NotebookOptionsPosition[     12915,        362]
+NotebookOutlinePosition[     13376,        380]
+CellTagsIndexPosition[     13333,        377]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{"Clear", "[", 
+  RowBox[{
+  "f", ",", "df", ",", "p", ",", "a", ",", "b", ",", "c", ",", "y", ",", "J", 
+   ",", "M"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"SetOptions", "[", 
+   RowBox[{"SingularValueList", ",", 
+    RowBox[{"Tolerance", "->", "0"}]}], "]"}], ";", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"f", "[", 
+     RowBox[{"{", 
+      RowBox[{"a_", ",", "b_", ",", "c_"}], "}"}], "]"}], "[", 
+    RowBox[{"{", 
+     RowBox[{"x_", ",", "y_", ",", "z_"}], "}"}], "]"}], ":=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"-", "y"}], "-", "z"}], ",", 
+     RowBox[{"x", " ", "+", " ", 
+      RowBox[{"a", " ", "y"}]}], ",", " ", 
+     RowBox[{"b", "+", 
+      RowBox[{"z", 
+       RowBox[{"(", 
+        RowBox[{"x", "-", "c"}], ")"}]}]}]}], "}"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"df", "[", 
+    RowBox[{"{", 
+     RowBox[{"a_", ",", "b_", ",", "c_"}], "}"}], "]"}], "[", 
+   RowBox[{"{", 
+    RowBox[{"x_", ",", "y_", ",", "z_"}], "}"}], "]"}], ":=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"0", ",", 
+      RowBox[{"-", "1"}], ",", 
+      RowBox[{"-", "1"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "a", ",", "0"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"z", ",", " ", "0", ",", 
+      RowBox[{"-", "c"}]}], "}"}]}], "}"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"p", "=", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"a", ",", "b", ",", "c"}], "}"}], "=", 
+    RowBox[{"{", 
+     RowBox[{"0.2", ",", "0.2", ",", "5.7"}], "}"}]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"y0", "=", 
+   RowBox[{"{", 
+    RowBox[{"3", ",", "3", ",", "6"}], "}"}]}], ";", " ", 
+  RowBox[{"TMax", "=", "8"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Id", "=", 
+   RowBox[{"IdentityMatrix", "[", "3", "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"ySol", ",", "JSol", ",", "MSol"}], "}"}], "=", 
+   RowBox[{"NDSolveValue", "[", 
+    RowBox[{
+     RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"y", "'"}], "[", "t", "]"}], "==", 
+        RowBox[{
+         RowBox[{"f", "[", "p", "]"}], "[", 
+         RowBox[{"y", "[", "t", "]"}], "]"}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"J", "'"}], "[", "t", "]"}], "==", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"df", "[", "p", "]"}], "[", 
+          RowBox[{"y", "[", "t", "]"}], "]"}], ".", 
+         RowBox[{"J", "[", "t", "]"}]}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"M", "'"}], "[", "t", "]"}], "==", 
+        RowBox[{"-", 
+         RowBox[{
+          RowBox[{
+           RowBox[{
+            RowBox[{"df", "[", "p", "]"}], "[", 
+            RowBox[{"y", "[", "t", "]"}], "]"}], "\[Transpose]"}], ".", 
+          RowBox[{"M", "[", "t", "]"}]}]}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"y", "[", "0", "]"}], "==", "y0"}], ",", " ", 
+       RowBox[{
+        RowBox[{"J", "[", "0", "]"}], "==", "Id"}], ",", 
+       RowBox[{
+        RowBox[{"M", "[", "0", "]"}], "==", "Id"}]}], "\[IndentingNewLine]", 
+      "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"y", ",", "J", ",", "M"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"t", ",", "0", ",", " ", "TMax"}], "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ParametricPlot3D", "[", 
+   RowBox[{
+    RowBox[{"ySol", "[", "t", "]"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"t", ",", "0", ",", " ", "TMax"}], "}"}], ",", 
+    RowBox[{"PlotRange", "->", "All"}]}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"LogPlot", "[", " ", 
+   RowBox[{
+    RowBox[{"{", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"SingularValueList", "[", 
+       RowBox[{"JSol", "[", "t", "]"}], "]"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"1", "/", 
+       RowBox[{"SingularValueList", "[", 
+        RowBox[{"MSol", "[", "t", "]"}], "]"}]}]}], "\[IndentingNewLine]", 
+     "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"t", ",", "0", ",", " ", "TMax"}], "}"}]}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Plot", "[", " ", 
+  RowBox[{
+   RowBox[{"{", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"SingularValueList", "[", 
+       RowBox[{"JSol", "[", "t", "]"}], "]"}], "\[LeftDoubleBracket]", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", "2"}], "}"}], "\[RightDoubleBracket]"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"1", "/", 
+      RowBox[{
+       RowBox[{"SingularValueList", "[", 
+        RowBox[{"MSol", "[", "t", "]"}], "]"}], "\[LeftDoubleBracket]", 
+       RowBox[{"{", 
+        RowBox[{"2", ",", "3"}], "}"}], "\[RightDoubleBracket]"}]}]}], 
+    "\[IndentingNewLine]", "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"t", ",", "0", ",", " ", "TMax"}], "}"}]}], "]"}]}], "Input",
+ CellChangeTimes->{{4.001691388849967*^9, 4.0016914231701803`*^9}, {
+  4.0016914601463747`*^9, 4.0016914845193377`*^9}, {4.001691566406023*^9, 
+  4.001691621026484*^9}, {4.001691680204221*^9, 4.001691690613415*^9}, {
+  4.0016918206985207`*^9, 4.001692243722769*^9}, {4.001965863145548*^9, 
+  4.0019659316242733`*^9}, {4.001965969357544*^9, 4.001966164999284*^9}},
+ CellLabel->
+  "In[396]:=",ExpressionUUID->"0a49db29-c6a6-4d9e-bb80-d5a659aeaed1"],
+
+Cell[BoxData[{
+ RowBox[{"ClearAll", "[", 
+  RowBox[{"f", ",", "df", ",", "LTSk", ",", "Dia"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"f", "[", 
+   RowBox[{"{", 
+    RowBox[{"x_", ",", "y_", ",", "z_"}], "}"}], "]"}], ":=", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"-", "y"}], "-", "z"}], ",", 
+    RowBox[{"x", "+", 
+     RowBox[{"0.2", " ", "y"}]}], ",", 
+    RowBox[{"0.2", "+", 
+     RowBox[{"z", " ", 
+      RowBox[{"(", 
+       RowBox[{"x", "-", "5.7"}], ")"}]}]}]}], "}"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"df", "[", 
+    RowBox[{"{", 
+     RowBox[{"x_", ",", "y_", ",", "z_"}], "}"}], "]"}], ":=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"0", ",", 
+       RowBox[{"-", "1"}], ",", 
+       RowBox[{"-", "1"}]}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "0.2", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"z", ",", "0", ",", 
+       RowBox[{"x", "-", "5.7"}]}], "}"}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"LTSk", "[", 
+    RowBox[{"M_", "?", "MatrixQ"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"L", "=", 
+       RowBox[{"LowerTriangularize", "[", 
+        RowBox[{"M", ",", 
+         RowBox[{"-", "1"}]}], "]"}]}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"L", "-", 
+      RowBox[{"L", "\[Transpose]"}]}]}], "]"}]}], " "}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Dia", "[", 
+    RowBox[{"M_", "?", "MatrixQ"}], "]"}], ":=", 
+   RowBox[{"Diagonal", "[", "M", "]"}]}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"y0", "=", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2", ",", "3"}], "}"}]}], ";", " ", 
+  RowBox[{"Id", "=", 
+   RowBox[{"IdentityMatrix", "[", 
+    RowBox[{"Length", "[", "y0", "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"TMax", "=", "23"}], ";"}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"ySol", ",", "JSol", ",", "QSol", ",", "rSol"}], "}"}], "=", 
+   RowBox[{"NDSolveValue", "[", 
+    RowBox[{
+     RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"y", "'"}], "[", "t", "]"}], "==", 
+        RowBox[{"f", "[", 
+         RowBox[{"y", "[", "t", "]"}], "]"}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"J", "'"}], "[", "t", "]"}], "==", 
+        RowBox[{
+         RowBox[{"df", "[", 
+          RowBox[{"y", "[", "t", "]"}], "]"}], ".", 
+         RowBox[{"J", "[", "t", "]"}]}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"Q", "'"}], "[", "t", "]"}], "==", 
+        RowBox[{
+         RowBox[{"Q", "[", "t", "]"}], ".", 
+         RowBox[{"LTSk", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Q", "[", "t", "]"}], "\[Transpose]"}], ".", 
+           RowBox[{"df", "[", 
+            RowBox[{"y", "[", "t", "]"}], "]"}], ".", 
+           RowBox[{"Q", "[", "t", "]"}]}], "]"}]}]}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"r", "'"}], "[", "t", "]"}], "==", 
+        RowBox[{
+         RowBox[{"Dia", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Q", "[", "t", "]"}], "\[Transpose]"}], ".", 
+           RowBox[{"df", "[", 
+            RowBox[{"y", "[", "t", "]"}], "]"}], ".", 
+           RowBox[{"Q", "[", "t", "]"}]}], "]"}], "*", 
+         RowBox[{"r", "[", "t", "]"}]}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"y", "[", "0", "]"}], "==", "y0"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"J", "[", "0", "]"}], "==", "Id"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Q", "[", "0", "]"}], "==", "Id"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"r", "[", "0", "]"}], "==", 
+        RowBox[{"{", 
+         RowBox[{"1", ",", "1", ",", "1"}], "}"}]}]}], "\[IndentingNewLine]", 
+      "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"y", ",", "J", ",", "Q", ",", "r"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"t", ",", "0", ",", "TMax"}], "}"}]}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"TabView", "[", 
+  RowBox[{"{", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"\"\<r\>\"", "->", 
+     RowBox[{"LogPlot", "[", 
+      RowBox[{
+       RowBox[{"rSol", "[", "t", "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"t", ",", "0", ",", "TMax"}], "}"}], ",", 
+       RowBox[{"PlotRange", "->", 
+        RowBox[{"{", 
+         RowBox[{
+          SuperscriptBox["10", 
+           RowBox[{"-", "32"}]], ",", "10"}], "}"}]}]}], "]"}]}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"\"\<\[Sigma]\>\"", "->", 
+     RowBox[{"LogPlot", "[", 
+      RowBox[{
+       RowBox[{"SingularValueList", "[", 
+        RowBox[{
+         RowBox[{"JSol", "[", "t", "]"}], ",", 
+         RowBox[{"Tolerance", "->", "0"}]}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"t", ",", "0", ",", "TMax"}], "}"}], ",", 
+       RowBox[{"PlotRange", "->", 
+        RowBox[{"{", 
+         RowBox[{
+          SuperscriptBox["10", 
+           RowBox[{"-", "32"}]], ",", "10"}], "}"}]}]}], "]"}]}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"\"\<orth\>\"", "->", 
+     RowBox[{"LogPlot", "[", 
+      RowBox[{
+       RowBox[{"Norm", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"QSol", "[", "t", "]"}], "\[Transpose]"}], ".", 
+          RowBox[{"QSol", "[", "t", "]"}]}], "-", "Id"}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"t", ",", "0", ",", " ", "TMax"}], "}"}]}], "]"}]}]}], 
+   "\[IndentingNewLine]", "}"}], "]"}]}], "Input",
+ CellChangeTimes->{{4.0019490709715633`*^9, 4.001949070971609*^9}, {
+   4.001949109810041*^9, 4.001949123628182*^9}, {4.001949311370075*^9, 
+   4.001949318219565*^9}, {4.001949356404217*^9, 4.001949371448489*^9}, {
+   4.001949414446537*^9, 4.0019496792888603`*^9}, {4.0019497204913816`*^9, 
+   4.001949752496973*^9}, {4.0019497831348267`*^9, 4.0019498149200907`*^9}, {
+   4.001949915440639*^9, 4.001950140129304*^9}, {4.0019501766803417`*^9, 
+   4.0019502419129267`*^9}, {4.00195041412495*^9, 4.00195048644209*^9}, {
+   4.001950540381675*^9, 4.001950626186775*^9}, {4.0019506781506433`*^9, 
+   4.001950706070601*^9}, {4.001950898730873*^9, 4.001951006996972*^9}, {
+   4.001951131548111*^9, 4.001951160722322*^9}, {4.001962431091012*^9, 
+   4.0019624349993753`*^9}, 4.001962496641967*^9},
+ CellLabel->
+  "In[304]:=",ExpressionUUID->"11652669-b084-49ec-a65d-da52a690da6d"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"QT", ",", "RT"}], "}"}], "=", 
+   RowBox[{"QRDecomposition", "[", 
+    RowBox[{"QSol", "[", "TMax", "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"MatrixForm", "[", "RT", "]"}]}], "Input",
+ CellChangeTimes->{{4.001962552914915*^9, 4.001962603142105*^9}},
+ CellLabel->
+  "In[317]:=",ExpressionUUID->"fe08af95-9d35-4430-9447-d14e4422c764"]
+},
+WindowToolbars->{"RulerBar", "MultipurposeBar"},
+WindowSize->{1518, 882},
+WindowMargins->{{Automatic, 98}, {Automatic, 36}},
+Magnification->2.,
+FrontEndVersion->"15.0 for Mac OS X ARM (64-bit) (July 2, 2026)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"000f497d-0580-4db1-aadd-2f4ec6c61a96"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[554, 20, 5340, 148, 916, "Input",ExpressionUUID->"0a49db29-c6a6-4d9e-bb80-d5a659aeaed1"],
+Cell[5897, 170, 6598, 178, 1102, "Input",ExpressionUUID->"11652669-b084-49ec-a65d-da52a690da6d"],
+Cell[12498, 350, 413, 10, 99, "Input",ExpressionUUID->"fe08af95-9d35-4430-9447-d14e4422c764"]
+}
+]
+*)
+
