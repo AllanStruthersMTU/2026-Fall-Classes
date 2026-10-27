@@ -83,31 +83,33 @@ v_e&=0.484\times10^{12}\,\mathrm{m^3}\quad
 \small
 \begin{itemize}
 \item Lakes are well-mixed tanks with constant volume $v$ in $\mathrm{m^3}$.
-\item Pollutants do not evaporate. There is no external pollutant supply. Amounts change only through water transfers.
-\item Pollutant amount is $s(t)$ in $\mathrm{kg}$ and concentration is $s(t)/v$ in $\mathrm{kg/m^3}$. Initial concentration $c_0$ gives $s(0)=vc_0$.
-\item An inflow $q$ in $\mathrm{m^3/s}$ carries its source lake's concentration $c$. Total water outflow $q_{\mathrm{out}}$ excludes evaporation and carries this lake's concentration $s(t)/v$.
+\item Pollutants do not evaporate and change only through water 
+transfers, no external supply. 
+\item Pollutants $s(t)$ in $\mathrm{kg}$ and concentration $c(t)=s(t)/v$ in $\mathrm{kg/m^3}$. Initial concentration $c_0$ gives $s(0)=vc_0$.
+\item An inflow $q_i$ in $\mathrm{m^3/s}$ carries the source concentration $c_i$. Outflow $q_{\mathrm{out}}$ (excluding evaporation) carries the lake's concentration $s(t)/v$.
 \end{itemize}
 
-\medskip
 Flow times concentration gives pollutant rate
 \(
 (\cancel{\mathrm{m^3}}/\mathrm{s})(\mathrm{kg}/\cancel{\mathrm{m^3}})
 =\mathrm{kg}/\mathrm{s}
 \).
 \[
-s'(t)=\underbrace{\sum_{\text{incoming flows}}qc}_{\text{pollutant inflow rate}}
+s'(t)=\underbrace{\sum_{\text{incoming flows}}q_i c_i}_{\text{pollutant inflow rate}}
 -\underbrace{q_{\mathrm{out}}s(t)/v}_{\text{pollutant outflow rate}}
 \]
 \end{frame}
 
-\begin{frame}{Building the five-lake matrix}
+\begin{frame}{Five-Lake matrix A}
 \small
-Use $\vect{s}=(s_s,s_m,s_h,s_e,s_o)$ with amounts in $\mathrm{kg}$ and time in seconds.
-Michigan receives pollutant from Huron and loses it to Huron and Chicago
+With pollutants
+$\vect{s}=(s_s,s_m,s_h,s_e,s_o)$ in $\mathrm{kg}$ and time $t$ in seconds.
+Lake Michigan receives pollution from Lake Huron and loses it to Lake 
+Huron and the Chicago river.  The ODE is 
 \[
 s_m'=10^{-9}\bigl(6.00s_h/3.54-(7.60+0.09)s_m/4.92\bigr)
 \]
-Each row is a receiving lake's balance. Each column uses its source lake's volume.
+Each row is pollution balance for the matching lake.
 \[
 \boxed{\vect{s}'=A\vect{s}}
 \qquad
@@ -120,8 +122,61 @@ A=10^{-9}
 0 & 0 & 0 & 6.30/0.484 & -7.40/1.64
 \end{pmatrix}
 \]
-The constant matrix $A$ has entries in $\mathrm{s^{-1}}$ since
-\((10^3\,\mathrm{m^3/s})/(10^{12}\,\mathrm{m^3})=10^{-9}\,\mathrm{s^{-1}}\).
+Each entry in $A$ has units $\mathrm{s^{-1}}$ since
+\[
+\frac{10^3\,\mathrm{m^3/s}}{10^{12}\,\mathrm{m^3}}=10^{-9}\,\mathrm{s^{-1}}
+\]
+\end{frame}
+
+\begin{frame}{Eigenvalues and eigenvectors of $A$}
+\small
+Eigenvalues are
+\[
+(\lambda_1,\lambda_2,\lambda_3,\lambda_4,\lambda_5)
+=10^{-9}(-0.17355,-0.58895,-4.25090,-4.51220,-13.01653)
+\]
+with units $\mathrm{s^{-1}}$. The eigenvectors are columns of
+\[
+W=[\vect{w}_1\ \vect{w}_2\ \vect{w}_3\ \vect{w}_4\ \vect{w}_5]
+=
+\begin{pmatrix}
+0.9743 & 0 & 0 & 0 & 0\\
+0.1692 & 0.8468 & -0.0695 & 0 & 0\\
+0.1387 & 0.4867 & 0.1103 & 0 & 0\\
+0.0171 & 0.0619 & 0.0199 & 0 & -0.5470\\
+0.0513 & 0.2055 & 0.9913 & 1.0000 & 0.8372
+\end{pmatrix}
+\]
+with rows are ordered by lake $s,m,h,e,o$. The columns satisfy
+\[
+A\vect{w}_k=\lambda_k\vect{w}_k
+\qquad
+AW=W\operatorname{diag}(\lambda_1,\lambda_2,\lambda_3,\lambda_4,\lambda_5)
+\]
+\end{frame}
+
+\begin{frame}{General solution and long-time concentrations}
+\small
+The general solution is
+\[
+\vect{s}(t)=\sum_{k=1}^{5}a_k e^{\lambda_k t}\vect{w}_k
+\qquad
+\begin{pmatrix}a_1\\a_2\\a_3\\a_4\\a_5\end{pmatrix}
+=W^{-1}\vect{s}(0)
+\]
+Provided $a_1\ne0$, the slowest-decaying mode dominates as $t\to\infty$
+\[
+\vect{s}(t)=a_1e^{\lambda_1t}\vect{w}_1+O(e^{\lambda_2t})
+=a_1e^{-0.17355\times10^{-9}t}\vect{w}_1+O(e^{\lambda_2t})
+\]
+All concentrations approach zero. 
+Asymptotically in the slowest mode concentration ratios
+\[
+\left(\frac{c_s(t)}{c_s(t)},\frac{c_m(t)}{c_s(t)},
+\frac{c_h(t)}{c_s(t)},\frac{c_e(t)}{c_s(t)},\frac{c_o(t)}{c_s(t)}\right)
+\longrightarrow (1,\ 0.427,\ 0.487,\ 0.438,\ 0.388)
+\]
+Michigan's concentration is $\sim 43\%$ of Superior's, Huron's $49\%$, Erie's $44\%$, and Ontario's $39\%$ 
 \end{frame}
 
 \begin{frame}{Estimation notes}
