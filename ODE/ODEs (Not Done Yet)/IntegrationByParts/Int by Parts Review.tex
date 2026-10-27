@@ -1,0 +1,95 @@
+% Updated October 26, 2026 at 4:43 PM EDT (America/New_York)
+\documentclass[14pt,aspectratio=169]{beamer}
+% Use the same MTU theme and course identification as the ODE lectures.
+\ifdefined\pdfmapfile\pdfmapfile{+cm-super-t1.map}\fi
+\usepackage{beamerthemeMTU}
+\usepackage{amsmath,amssymb}
+\course{MA3521 --- Introduction to ODEs}
+\author{Allan Struthers}
+\institute{Math Sciences}
+\title{Int by Parts Review}
+\lecturelabel{Review}
+\date{}
+\setbeamersize{text margin left=10mm,text margin right=10mm}
+
+\begin{document}
+
+\begin{frame}{Int by Parts Review: Backwards product rule!}
+\begin{itemize}
+\item Integrate and rearrange the  product rule to get
+\[
+d(uv)=u\,dv+v\,du 
+\Longrightarrow
+\boxed{\int u\,dv=uv-\int v\,du} + C
+\]
+Differentiate $u$, integrate $dv$ include $+C$ in the final integral.
+\item Make $\int v\,du$ simpler. Useful choices 
+that simplify when differentiated are $u=t$, $u=\ln(t)$, $u=\arctan(t)$, \dots
+
+\begin{itemize}
+\item Identify $u$ and $dv$.
+\item Differentiate $u$ to get $du$. Integrate $dv$ to get $v$.
+\item Substitute into $\int u\,dv=uv-\int v\,du$.
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Worked example \quad $\displaystyle\int \ln(t)\,dt$}
+For $t>0$, write the integrand as $\ln(t)\cdot 1$.
+\[
+\boxed{\begin{aligned}
+u&=\ln(t)\\
+du&=\frac{1}{t}\,dt
+\end{aligned}}
+\qquad
+\boxed{\begin{aligned}
+dv&=dt\\
+v&=t
+\end{aligned}}
+\]
+\[
+\int\ln(t)\,dt
+=t\ln(t)-\int t\,\frac{1}{t}\,dt
+=t\ln(t)-\int 1\,dt
+\]
+\[
+\boxed{\displaystyle\int\ln(t)\,dt=t\ln(t)-t+C}
+\]
+\end{frame}
+
+\begin{frame}{Worked example \quad $\displaystyle\int t e^{2t}\,dt$}
+	\vspace{-2ex}
+\[
+\boxed{\begin{aligned}
+u&=t\\
+du&=dt
+\end{aligned}}
+\qquad
+\boxed{\begin{aligned}
+dv&=e^{2t}\,dt\\
+v&=\frac{e^{2t}}{2}
+\end{aligned}}
+\]
+\[
+\int t e^{2t}\,dt
+=\frac{t e^{2t}}{2}-\int\frac{e^{2t}}{2}\,dt
+=\frac{t e^{2t}}{2}-\frac{1}{2}\int e^{2t}\,dt
+\]
+\[
+\boxed{\displaystyle\int t e^{2t}\,dt
+=\frac{t e^{2t}}{2}-\frac{e^{2t}}{4}+C}
+\]
+
+Remember the $1/2$ each time you integrate $e^{2t}$.
+
+\end{frame}
+
+
+
+
+
+
+
+\end{document}
+
+
