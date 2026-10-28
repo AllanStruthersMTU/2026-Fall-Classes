@@ -9,6 +9,19 @@
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{8pt}
 \pagestyle{empty}
+% Prominent numbers in the existing top margin, including the first page.
+% Odd pages are left-aligned; even pages are right-aligned.
+\AddToHook{shipout/foreground}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \ifodd\value{page}
+      \node[anchor=north west,draw=black,rectangle,line width=1.5pt,inner xsep=3pt,inner ysep=1pt,font=\fontsize{16}{16}\selectfont\bfseries]
+        at ([xshift=0.25in,yshift=-1pt]current page.north west) {\thepage};
+    \else
+      \node[anchor=north east,draw=black,rectangle,line width=1.5pt,inner xsep=3pt,inner ysep=1pt,font=\fontsize{16}{16}\selectfont\bfseries]
+        at ([xshift=-0.25in,yshift=-1pt]current page.north east) {\thepage};
+    \fi
+  \end{tikzpicture}%
+}
 % Fixed name-box dimensions and page position shared by every worksheet.
 \newcommand{\WorksheetNameBox}{%
   \begingroup\setlength{\fboxsep}{3pt}\setlength{\fboxrule}{0.4pt}%
