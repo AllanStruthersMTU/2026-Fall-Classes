@@ -1,5 +1,5 @@
 % Common article worksheet layout. Load after \documentclass.
-\usepackage[margin=0.25in,headheight=0pt,headsep=0pt,footskip=0pt]{geometry}
+\usepackage[margin=0.5in,top=0.85in,headheight=0pt,headsep=0pt,footskip=0pt]{geometry}
 \usepackage{amsmath,amssymb}
 \usepackage{tikz,graphicx}
 \definecolor{mtuGreen}{RGB}{0,79,42}
@@ -9,23 +9,28 @@
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{8pt}
 \pagestyle{empty}
-% Prominent numbers in the existing top margin, including the first page.
+% Keep all marks inside a half-inch print margin, including their strokes.
 % Odd pages are left-aligned; even pages are right-aligned.
 \AddToHook{shipout/foreground}{%
   \begin{tikzpicture}[remember picture,overlay]
     \ifodd\value{page}
       \node[anchor=north west,draw=black,rectangle,line width=1.5pt,inner xsep=3pt,inner ysep=1pt,font=\fontsize{16}{16}\selectfont\bfseries]
-        at ([xshift=0.25in,yshift=-1pt]current page.north west) {\thepage};
+        at ([xshift=0.52in,yshift=-0.52in]current page.north west) {\thepage};
     \else
       \node[anchor=north east,draw=black,rectangle,line width=1.5pt,inner xsep=3pt,inner ysep=1pt,font=\fontsize{16}{16}\selectfont\bfseries]
-        at ([xshift=-0.25in,yshift=-1pt]current page.north east) {\thepage};
+        at ([xshift=-0.52in,yshift=-0.52in]current page.north east) {\thepage};
+    \fi
+    % First-page marker matches the dimensions of the boxed page number 1.
+    \ifnum\value{page}=1\relax
+      \node[anchor=north east,draw=black,fill=black,rectangle,line width=1.5pt,inner xsep=3pt,inner ysep=1pt,font=\fontsize{16}{16}\selectfont\bfseries]
+        at ([xshift=-0.52in,yshift=-0.52in]current page.north east) {\phantom{1}};
     \fi
   \end{tikzpicture}%
 }
 % Fixed name-box dimensions and page position shared by every worksheet.
 \newcommand{\WorksheetNameBox}{%
   \begingroup\setlength{\fboxsep}{3pt}\setlength{\fboxrule}{0.4pt}%
-  \fbox{\rule[-0.30in]{0pt}{0.42in}\makebox[4.24in][l]{Name:}}%
+  \fbox{\rule[-0.30in]{0pt}{0.42in}\makebox[3.3in][l]{Name:}}%
   \endgroup}
 \newcommand{\WorksheetHeading}[1]{%
   \noindent{\small\textbf{MA3521 --- #1}}\hfill\WorksheetNameBox\par}
