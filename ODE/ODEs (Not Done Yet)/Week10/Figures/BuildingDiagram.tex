@@ -1,0 +1,86 @@
+% Reusable shear-building sketch. Displacements are absolute, measured from rest.
+% Numeric data: masses in kg, stiffnesses in N/m, damping in N s/m.
+% Drawing offsets are independent of physical units.
+% basemotion accepts a math expression, for example basemotion={\sin(t)}.
+\usetikzlibrary{arrows.meta,calc}
+\pgfkeys{/ode building/.is family,/ode building,
+  baseoffset/.store in=\ODEbase, basemotion/.store in=\ODEbasemotion,
+  offset1/.store in=\ODEbone,offset2/.store in=\ODEbtwo,offset3/.store in=\ODEbthree,
+  mass1/.store in=\ODEbmone,mass2/.store in=\ODEbmtwo,mass3/.store in=\ODEbmthree,
+  stiffness1/.store in=\ODEbkone,stiffness2/.store in=\ODEbktwo,stiffness3/.store in=\ODEbkthree,
+  damping1/.store in=\ODEbcone,damping2/.store in=\ODEbctwo,damping3/.store in=\ODEbcthree}
+
+% Dashpot between two numeric points. The piston follows the line of action.
+\newcommand{\ODEBuildingDamper}[4]{%
+  \pgfmathsetmacro{\ODEangle}{atan2(#4-#2,#3-#1)}
+  \pgfmathsetmacro{\ODElength}{sqrt((#3-#1)^2+(#4-#2)^2)}
+  \begin{scope}[shift={(#1,#2)},rotate=\ODEangle]
+    \draw[thick] (0,0)--({.38*\ODElength},0);
+    \draw[thick,fill=white] ({.38*\ODElength},-.075) rectangle ({.72*\ODElength},.075);
+    \draw[thick] ({.55*\ODElength},-.065)--({.55*\ODElength},.065);
+    \draw[thick] ({.55*\ODElength},0)--(\ODElength,0);
+  \end{scope}}
+
+\newcommand{\ThreeStoryBuilding}[1]{%
+  \begingroup
+  \pgfkeys{/ode building/.cd,
+    basemotion={\sin(t)},baseoffset=.30,offset1=.65,offset2=1.05,offset3=1.45,
+    mass1=4,mass2=3,mass3=2,
+    stiffness1=4,stiffness2=3,stiffness3=2,
+    damping1=2,damping2=1,damping3=1,#1}
+  \begin{tikzpicture}[font=\normalsize,
+    motion/.style={-{Stealth[length=2mm]},thick,mtuGreen},
+    ref/.style={gray!55,dashed,thin},
+    guide/.style={gray!50,densely dotted,thin},
+    tag/.style={fill=white,inner sep=1.5pt}]
+    % Displacement arrows extend from the outside datum to the left floor edges.
+    % The datum is offset for legibility. Arrows are schematic, not to scale.
+    % Shape offsets control the cubic column geometry independently.
+    \draw[ref] (-3.15,-.05)--(-3.15,4.37);
+    \node[anchor=south,font=\small] at (1.5,4.85) {Displacements: $\vect{y}(t)=(y_1(t),y_2(t),y_3(t))$ (m),\quad $t$ in seconds.};
+    \node[gray,anchor=north,font=\small] at (-3.15,-.1) {$0$};
+    % Light rest-position outline.
+
+    \foreach \i in {1,2,3}{\draw[ref] (-1.2,{1.35*\i})--(1.2,{1.35*\i});}
+    % Slabs end flush with the columns. No overhanging edges.
+    \foreach \i/\offset/\mass in {1/\ODEbone/\ODEbmone,2/\ODEbtwo/\ODEbmtwo,3/\ODEbthree/\ODEbmthree}{
+      \draw[thick,fill=gray!25] ({\offset-1.2},{1.35*\i-.055}) rectangle ({\offset+1.2},{1.35*\i+.055});
+
+
+      \draw[motion] (-3.15,{1.35*\i})--({\offset-1.2},{1.35*\i});
+      \node[above,mtuGreen] at (-2.6,{1.35*\i}) {$y_{\i}(t)$};
+
+    }
+    % Each outside edge is ONE continuous piecewise cubic path. Vertical
+    % tangents and matching derivatives at the floor junctions give C1 joins.
+    \foreach \side in {-1.2,1.2}{
+      \draw[line width=1.7pt] ({\ODEbase+\side},0)
+      .. controls ({\ODEbase+\side},.45) and ({\ODEbone+\side},.90) .. ({\ODEbone+\side},1.35)
+      .. controls ({\ODEbone+\side},1.80) and ({\ODEbtwo+\side},2.25) .. ({\ODEbtwo+\side},2.70)
+      .. controls ({\ODEbtwo+\side},3.15) and ({\ODEbthree+\side},3.60) .. ({\ODEbthree+\side},4.05);
+    }
+    \foreach \i/\lo/\hi/\stiff/\damp/\mass in {
+      1/\ODEbase/\ODEbone/\ODEbkone/\ODEbcone/\ODEbmone,
+      2/\ODEbone/\ODEbtwo/\ODEbktwo/\ODEbctwo/\ODEbmtwo,
+      3/\ODEbtwo/\ODEbthree/\ODEbkthree/\ODEbcthree/\ODEbmthree}{
+      \pgfmathsetmacro{\ODElowy}{1.35*(\i-1)}
+      \pgfmathsetmacro{\ODEhighy}{1.35*\i}
+      \pgfmathsetmacro{\ODEmid}{(\lo+\hi)/2}
+      \node[tag] at ({\ODEmid-.87},{\ODElowy+.67}) {$k_{\i}$};
+      \ODEBuildingDamper{\lo+.2}{\ODElowy+.055}{\hi+.65}{\ODEhighy-.055}
+      \node[anchor=west,tag] at ({\ODEmid+.52},{\ODElowy+.66}) {$c_{\i}$};
+      \node[anchor=west,font=\small,draw=mtuGreen,line width=.6pt,inner xsep=4pt,inner ysep=1pt,minimum width=2.7cm] at (3.35,{\ODEhighy-.32+.2*(\i-2)}) {\setlength{\jot}{0pt}$\begin{aligned}
+        m_{\i}&=\mass\,\mathrm{kg}\\k_{\i}&=\stiff\,\mathrm{N/m}\\c_{\i}&=\damp\,\mathrm{N\,s/m}
+      \end{aligned}$};
+    }
+    % Foundation and rollers. The baseoffset uses the same outside strip.
+    \draw[thick,fill=gray!40] ({\ODEbase-1.5},-.16) rectangle ({\ODEbase+1.5},0);
+    \foreach \wheel in {-.95,.95}{\draw[thick,fill=white] ({\ODEbase+\wheel},-.31) circle[radius=.15];}
+    \draw[thick] (-1.8,-.47)--(2.4,-.47);
+    \foreach \ground in {-1.7,-1.45,...,2.3}{\draw[gray,thin] (\ground,-.47)--({\ground-.12},-.6);}
+
+    \draw[motion] (-3.15,-.02)--({\ODEbase-1.5},-.02);
+    \node[above,mtuGreen] at (-2.6,-.02) {$y_0(t)$};
+    \node[anchor=west,align=left,font=\small] at (3.35,-.13) {$y_0(t)=\ODEbasemotion\;\mathrm{m}$};
+  \end{tikzpicture}%
+  \endgroup}

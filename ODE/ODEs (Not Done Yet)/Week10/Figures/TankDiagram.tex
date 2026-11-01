@@ -1,0 +1,59 @@
+% Reusable three-tank network. Load once in the preamble.
+% \ThreeTankDiagram{capacity1=100,volume1=60,concentration1=2,...}
+% Volumes: L. Concentrations: g/L. Flow rates: L/min.
+\usetikzlibrary{arrows.meta}
+\pgfkeys{/ode tanks/.is family,/ode tanks,
+  capacity1/.store in=\ODEcapone, capacity2/.store in=\ODEcaptwo, capacity3/.store in=\ODEcapthree,
+  volume1/.store in=\ODEvolone, volume2/.store in=\ODEvoltwo, volume3/.store in=\ODEvolthree,
+  concentration1/.store in=\ODEcone, concentration2/.store in=\ODEctwo, concentration3/.store in=\ODEcthree,
+  inflow/.store in=\ODEqin, inflowconcentration/.store in=\ODEcin,
+  flow12/.store in=\ODEqonetwo, flow21/.store in=\ODEqtwoone,
+  flow23/.store in=\ODEqtwothree, flow32/.store in=\ODEqthreetwo,
+  outflow/.store in=\ODEqout}
+
+% Shared compact labels used by both lectures and worksheets.
+\newcommand{\ODETankHeading}[2]{%
+  \node[font=\bfseries] at (0,3.12) {$T_{#1}$ (#2 L)};}
+\newcommand{\ODETankLabels}[4]{%
+  \pgfmathtruncatemacro{\InitialSalt}{#3*#4}
+  \node[anchor=north,inner sep=1pt,font=\fontsize{7}{8}\selectfont] at (0,-.20)
+  {$v_{#1}(0)=#3\,\mathrm{L},\;s_{#1}(0)=\InitialSalt\,\mathrm{g}$};}
+% One cylindrical tank: index, horizontal position, capacity, initial volume,
+% initial concentration. The liquid height follows initial volume/capacity.
+\newcommand{\ODETank}[5]{%
+  \begin{scope}[shift={(#2,0)}]
+    \pgfmathsetmacro{\ODElevel}{2.6*(#4)/(#3)}
+    \path[fill=mtuGreenPale] (-.9,0) arc[start angle=180,end angle=360,x radius=.9,y radius=.17]
+      -- (.9,\ODElevel) arc[start angle=0,end angle=180,x radius=.9,y radius=.17] -- cycle;
+    \draw[mtuGreenLight,fill=mtuGreenLight!20] (0,\ODElevel) ellipse[x radius=.9,y radius=.17];
+    \draw[thick] (-.9,2.6)--(-.9,0) arc[start angle=180,end angle=360,x radius=.9,y radius=.17] -- (.9,2.6);
+    \draw[thick] (0,2.6) ellipse[x radius=.9,y radius=.17];
+    \ODETankHeading{#1}{#3}
+    \ODETankLabels{#1}{#3}{#4}{#5}
+    \coordinate (tank#1wh) at (-.9,1.95);
+    \coordinate (tank#1eh) at (.9,1.95);
+    \coordinate (tank#1wl) at (-.9,.7);
+    \coordinate (tank#1el) at (.9,.7);
+  \end{scope}}
+
+\newcommand{\ThreeTankDiagram}[1]{%
+  \begingroup
+  \pgfkeys{/ode tanks/.cd,
+    capacity1=100,capacity2=120,capacity3=100,
+    volume1=60,volume2=80,volume3=50,
+    concentration1=2,concentration2=1,concentration3=0,
+    inflow=2,inflowconcentration=3,flow12=5,flow21=3,flow23=4,flow32=2,outflow=2,#1}
+  \begin{tikzpicture}[font=\small,
+    pipe/.style={-{Stealth[length=2.5mm,width=1.7mm]},thick,mtuGreen},
+    rate/.style={above,align=center,text=black,fill=white,inner sep=3pt}]
+    \ODETank{1}{0}{\ODEcapone}{\ODEvolone}{\ODEcone}
+    \ODETank{2}{4.6}{\ODEcaptwo}{\ODEvoltwo}{\ODEctwo}
+    \ODETank{3}{9.2}{\ODEcapthree}{\ODEvolthree}{\ODEcthree}
+    \draw[pipe] (-3.7,1.95)--(tank1wh) node[midway,rate] {$\begin{aligned}q_{\mathrm{in}}&=\ODEqin\ \mathrm{L/min}\\c_{\mathrm{in}}&=\ODEcin\ \mathrm{g/L}\end{aligned}$};
+    \draw[pipe] (tank1eh)--(tank2wh) node[midway,rate] {$q_{12}=\ODEqonetwo\ \mathrm{L/min}$};
+    \draw[pipe] (tank2wl)--(tank1el) node[midway,rate] {$q_{21}=\ODEqtwoone\ \mathrm{L/min}$};
+    \draw[pipe] (tank2eh)--(tank3wh) node[midway,rate] {$q_{23}=\ODEqtwothree\ \mathrm{L/min}$};
+    \draw[pipe] (tank3wl)--(tank2el) node[midway,rate] {$q_{32}=\ODEqthreetwo\ \mathrm{L/min}$};
+    \draw[pipe] (tank3el)--(12.9,.7) node[midway,rate] {$q_{\mathrm{out}}=\ODEqout\ \mathrm{L/min}$};
+  \end{tikzpicture}%
+  \endgroup}
