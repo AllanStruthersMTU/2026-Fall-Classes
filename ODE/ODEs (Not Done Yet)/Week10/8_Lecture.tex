@@ -8,33 +8,55 @@
 % Exam description reproduced from the course's ExamOne.tex,
 % distributed as ODE/Week9/ExamOne.pdf.
 \begin{document}
-\begin{frame}{Exam One}
-The first exam covers tanks, linear first-order equations, separable ODEs, and first-order constant-coefficient linear systems.
+\begin{frame}{Very predictable Exam One: Nov 5th in class.}
+Tanks, linear first-order ODEs, separable ODEs, 
+and first-order constant-coefficient linear systems.  All including 
+$y_c$, $y_p$, and initial conditions. 
   \begin{itemize}
-  	\item This includes $y_c$, $y_p$, and initial conditions.
-  	\item The exam will be like HW (with simpler boxes) stuck together.
-  	\item Four questions, on both sides of two sheets of paper, totaling 50 points.
-  	\item You can write anything you want on a notecard up to $4\times6$ inches. 
-  	\item The exam is in class on November 5.
-  	\item We finish exam material October 29.
-  	\item Monday, Tuesday, and Wednesday mostly review with some new material.
-
+  	\item Four questions on two sheets totaling 50 points.
+  	\item Questions like HW with fewer boxes stuck together.
+  	\item Write anything you want on a two-sided 
+  	notecard less than $4\times6$ inches. 
+  	\item Almost all review this week.
   \end{itemize}
-
-The exam is intended to be very predictable.
 \end{frame}
-\begin{frame}{Week Ten Monday Topics}
-For constant $a$, with initial condition $y(t_0)=y_0$.
-\begin{enumerate}
-  \item First-order separable equation
-  \[
-    y'=ay \qquad y(t_0)=y_0
-  \]
-  \item Forced first-order linear equation
-  \[
-    y'=ay+f(t) \qquad y(t_0)=y_0
-  \]
-  Here $f(t)$ is a given forcing function.
-\end{enumerate}
+\begin{frame}{Separable and Linear ODEs}
+\begin{block}{Separable\quad $y'=g(t)h(y)$}
+\begin{itemize}
+  \item Multiply by $dt$ and separate variables
+  $\frac{dy}{h(y)}=g(t)\,dt$
+  \item Integrate, then use the initial condition to determine $C$.
+  \item Do not solve for $y$ on an exam. 
+\end{itemize}
+\end{block}
+\begin{block}{Linear\quad $a_1(t)y'+a_0(t)y=f(t)\ \Longrightarrow\ y'+p(t)y=q(t)$}
+\begin{itemize}
+  \item Divide by $a_1(t)$ to get the 
+  standard form $y'+p(t)y=q(t)$ 
+  \item Multiply by the integrating factor
+  $\mu(t)=\exp\left(\int p(t)\,dt\right)$ to get $(\mu y)'=\mu q(t)$.
+  \item Integrate then use the initial condition to determine $C$.
+\end{itemize}
+\end{block}
+\end{frame}
+\begin{frame}{Linear Systems $\vect{y}'=\mat{A}\vect{y}+\vect{f}$: \quad $\vect{y}=\vect{y}_c+\vect{y}_p$
+		for $\mat{A}\in\mathbb{R}^{n\times n}$}
+\begin{block}{Complementary solution\quad $\vect{y}_c'=\mat{A}\vect{y}_c$}
+\begin{itemize}
+  \item Find $n$ linearly independent real solutions $\vect{y}_k(t)$ from eigenvalues and eigenvectors.
+  \item Real eigenpairs give $e^{\lambda t}\vect{v}$. Splitting complex eigenpairs gives two LI solutions.
+  Then $\vect{y}_c=\sum_{k=1}^{n}c_k\vect{y}_k$.
+\end{itemize}
+\end{block}
+\begin{block}{Particular solution\quad $\vect{y}_p'=\mat{A}\vect{y}_p+\vect{f}(t)$}
+\begin{itemize}
+  \item Substitute the undetermined coefficient 
+  form matching $\vect{f}$ and match coefficients.
+  \item Add particular solutions for separate forcing terms.
+\end{itemize}
+\end{block}
+For $\vect{y}(0)=\vect{y}_0$, determine $\vect{c}$ by solving
+$\mat{M}\vect{c}=\vect{y}_0-\vect{y}_p(0)$,
+where $\mat{M}=[\vect{y}_1(0)\ \cdots\ \vect{y}_n(0)]$.
 \end{frame}
 \end{document}

@@ -1,0 +1,33 @@
+\documentclass[12pt,letterpaper]{article}
+\input{WorksheetHeader.tex}
+\usepackage{bm}
+% The worksheet header supplies \vect. The MTU theme supplies this \mat definition.
+\newcommand{\mat}[1]{\bm{#1}}
+\newcommand{\SystemBlank}[2]{%
+  \vcenter{\hbox{$\boxed{\rule{0pt}{#2}\makebox[#1]{}}$}}}
+\newcommand{\VectorBlank}{\SystemBlank{3.2in}{0.80in}}
+\newcommand{\MatrixBlank}{\SystemBlank{1.8in}{0.80in}}
+\newcommand{\TrigMatrixBlank}{\SystemBlank{3.0in}{1.60in}}
+\begin{document}
+\noindent\makebox[0pt][l]{\raisebox{-\baselineskip}[0pt][0pt]{\small Do not solve.}}%
+\WorksheetHeading{In-Class Worksheet Tuesday/Wednesday}
+\begin{enumerate}
+\item \fbox{\normalsize\begin{tabular}{@{}l@{}}{\large$\square$} Linear\\{\large$\square$} Separable\end{tabular}}\qquad $ty'+2y=e^t\qquad y(1)=0$
+\par\noindent\makebox[2.7in][l]{Show a suitable intermediate step}\ $\VectorBlank$\par
+\vfill
+\noindent\makebox[2.7in][l]{Show a fully integrated answer}\ $\VectorBlank$\par
+\item \fbox{\normalsize\begin{tabular}{@{}l@{}}{\large$\square$} Linear\\{\large$\square$} Separable\end{tabular}}\qquad $y'=2t\cos(t^2)(1+y^2)\qquad y(\sqrt{\pi})=0$
+\par\noindent\makebox[2.7in][l]{Show a suitable intermediate step}\ $\VectorBlank$\par
+\vfill
+\noindent\makebox[2.7in][l]{Show a fully integrated answer}\ $\VectorBlank$\par
+\newpage
+\item \fbox{\normalsize\begin{tabular}{@{}l@{}}{\large$\square$} Linear\\{\large$\square$} Separable\end{tabular}}\qquad $\ln(y)y'=t e^{t^2}\qquad y(1)=e$
+\par\noindent\makebox[2.7in][l]{Show a suitable intermediate step}\ $\VectorBlank$\par
+\vfill
+\noindent\makebox[2.7in][l]{Show a fully integrated answer}\ $\VectorBlank$\par
+\item \fbox{\normalsize\begin{tabular}{@{}l@{}}{\large$\square$} Linear\\{\large$\square$} Separable\end{tabular}}\qquad $ty'+(t+1)y=1\qquad y(1)=1$
+\par\noindent\makebox[2.7in][l]{Show a suitable intermediate step}\ $\VectorBlank$\par
+\vfill
+\noindent\makebox[2.7in][l]{Show a fully integrated answer}\ $\VectorBlank$\par
+\end{enumerate}
+\end{document}

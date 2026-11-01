@@ -1,0 +1,46 @@
+\documentclass[11pt,letterpaper]{article}
+\input{WorksheetHeader.tex}
+\input{Figures/TankDiagram.tex}
+\usepackage{bm}
+\newcommand{\mat}[1]{\bm{#1}}
+\newcommand{\SystemBlank}[2]{%
+  \vcenter{\hbox{$\boxed{\rule{0pt}{#2}\makebox[#1]{}}$}}}
+\newcommand{\VectorBlank}{\SystemBlank{3.2in}{0.80in}}
+\newcommand{\MatrixBlank}{\SystemBlank{1.8in}{0.80in}}
+\newcommand{\TrigMatrixBlank}{\SystemBlank{3.0in}{1.60in}}
+% Original tank data and diagram from Week8/TanksWorksheet.tex.
+\newcommand{\TankProblem}[1]{%
+\begingroup
+\setlength{\parskip}{3pt}
+\noindent\resizebox{\linewidth}{!}{\ThreeTankDiagram{#1}}\par
+The tanks are well-mixed. Time $t$ is in minutes, volumes $\vect{v}(t)$ in L,
+and salt masses $\vect{s}(t)$ in g.\par
+The salt sources above the tanks add salt continuously without adding liquid.
+Include these rates in $\vect{b}$.\par
+The IVP is $\vect{s}'=\mat{A}(t)\vect{s}+\vect{b}$,
+$\vect{s}(0)=\vect{s}_0$.\par
+\noindent $0<t<\MatrixBlank$\par
+\noindent $\vect{v}(t)=\VectorBlank\quad\mathrm{L}$\par
+\noindent $\vect{s}_0=\VectorBlank\quad\mathrm{g}$\par
+\noindent $\vect{b}=\VectorBlank\quad\mathrm{g/min}$\par
+\noindent $\mat{A}(t)=\TrigMatrixBlank\quad\mathrm{min}^{-1}$\par
+\endgroup}
+\begin{document}
+\WorksheetHeading{In-Class Tank Worksheet}
+\begin{enumerate}
+\item \TankProblem{%
+  capacity1=100,volume1=60,concentration1=2,
+  capacity2=120,volume2=80,concentration2=1,
+  capacity3=100,volume3=50,concentration3=0,
+  inflow=3,inflowconcentration=3,
+  flow12=5,flow21=3,flow23=6,flow32=2,outflow=2,
+  saltRate1=1,saltRate2=2,saltRate3=3
+}
+
+\end{enumerate}
+% Independent continuous salt sources: (1,2,3) g/min.
+% Initial salt masses and all liquid flows remain unchanged.
+% Front: volume rates (1,-2,2) L/min. Initial salt (120,80,0) g.
+% v=(60+t,80-2t,50+2t), b=(10,2,3) g/min. Valid until t=25 min.
+% A=[-5/v1,3/v2,0; 5/v1,-9/v2,2/v3; 0,6/v2,-4/v3].
+\end{document}
