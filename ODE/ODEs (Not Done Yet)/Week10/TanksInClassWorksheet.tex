@@ -8,39 +8,80 @@
 \newcommand{\VectorBlank}{\SystemBlank{3.2in}{0.80in}}
 \newcommand{\MatrixBlank}{\SystemBlank{1.8in}{0.80in}}
 \newcommand{\TrigMatrixBlank}{\SystemBlank{3.0in}{1.60in}}
+\newcommand{\TimeBlank}[1][]{%
+  \vcenter{\hbox{$\boxed{\parbox[c][0.25in][c]{0.45in}{\centering\ensuremath{#1}}}$}}}
 % Original tank data and diagram from Week8/TanksWorksheet.tex.
-\newcommand{\TankProblem}[1]{%
-\begingroup
-\setlength{\parskip}{3pt}
-\noindent\resizebox{\linewidth}{!}{\ThreeTankDiagram{#1}}\par
-The tanks are well-mixed. Time $t$ is in minutes, volumes $\vect{v}(t)$ in L,
-and salt masses $\vect{s}(t)$ in g.\par
-The salt sources above the tanks add salt continuously without adding liquid.
-Include these rates in $\vect{b}$.\par
-The IVP is $\vect{s}'=\mat{A}(t)\vect{s}+\vect{b}$,
-$\vect{s}(0)=\vect{s}_0$.\par
-\noindent $0<t<\MatrixBlank$\par
-\noindent $\vect{v}(t)=\VectorBlank\quad\mathrm{L}$\par
-\noindent $\vect{s}_0=\VectorBlank\quad\mathrm{g}$\par
-\noindent $\vect{b}=\VectorBlank\quad\mathrm{g/min}$\par
-\noindent $\mat{A}(t)=\TrigMatrixBlank\quad\mathrm{min}^{-1}$\par
-\endgroup}
 \begin{document}
 \WorksheetHeading{In-Class Tank Worksheet}
 \begin{enumerate}
-\item \TankProblem{%
+\setlength{\parskip}{3pt}
+\item \mbox{}
+\newline
+\resizebox{\linewidth}{!}{\ThreeTankDiagram{%
   capacity1=100,volume1=60,concentration1=2,
   capacity2=120,volume2=80,concentration2=1,
   capacity3=100,volume3=50,concentration3=0,
   inflow=3,inflowconcentration=3,
-  flow12=5,flow21=3,flow23=6,flow32=2,outflow=2,
+  flow12=5,flow21=2,flow23=5,flow32=2,outflow=3,
   saltRate1=1,saltRate2=2,saltRate3=3
-}
+}}
+\newline
+Tanks are well-mixed, $t$ in min, $\vect{v}(t)$ in L, $\vect{s}(t)$ in g, and conveyers add dry salt at the rate shown. 
+\begin{enumerate}
+\item
+$\vect{s}'=\mat{A}\vect{s}+\vect{b}$,
+$\vect{s}(0)=\begin{pmatrix}120\\80\\0\end{pmatrix}\,\mathrm{g}$\quad
+$0<t<\TimeBlank\quad\mathrm{min}$
+
+\noindent $\vect{v}(t)=\SystemBlank{1.6in}{0.80in}\quad\mathrm{L}\qquad
+\vect{b}=\SystemBlank{1.6in}{0.80in}\quad\mathrm{g/min}$
+\item $\mat{A}=\TrigMatrixBlank\quad\mathrm{min}^{-1}$
+\item A UC form is $\vect{s}_p(t)=\VectorBlank$. 
+Constants are determined by row reducing
+$\mat{M}_{\text{\textsc{uc}}}=\MatrixBlank$
 
 \end{enumerate}
+
+\newpage
+\item \mbox{} \newline
+\resizebox{\linewidth}{!}{\ThreeTankDiagram{%
+    capacity1=100,volume1=50,concentration1=1,
+  capacity2=120,volume2=60,concentration2=2,
+  capacity3=100,volume3=40,concentration3=1,
+  inflow=2,inflowconcentration=2,
+  flow12=4,flow21=2,flow23=3,flow32=1,outflow=2,
+  saltRate1=2,saltRate2=1,saltRate3=2
+}}
+\newline
+Tanks are well-mixed, $t$ in min, $\vect{v}(t)$ in L, $\vect{s}(t)$ in g, and conveyers add dry salt at the rate shown. 
+\begin{enumerate}
+\item
+$\vect{s}'=\mat{A}\vect{s}+\vect{b}$,
+$\vect{s}(0)=\begin{pmatrix}50\\120\\40\end{pmatrix}\,\mathrm{g}$\quad
+$0<t<\TimeBlank[\infty]\quad\mathrm{min}$
+
+\noindent $\vect{v}(t)=\vcenter{\hbox{$\boxed{\parbox[c][0.80in][c]{1.6in}{\centering$\begin{pmatrix}50\\60\\40\end{pmatrix}$}}$}}\quad\mathrm{L}\qquad
+\vect{b}=\SystemBlank{1.6in}{0.80in}\quad\mathrm{g/min}$
+\item $\mat{A}=\TrigMatrixBlank\quad\mathrm{min}^{-1}$
+\item A UC form is $\vect{s}_p(t)=\VectorBlank$. 
+Constants are determined by row reducing
+$\mat{M}_{\text{\textsc{uc}}}=\MatrixBlank$
+
+\item Not on exam. Solve the IVP
+$\vect{y} =\VectorBlank$
+\end{enumerate}
+\end{enumerate}
 % Independent continuous salt sources: (1,2,3) g/min.
-% Initial salt masses and all liquid flows remain unchanged.
-% Front: volume rates (1,-2,2) L/min. Initial salt (120,80,0) g.
-% v=(60+t,80-2t,50+2t), b=(10,2,3) g/min. Valid until t=25 min.
-% A=[-5/v1,3/v2,0; 5/v1,-9/v2,2/v3; 0,6/v2,-4/v3].
+% Liquid balances: 3+2=5; 5+2=2+5; 5=2+3 L/min.
+% Volumes (60,80,50) L are constant and below capacities.
+% Initial salt (120,80,0) g; b=(10,2,3) g/min.
+% No finite volume boundary. Model remains valid for every t>0.
+% A=[-5/60,2/80,0; 5/60,-7/80,2/50; 0,5/80,-5/50] min^{-1}.
+% Constant UC trial s_p=a is valid: det(A)=-1/3200.
+% UC augmented matrix [A | -b], with b=(10,2,3).
+% Q2 balances: 2+2=4; 4+1=2+3; 3=1+2 L/min.
+% Q2 v=(50,60,40) L, initial salt=(50,120,40) g, b=(6,1,2) g/min.
+% Q2 A=[-4/50,2/60,0;4/50,-5/60,1/40;0,3/60,-3/40].
+% det(A)=-1/5000, so constant UC trial is valid; UC matrix [A|-b].
+% IC matrix [s_1(0) s_2(0) s_3(0) | s(0)-s_p(0)], not [A|...].
 \end{document}

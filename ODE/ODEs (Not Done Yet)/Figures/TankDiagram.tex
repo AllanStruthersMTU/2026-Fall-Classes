@@ -42,7 +42,7 @@
 % Add these rates to the salt-input vector, not to initial salt masses.
 \newcommand{\ODETankSaltSource}[2]{%
   \ifdim#2pt>0pt\relax
-    \begin{scope}[shift={(#1,0)}]
+    \begin{scope}[shift={(#1,0)},xshift=0.15cm,yshift=-0.12cm]
       % Belt sits below the capacity heading and delivers inward over the rim.
       \node[anchor=west,font=\small] at (1.12,3.20) {$#2\,\mathrm{g/min}$};
       \draw[thick,mtuGreen,rounded corners=2pt,fill=white]
@@ -51,7 +51,7 @@
       \draw[mtuGreen] (1.80,2.88) circle[radius=0.055];
       \draw[-{Stealth[length=1.5mm]},mtuGreen] (1.55,2.88)--(0.90,2.88);
       \foreach \sx/\sy in {1.65/3.00,1.43/3.00,1.20/3.00,0.98/3.00,0.75/3.00,0.50/2.75,0.48/2.64,0.53/2.53,0.48/2.42}{%
-        \fill[mtuGreen] (\sx,\sy) circle[radius=0.022];}
+        \fill[red] (\sx,\sy) circle[radius=0.022];}
     \end{scope}
   \fi}
 \newcommand{\ThreeTankDiagram}[1]{%
