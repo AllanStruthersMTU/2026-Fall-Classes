@@ -42,13 +42,14 @@ $0<t<\TimeBlank[\infty]\quad\mathrm{min}$
 
 \noindent $\vect{v}(t)=\KeyBox{1.6in}{0.80in}{\begin{pmatrix}60\\80\\50\end{pmatrix}}\quad\mathrm{L}\qquad
 \vect{b}=\KeyBox{1.6in}{0.80in}{\begin{pmatrix}10\\2\\3\end{pmatrix}}\quad\mathrm{g/min}$
-\item $\mat{A}=\KeyBox{3.0in}{1.60in}{\begin{pmatrix}- \frac{1}{12}&\frac{1}{40}&0\\\frac{1}{12}&- \frac{7}{80}&\frac{1}{25}\\0&\frac{1}{16}&- \frac{1}{10}\end{pmatrix}}\quad\mathrm{min}^{-1}$
+\item $\mat{A}=\KeyBox{3.0in}{1.60in}{\begin{pmatrix}- 5/60&2/80&0\\5/60&- 7/80&2/50\\0&5/80&- 5/50\end{pmatrix}}\quad\mathrm{min}^{-1}$
 \item A UC form is $\vect{s}_p(t)=\KeyBox{3.2in}{0.80in}{\vect{a}}$. 
+\hfill{\footnotesize $\vect{0}=\mat{A}\vect{a}+\vect{b}\ \Longrightarrow\ \mat{A}\vect{a}=-\vect{b}$}
 Constants are determined by row reducing
-$\mat{M}_{\text{\textsc{uc}}}=\KeyBox{1.8in}{0.80in}{\left[\begin{array}{rrr|r}- \frac{1}{12}&\frac{1}{40}&0&-10\\\frac{1}{12}&- \frac{7}{80}&\frac{1}{25}&-2\\0&\frac{1}{16}&- \frac{1}{10}&-3\end{array}\right]}$
+$\mat{M}_{\text{\textsc{uc}}}=\KeyBox{1.8in}{0.80in}{\left[\begin{array}{rrr|r}- 5/60&2/80&0&-10\\5/60&- 7/80&2/50&-2\\0&5/80&- 5/50&-3\end{array}\right]}$
 
 \end{enumerate}
-\hfill{\footnotesize $3+2=5,\quad5+2=2+5,\quad5=2+3\quad(\mathrm{L/min})$}\par
+\hfill{\footnotesize Volume check: \quad $3+2=5,\quad5+2=2+5,\quad5=2+3\quad(\mathrm{L/min})$}\par
 
 \newpage
 \item \mbox{} \newline
@@ -70,15 +71,16 @@ $0<t<\TimeBlank[\infty]\quad\mathrm{min}$
 
 \noindent $\vect{v}(t)=\vcenter{\hbox{$\boxed{\parbox[c][0.80in][c]{1.6in}{\centering$\begin{pmatrix}50\\60\\40\end{pmatrix}$}}$}}\quad\mathrm{L}\qquad
 \vect{b}=\KeyBox{1.6in}{0.80in}{\begin{pmatrix}6\\1\\2\end{pmatrix}}\quad\mathrm{g/min}$
-\item $\mat{A}=\KeyBox{3.0in}{1.60in}{\begin{pmatrix}- \frac{2}{25}&\frac{1}{30}&0\\\frac{2}{25}&- \frac{1}{12}&\frac{1}{40}\\0&\frac{1}{20}&- \frac{3}{40}\end{pmatrix}}\quad\mathrm{min}^{-1}$
+\item $\mat{A}=\KeyBox{3.0in}{1.60in}{\begin{pmatrix}- 4/50&2/60&0\\4/50&- 5/60&1/40\\0&3/60&- 3/40\end{pmatrix}}\quad\mathrm{min}^{-1}$
 \item A UC form is $\vect{s}_p(t)=\KeyBox{3.2in}{0.80in}{\vect{a}}$. 
+\hfill{\footnotesize $\vect{0}=\mat{A}\vect{a}+\vect{b}\ \Longrightarrow\ \mat{A}\vect{a}=-\vect{b}$}
 Constants are determined by row reducing
-$\mat{M}_{\text{\textsc{uc}}}=\KeyBox{1.8in}{0.80in}{\left[\begin{array}{rrr|r}- \frac{2}{25}&\frac{1}{30}&0&-6\\\frac{2}{25}&- \frac{1}{12}&\frac{1}{40}&-1\\0&\frac{1}{20}&- \frac{3}{40}&-2\end{array}\right]}$
+$\mat{M}_{\text{\textsc{uc}}}=\KeyBox{1.8in}{0.80in}{\left[\begin{array}{rrr|r}- 4/50&2/60&0&-6\\4/50&- 5/60&1/40&-1\\0&3/60&- 3/40&-2\end{array}\right]}$
 
 \item Not on exam. Solve the IVP
 $\vect{y} =\KeyBox{3.2in}{0.80in}{\begin{gathered}(1025,1380,1080)^T/6\\{}+\exp(\mat{A}t)(-725,-660,-840)^T/6\end{gathered}}$
 \end{enumerate}
-\hfill{\footnotesize $2+2=4,\quad4+1=2+3,\quad3=1+2\quad(\mathrm{L/min})$}\par
+\hfill{\footnotesize Volume check $2+2=4,\quad4+1=2+3,\quad3=1+2\quad(\mathrm{L/min})$}\par
 \end{enumerate}
 % Independent continuous salt sources: (1,2,3) g/min.
 % Liquid balances: 3+2=5; 5+2=2+5; 5=2+3 L/min.

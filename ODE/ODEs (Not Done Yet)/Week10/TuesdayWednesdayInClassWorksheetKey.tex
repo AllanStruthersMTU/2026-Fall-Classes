@@ -21,23 +21,54 @@
 \begin{enumerate}
 \item \fbox{\normalsize\begin{tabular}{@{}l@{}}{\large$\rlap{\checkmark}\square$} Linear\\{\large$\square$} Separable\end{tabular}}\qquad $ty'+2y=e^t\qquad y(1)=0$
 \par\noindent\makebox[2.7in][l]{Show a suitable intermediate step}\ $\KeyBox{3.2in}{0.80in}{(t^2y)\,{}^{\prime}=t e^t}$\par
-\hfill{\footnotesize $\mu=t^2,\quad \int t e^t\,dt=e^t(t-1)$}\par
+\noindent{\footnotesize Standard form $y'+(2/t)y=e^t/t$}
+
+\hfill{\footnotesize $\begin{gathered}
+y'+p(t)y=q(t),\quad p(t)=2/t,\quad q(t)=e^t/t\\
+\mu(t)=\exp\!\left(\int p(t)\,dt\right)\\
+\int (2/t)\,dt=2\ln|t|\\
+\mu(t)=e^{2\ln|t|}=|t|^2=t^2\quad(t>0\text{ since }t_0=1)\\
+\int t e^t\,dt=e^t(t-1)+C\\
+t^2y=e^t(t-1)+C\\
+y(1)=0\ \Longrightarrow\ 0=e(1-1)+C\ \Longrightarrow\ C=0
+\end{gathered}$}
 \vfill
 \noindent\makebox[2.7in][l]{Show a fully integrated answer}\ $\KeyBox{3.2in}{0.80in}{t^2y=e^t(t-1)}$\par
 \item \fbox{\normalsize\begin{tabular}{@{}l@{}}{\large$\square$} Linear\\{\large$\rlap{\checkmark}\square$} Separable\end{tabular}}\qquad $y'=2t\cos(t^2)(1+y^2)\qquad y(\sqrt{\pi})=0$
-\par\noindent\makebox[2.7in][l]{Show a suitable intermediate step}\ $\KeyBox{3.2in}{0.80in}{\displaystyle\int\frac{dy}{1+y^2}=\int 2t\cos(t^2)\,dt}$\par
-\hfill{\footnotesize $u=t^2,\quad \sin(\pi)=0$}\par
+\par\noindent\makebox[2.7in][l]{Show a suitable intermediate step}\ $\KeyBox{3.2in}{0.80in}{\displaystyle\int\frac{dy}{1+y^2}=\int 2t\cos(t^2)\,dt+C}$\par
+\hfill{\footnotesize $\begin{gathered}
+y'=\underbrace{2t\cos(t^2)}_{\text{factor in }t}\underbrace{(1+y^2)}_{\text{factor in }y}\\
+\frac{dy}{1+y^2}=2t\cos(t^2)\,dt,\quad u=t^2\\
+\arctan(y)=\sin(t^2)+C\\
+y(\sqrt{\pi})=0\ \Longrightarrow\ 0=\sin(\pi)+C\ \Longrightarrow\ C=0
+\end{gathered}$}
 \vfill
 \noindent\makebox[2.7in][l]{Show a fully integrated answer}\ $\KeyBox{3.2in}{0.80in}{\arctan(y)=\sin(t^2)}$\par
 \newpage
 \item \fbox{\normalsize\begin{tabular}{@{}l@{}}{\large$\square$} Linear\\{\large$\rlap{\checkmark}\square$} Separable\end{tabular}}\qquad $\ln(y)y'=t e^{t^2}\qquad y(1)=e$
-\par\noindent\makebox[2.7in][l]{Show a suitable intermediate step}\ $\KeyBox{3.2in}{0.80in}{\displaystyle\int\ln(y)\,dy=\int t e^{t^2}\,dt}$\par
-\hfill{\footnotesize $\int\ln(y)\,dy=y\ln(y)-y,\quad u=t^2$}\par
+\par\noindent\makebox[2.7in][l]{Show a suitable intermediate step}\ $\KeyBox{3.2in}{0.80in}{\displaystyle\int\ln(y)\,dy=\int t e^{t^2}\,dt+C}$\par
+\hfill{\footnotesize $\begin{gathered}
+y'=\underbrace{t e^{t^2}}_{\text{factor in }t}\underbrace{\frac{1}{\ln(y)}}_{\text{factor in }y}\\
+\ln(y)\,dy=t e^{t^2}\,dt,\quad u=t^2\\
+\int\ln(y)\,dy=y\ln(y)-y+C\\
+y\ln(y)-y=e^{t^2}/2+C\\
+y(1)=e\ \Longrightarrow\ e\ln(e)-e=e/2+C\ \Longrightarrow\ C=-e/2
+\end{gathered}$}
 \vfill
 \noindent\makebox[2.7in][l]{Show a fully integrated answer}\ $\KeyBox{3.2in}{0.80in}{y\ln(y)-y=(e^{t^2}-e)/2}$\par
 \item \fbox{\normalsize\begin{tabular}{@{}l@{}}{\large$\rlap{\checkmark}\square$} Linear\\{\large$\square$} Separable\end{tabular}}\qquad $ty'+(t+1)y=1\qquad y(1)=1$
 \par\noindent\makebox[2.7in][l]{Show a suitable intermediate step}\ $\KeyBox{3.2in}{0.80in}{(t e^t y)\,{}^{\prime}=e^t}$\par
-\hfill{\footnotesize $\mu=t e^t,\quad C=0$}\par
+\noindent{\footnotesize Standard form $y'+(1+1/t)y=1/t$}
+
+\hfill{\footnotesize $\begin{gathered}
+y'+p(t)y=q(t),\quad p(t)=1+1/t,\quad q(t)=1/t\\
+\mu(t)=\exp\!\left(\int p(t)\,dt\right)\\
+\int (1+1/t)\,dt=t+\ln|t|\\
+\mu(t)=e^{t+\ln|t|}=e^t|t|=t e^t\quad(t>0\text{ since }t_0=1)\\
+\int e^t\,dt=e^t+C\\
+t e^t y=e^t+C\\
+y(1)=1\ \Longrightarrow\ e=e+C\ \Longrightarrow\ C=0
+\end{gathered}$}
 \vfill
 \noindent\makebox[2.7in][l]{Show a fully integrated answer}\ $\KeyBox{3.2in}{0.80in}{t e^t y=e^t}$\par
 \end{enumerate}
