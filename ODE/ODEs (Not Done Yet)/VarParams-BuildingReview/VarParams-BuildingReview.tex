@@ -1,0 +1,222 @@
+\documentclass[11pt,aspectratio=169]{beamer}
+\ifdefined\pdfmapfile\pdfmapfile{+cm-super-t1.map}\fi
+\input{LectureHeader}
+\title{Variation of Parameters and Two-Story Buildings}
+\date{}
+\lecturelabel{Review}
+
+% Recap follows Week 10, 9_Lecture.tex.
+% Building problems adapt the two cases in Week 9, BuildingWorksheet.tex.
+
+\begin{document}
+\begin{frame}{Variation of Parameters for a Scalar Equation}
+\[
+  y'+p(t)y=q(t)
+  \qquad
+  y_1'=-p(t)y_1
+  \qquad
+  y_c=cy_1
+\]
+\keypoint{Variation of parameters} replaces the constant $c$ by a function $u(t)$.
+\[
+  y=uy_1
+  \qquad
+  y'+p(t)y=u'y_1+u\underbrace{(y_1'+p(t)y_1)}_{0}
+\]
+So $u'=q(t)/y_1(t)$. Integrate and use the initial condition.
+
+\begin{block}{Example \quad $y'+2y=e^{-2t}$,\quad $y(0)=1$}
+Here $y_1(t)=e^{-2t}$, so $u'=1$ and $u(0)=1$.
+Then $u(t)=1+t$ and $y(t)=(1+t)e^{-2t}$.
+\end{block}
+\end{frame}
+
+\begin{frame}{Variation of Parameters for a System}
+For $\vect{y}'=\mat{A}\vect{y}+\vect{f}(t)$, the
+\keypoint{fundamental matrix} has $n$ linearly independent complementary solutions as its columns.
+\[
+  \mat{\Phi}(t)=[\,\vect{y}_1(t)\ \cdots\ \vect{y}_n(t)\,]
+  \qquad
+  \mat{\Phi}'=\mat{A}\mat{\Phi}
+  \qquad
+  \vect{y}_c=\mat{\Phi}\vect{c}
+\]
+Replace $\vect{c}$ by $\vect{u}(t)$ and substitute $\vect{y}=\mat{\Phi}\vect{u}$.
+\[
+  \underbrace{(\mat{\Phi}'-\mat{A}\mat{\Phi})}_{0}\vect{u}
+  +\mat{\Phi}\vect{u}'=\vect{f}(t)
+  \qquad
+  \vect{u}'=\mat{\Phi}^{-1}\vect{f}(t)
+\]
+At each $t$, the last equation amounts to solving
+$\mat{\Phi}(t)\vect{u}'(t)=\vect{f}(t)$.
+\end{frame}
+
+\begin{frame}{Initial Conditions and the Forcing Integral}
+Given $\vect{y}(0)=\vect{y}_0$, the coefficient vector starts at
+$\vect{u}(0)=\mat{\Phi}(0)^{-1}\vect{y}_0$.
+\[
+  \boxed{\vect{y}(t)=
+    \underbrace{\mat{\Phi}(t)\mat{\Phi}(0)^{-1}\vect{y}_0}_{\text{response to initial data}}
+    +\underbrace{\mat{\Phi}(t)\int_0^t\mat{\Phi}(s)^{-1}\vect{f}(s)\,ds}_{\text{response to forcing}}}
+\]
+The first term makes $\vect{y}(0)=\vect{y}_0$ since the integral is zero at $t=0$. 
+For $\mat{A}$ constant
+\[
+  \mat{\Phi}(t) = e^{\mat{A}t}=\sum_{k=0}^{\infty}\frac{(\mat{A}t)^k}{k!}
+    =\mat{I}+\mat{A}t+\frac{(\mat{A}t)^2}{2!}+\cdots
+\]
+and the solution of the IVP is
+\[
+  \vect{y}(t)=e^{\mat{A}t}\vect{y}_0
+    +\int_0^t e^{\mat{A}(t-s)}\vect{f}(s)\,ds
+\]
+\end{frame}
+
+\begin{frame}{Two-Story Building}
+\begin{columns}[c,onlytextwidth]
+  \column{.61\textwidth}
+  \resizebox{\linewidth}{!}{\TwoStoryBuilding{}}
+  \column{.35\textwidth}
+  \textbf{Worked problem}
+
+  \medskip
+  The base motion $y_0(t)$ is prescribed. The two floor displacements are
+  measured to the right from rest.
+
+  \[
+    \vect{y}(0)=(0,-1)\,\mathrm{m}
+  \]
+  \[
+    \vect{y}'(0)=(0,2)\,\mathrm{m/s}
+  \]
+\end{columns}
+\end{frame}
+
+\begin{frame}{Story Forces and Floor Balances}
+\setlength{\abovedisplayskip}{5pt}
+\setlength{\belowdisplayskip}{5pt}
+\setlength{\abovedisplayshortskip}{5pt}
+\setlength{\belowdisplayshortskip}{5pt}
+Story $i$ connects levels $i-1$ and $i$. The force on the 
+upper level is
+$-f_i$ and the force on the lower level is $+f_i$, where
+\[
+  f_i=k_i(y_i-y_{i-1})+c_i(y_i'-y_{i-1}')
+\]
+\[
+  \underbrace{\frac{\mathrm{N}}{\cancel{\mathrm{m}}}
+    \cancel{\mathrm{m}}}_{\text{spring}}=\mathrm{N}
+  \qquad
+  \underbrace{\frac{\mathrm{N}\,\cancel{\mathrm{s}}}{\cancel{\mathrm{m}}}
+    \frac{\cancel{\mathrm{m}}}{\cancel{\mathrm{s}}}}_{\text{damper}}=\mathrm{N}
+  \qquad
+  \mathrm{kg}\,\frac{\mathrm{m}}{\mathrm{s}^2}=\mathrm{N}
+\]
+Substituting the story forces into Newton's law gives
+\[
+  \begin{alignedat}{2}
+    4y_1'' &=-f_1+f_2 &\quad
+      &=-4(y_1-y_0)-2(y_1'-y_0')+3(y_2-y_1)+(y_2'-y_1')\\
+    3y_2'' &=-f_2 &
+      &=\phantom{-4(y_1-y_0)-2(y_1'-y_0')}-3(y_2-y_1)-(y_2'-y_1')
+  \end{alignedat}
+\]
+\end{frame}
+
+\begin{frame}{Floor Balances in Matrix Form}
+Collect the floor terms on the left and the prescribed base motion on the right.
+\[
+  \underbrace{\begin{pmatrix}4&0\\0&3\end{pmatrix}}_{\mat{M}}
+    \begin{pmatrix}y_1''\\y_2''\end{pmatrix}
+  +\underbrace{\begin{pmatrix}3&-1\\-1&1\end{pmatrix}}_{\mat{C}}
+    \begin{pmatrix}y_1'\\y_2'\end{pmatrix}
+  +\underbrace{\begin{pmatrix}7&-3\\-3&3\end{pmatrix}}_{\mat{K}}
+    \begin{pmatrix}y_1\\y_2\end{pmatrix}
+  =\underbrace{\begin{pmatrix}4y_0+2y_0'\\0\end{pmatrix}}_{\vect{b}(t)}
+\]
+\[
+  \mat{M}\vect{y}''+\mat{C}\vect{y}'+\mat{K}\vect{y}=\vect{b}(t)
+  \qquad
+  \vect{b}(t)=\begin{pmatrix}4y_0(t)+2y_0'(t)\\0\end{pmatrix}
+\]
+The units of $\mat{M}$, $\mat{C}$, $\mat{K}$, and $\vect{b}$ are
+$\mathrm{kg}$, $\mathrm{N\,s/m}$, $\mathrm{N/m}$, and $\mathrm{N}$, respectively.
+
+\medskip
+For this example, the prescribed base motion is $y_0(t)=\sin(t)$.
+\end{frame}
+
+\begin{frame}{First-Order Building IVP}
+Let $\vect{z}=(y_1,y_2,y_1',y_2')$.
+The top two equations give velocity. The bottom two give acceleration.
+\[
+  \vect{z}'=\mat{A}\vect{z}+\vect{g}(t)
+  \qquad
+  \mat{A}=\begin{pmatrix}\mat{0}&\mat{I}\\-\mat{M}^{-1}\mat{K}&-\mat{M}^{-1}\mat{C}\end{pmatrix}
+  \qquad
+  \vect{g}(t)=\begin{pmatrix}\vect{0}\\\mat{M}^{-1}\vect{b}(t)\end{pmatrix}
+\]
+\[
+  \mat{A}=\begin{pmatrix}
+    0&0&1&0\\
+    0&0&0&1\\
+    -7/4&3/4&-3/4&1/4\\
+    1&-1&1/3&-1/3
+  \end{pmatrix}
+  \quad
+  \vect{g}(t)=\begin{pmatrix}0\\0\\(4y_0(t)+2y_0'(t))/4\\0\end{pmatrix}
+  \quad
+  \vect{z}(0)=\begin{pmatrix}0\\-1\\0\\2\end{pmatrix}
+\]
+Dividing each force by its floor mass gives acceleration in
+$\mathrm{N}/\mathrm{kg}=(\cancel{\mathrm{kg}}\,\mathrm{m}/\mathrm{s}^2)/\cancel{\mathrm{kg}}=\mathrm{m}/\mathrm{s}^2$.
+\end{frame}
+
+\begin{frame}{Two-Story Building Practice \quad $\mat{M}\vect{y}''+\mat{C}\vect{y}'+\mat{K}\vect{y}=\vect{b}(t)$}
+\begin{columns}[c,onlytextwidth]
+  \column{.59\textwidth}
+  \resizebox{\linewidth}{!}{\TwoStoryBuilding{%
+    basemotion={2\sin(t)},mass1=3,mass2=2,%
+    stiffness1=6,stiffness2=4,damping1=3,damping2=2}}
+  \column{.38\textwidth}
+  \[
+    \begin{aligned}
+      \vect{y}(0)&=(0,1)\,\mathrm{m}\\
+      \vect{y}'(0)&=(-1,0)\,\mathrm{m/s}
+    \end{aligned}
+  \]
+  \begin{enumerate}
+    \item Find $\mat{M}$, $\mat{C}$, $\mat{K}$, and $\vect{b}(t)$.
+    \item Write $\vect{z}'=\mat{A}\vect{z}+\vect{g}(t)$ and $\vect{z}(0)$.
+  \end{enumerate}
+  Stop once the IVP is set up.
+\end{columns}
+\end{frame}
+
+\begin{frame}{Practice Check \quad $\mat{M}\vect{y}''+\mat{C}\vect{y}'+\mat{K}\vect{y}=\vect{b}(t)$}
+\[
+  \mat{M}=\begin{pmatrix}3&0\\0&2\end{pmatrix}
+  \quad
+  \mat{C}=\begin{pmatrix}5&-2\\-2&2\end{pmatrix}
+  \quad
+  \mat{K}=\begin{pmatrix}10&-4\\-4&4\end{pmatrix}
+  \quad
+  \vect{b}(t)=\begin{pmatrix}12\sin(t)+6\cos(t)\\0\end{pmatrix}
+\]
+\[
+  \mat{A}=\begin{pmatrix}
+    0&0&1&0\\
+    0&0&0&1\\
+    -10/3&4/3&-5/3&2/3\\
+    2&-2&1&-1
+  \end{pmatrix}
+  \quad
+  \vect{g}(t)=\begin{pmatrix}0\\0\\4\sin(t)+2\cos(t)\\0\end{pmatrix}
+  \quad
+  \vect{z}(0)=\begin{pmatrix}0\\1\\-1\\0\end{pmatrix}
+\]
+As a check, the base term in the acceleration equation is
+$\bigl(6y_0(t)+3y_0'(t)\bigr)/3$.
+\end{frame}
+\end{document}
