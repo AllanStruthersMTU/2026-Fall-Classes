@@ -1,0 +1,296 @@
+\documentclass[11pt,aspectratio=169]{beamer}
+\usepackage{beamerthemeMTU}
+\usepackage{amsmath,amssymb,bm}
+\course{MA4535 --- Nonlinear Dynamics \& Chaos}
+\author{Allan Struthers}
+\institute{Math Sciences}
+\lecturenum{11}
+\newcommand{\vect}[1]{\bm{#1}}
+\newcommand{\R}{\mathbb R}
+\newcommand{\pair}[2]{\langle #1,#2\rangle}
+\newcommand{\Rossler}{R\"ossler}
+\title{Curvature of an unstable manifold}
+\subtitle{Surface geometry and the lower \Rossler{} equilibrium}
+
+\date{\today}
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Curvature of a curve in Euclidean space}
+For a curve \(\vect{\gamma}(u)\) with arclength \(s\) and
+speed \(v=\|\vect{\gamma}'(u)\|\). The \textbf{unit tangent} is
+\[
+  \vect{t}=\frac{d\vect{\gamma}}{ds}=\frac{\vect{\gamma}'(u)}{v}.
+\]
+The \textbf{curvature} is
+\[
+  \kappa=\left\|\frac{d\vect{t}}{ds}\right\|
+  =\frac{\|\vect{\gamma}'(u)\times\vect{\gamma}''(u)\|}{v^3} \geq 0.
+\]
+\end{frame}
+
+\begin{frame}{Frenet frame in $\mathbb{R}^3$ with \(\kappa>0\).}
+The derivative \(d\vect{t}/ds\) is perpendicular to \(\vect{t}\)
+because \(\vect{t}\cdot\vect{t}=1\).
+\[
+ \begin{aligned}
+ \vect{t}&=\frac{\vect{\gamma}'(u)}{v}
+    &&\text{unit tangent},\\
+ \vect{n}&=\frac{1}{\kappa}\frac{d\vect{t}}{ds}
+    &&\text{principal normal},\\
+ \vect{b}&=\vect{t}\times\vect{n}
+    =\frac{\vect{\gamma}'(u)\times\vect{\gamma}''(u)}
+          {\|\vect{\gamma}'(u)\times\vect{\gamma}''(u)\|}
+    &&\text{binormal}.
+ \end{aligned}
+\]
+The speed \(v\) normalizes \(\vect{\gamma}'(u)\).
+The curvature \(\kappa\) normalizes \(d\vect{t}/ds\).
+The cross-product magnitude is \(v^3\kappa\).
+The cross product \(\vect{b}\) automatically has length 1.
+\end{frame}
+
+\begin{frame}{Frenet frame for a helix}
+\centering
+\begin{tikzpicture}[x={(2.2cm,-0.55cm)},y={(1.45cm,0.70cm)},z={(0cm,1.9cm)}]
+  % The helix and the three unit directions are evaluated at u = 0.
+  \fill[mtuGreenPale]
+    (1.20,-0.18,-0.06) -- (0.12,-0.18,-0.06) --
+    (0.12,0.82,0.273333) -- (1.20,0.82,0.273333) -- cycle;
+  \draw[mtuGreenLight, very thick]
+    plot[domain=-158:145,samples=65,variable=\u]
+      ({cos(\u)},{sin(\u)},{pi*\u/540});
+  \draw[->, very thick, mtuGreen] (1,0,0) --
+    (1,{2.4/sqrt(10)},{0.8/sqrt(10)}) node[right] {\(\vect{t}\)};
+  \draw[->, very thick, mtuGreen] (1,0,0) --
+    (0.2,0,0) node[left] {\(\vect{n}\)};
+  \draw[->, very thick, mtuGreen] (1,0,0) --
+    (1,{-0.8/sqrt(10)},{2.4/sqrt(10)}) node[above] {\(\vect{b}\)};
+  \fill[mtuGreen] (1,0,0) circle[radius=1.6pt];
+\end{tikzpicture}
+
+The frame is shown at \(u=0\) on
+\(\vect{\gamma}(u)=(\cos u,\sin u,u/3)\).
+The shaded \textbf{osculating plane} contains \(\vect{t}\) and
+\(\vect{n}\). The binormal \(\vect{b}\) is perpendicular to it.
+\end{frame}
+
+\begin{frame}{Torsion and the Frenet--Serret equations}
+With the arclength $s$ parametrization
+ \[
+ \boxed{
+ 	\vect{b}.\vect{b}=1
+ \quad \mbox{and} \quad
+ \vect{b}\cdot\vect{t}=0
+ \quad \mbox{and} \quad
+ \vect{t}'=\kappa\vect{n}
+ } 
+ \Longrightarrow
+ \boxed{\vect{b}'\cdot\vect{b}=\vect{b}'\cdot\vect{t}=0}
+ \]
+Thus \(\vect{b}'=-\tau\vect{n}\) with
+\(\tau=-\vect{b}'\cdot\vect{n}\) and 
+ \(\vect{n}=\vect{b}\times\vect{t}\) 
+gives
+\(\vect{n}'=-\kappa\vect{t}+\tau\vect{b}\). Together,
+\[
+ \boxed{\vect{t}'=\kappa\vect{n},\qquad
+        \vect{n}'=-\kappa\vect{t}+\tau\vect{b},\qquad
+        \vect{b}'=-\tau\vect{n}.}
+\]
+Curvature measures how fast the tangent turns. Torsion measures 
+how fast the osculating plane rotates about the tangent.
+\end{frame}
+
+\begin{frame}{XXXX Normal curvature and principal curvatures}
+For a curve on a surface, let \(\vect{n}\) now denote the unit surface normal.
+The normal curvature in the direction of the unit tangent \(\vect{t}\) is
+\[
+    \kappa_n(\vect{t})=\pair{d\vect{t}/ds}{\vect{n}}.
+\]
+Its maximum and minimum over unit tangent directions are the
+\textbf{principal curvatures} \(k_1,k_2\).
+\[
+    K=k_1k_2 \quad\text{(Gaussian)},\qquad
+    H=\tfrac12(k_1+k_2) \quad\text{(mean)}.
+\]
+Reversing \(\vect{n}\) reverses the signs of \(k_1,k_2,H\).
+The product \(K\) keeps its value.
+\end{frame}
+
+\begin{frame}{A chart with orthonormal tangent directions}
+At \(\vect{p}_0\), choose orthonormal tangent directions
+\(\vect{e}_1,\vect{e}_2\) and set \(\vect{n}=\vect{e}_1\times\vect{e}_2\).
+Write the surface locally as
+\[
+ \vect{p}(u_1,u_2)=\vect{p}_0+u_1\vect{e}_1+u_2\vect{e}_2+h(u_1,u_2)\vect{n}.
+\]
+Here \(h(0)=0\) and \(Dh(0)=0\).
+For a unit tangent \(\vect{t}=v_1\vect{e}_1+v_2\vect{e}_2\),
+write \(\vect{v}=(v_1,v_2)^{\mathsf T}\). At \(\vect{p}_0\),
+\[
+    B=D^2h(0),\qquad \kappa_n(\vect{t})=\vect{v}^{\mathsf T}B\vect{v}.
+\]
+The eigenvalues of \(B\) are \(k_1,k_2\), so \(K=\det B\) and
+\(H=\tfrac12\operatorname{tr}B\).
+\end{frame}
+
+\begin{frame}{Curvature of a graph over the coordinate plane}
+For \(\vect{p}(u,v)=(u,v,h(u,v))\), set
+\(\vect{g}=\nabla h\), \(Q=D^2h\), and \(r=\sqrt{1+\|\vect{g}\|^2}\).
+The graph directions \(\vect{p}_i=\partial_i\vect{p}\) have dot products
+\(G_{ij}=\pair{\vect{p}_i}{\vect{p}_j}\).
+\[
+    \vect{n}=\frac{(-\vect{g},1)}{r},\qquad
+    G=I+\vect{g}\vect{g}^{\mathsf T},\qquad B=\frac{Q}{r}.
+\]
+The principal curvatures solve \(\det(B-kG)=0\), and
+\[
+    K=\frac{\det B}{\det G}=\frac{\det Q}{(1+\|\vect{g}\|^2)^2}.
+\]
+\begin{block}{Example at the origin}
+For \(h(u,v)=\tfrac12(u^2-v^2)\), \(G=I\) at the origin.
+Then \(k_1=1,\ k_2=-1,\ K=-1,\ H=0\).
+\end{block}
+\end{frame}
+
+\begin{frame}{The unstable surface as an invariant graph}
+Near a hyperbolic equilibrium, suppose the two-dimensional unstable
+eigenspace projects invertibly onto the \(x_1y_1\)-plane.
+Set \(\vect{w}=(x_1,y_1)^{\mathsf T}\) in shifted coordinates. The local
+unstable manifold is \(z_1=h(\vect{w})\).
+\[
+    \frac{d\vect{w}}{dt}=\vect{f}(\vect{w},z_1),\qquad \dot{z}_1=j(\vect{w},z_1).
+\]
+The chain rule and tangency of the vector field give
+\[
+    Dh(\vect{w})\vect{f}(\vect{w},h(\vect{w}))=j(\vect{w},h(\vect{w})).
+\]
+Expand \(h\) at the equilibrium and match powers of \(\vect{w}\).
+\[
+    h(\vect{w})=\vect{g}^{\mathsf T}\vect{w}+\tfrac12 \vect{w}^{\mathsf T}Q\vect{w}+O(\|\vect{w}\|^3).
+\]
+The unstable eigenspace supplies \(\vect{g}\). The quadratic terms determine
+the symmetric matrix \(Q\), which gives the curvature at the equilibrium.
+\end{frame}
+
+\begin{frame}{The lower \Rossler{} equilibrium}
+\small
+Use the original Euclidean state coordinates \((x,y,z)\) and
+the parameters \(a=b=0.2,\ c=5.7\).
+\[
+  \dot x=-y-z,\qquad \dot y=x+ay,\qquad \dot z=b+z(x-c).
+\]
+Solving the equilibrium equations gives
+\[
+  z_-=\frac{c-\sqrt{c^2-4ab}}{2a},\qquad
+  \vect{p}_-=(az_-,-z_-,z_-)\approx(0.0070262,-0.0351310,0.0351310).
+\]
+With \(d=az_--c\), the Jacobian and its eigenvalues are
+\[
+ J=\begin{pmatrix}0&-1&-1\\1&a&0\\z_-&0&d\end{pmatrix},
+ \qquad
+ \begin{aligned}
+ \lambda_s&\approx-5.686976,\\
+ \lambda_{u,\pm}&\approx0.097001\pm0.995193\,i.
+ \end{aligned}
+\]
+The complex pair spans a real two-dimensional unstable plane.
+\end{frame}
+
+\begin{frame}{The tangent plane from the stable left eigenvector}
+Shift the equilibrium to the origin with \((x_1,y_1,z_1)=(x,y,z)-\vect{p}_-\).
+The shifted system is
+\[
+   \dot{x}_1=-y_1-z_1,\qquad \dot{y}_1=x_1+ay_1,\qquad
+   \dot{z}_1=z_-x_1+dz_1+x_1z_1.
+\]
+A left eigenvector \(\vect{\ell}\) for \(\lambda_s\) annihilates the two
+unstable eigenvectors and is normal to the unstable plane.
+Scale it to have third component \(1\).
+\[
+  \vect{\ell}=(-p,-q,1)^{\mathsf T},\qquad
+  \vect{g}=\binom{p}{q}\approx\binom{0.00599829}{0.00101891}.
+\]
+On the plane \(z_1=px_1+qy_1\), the linearized dynamics have matrix
+\[
+ A=\begin{pmatrix}-p&-1-q\\1&a\end{pmatrix},
+ \qquad \lambda_s=d+p .
+\]
+\end{frame}
+
+\begin{frame}{The Hessian from a three-variable linear solve}
+The invariance equation for the shifted graph is
+\[
+  h_{x_1}(-y_1-h)+h_{y_1}(x_1+ay_1)=z_-x_1+dh+x_1h .
+\]
+With \(\vect{e}_1=(1,0)^{\mathsf T}\), matching quadratic terms gives
+\[
+  \vect{w}^{\mathsf T}QA\vect{w}
+  -\tfrac{\lambda_s}{2}\vect{w}^{\mathsf T}Q\vect{w}
+  =(\vect{e}_1^{\mathsf T}\vect{w})(\vect{g}^{\mathsf T}\vect{w}).
+\]
+Taking the symmetric matrix of this quadratic identity yields
+\[
+  \boxed{A^{\mathsf T}Q+QA-\lambda_s Q=\vect{e}_1\vect{g}^{\mathsf T}+\vect{g}\vect{e}_1^{\mathsf T}}.
+\]
+The \(11\), \(12\), and \(22\) entries are three linear equations for
+\(Q_{11},Q_{12},Q_{22}\). The eigenvalues of \(A\) have positive real part,
+so their pairwise sums cannot equal \(\lambda_s<0\).
+\end{frame}
+
+\begin{frame}{Curvatures at the equilibrium}
+Solving for the Hessian of the local unstable graph gives
+\[
+  Q\approx
+  \begin{pmatrix}
+    1.945588\times10^{-3} & 4.777028\times10^{-4}\\
+    4.777028\times10^{-4} & 1.571189\times10^{-4}
+  \end{pmatrix}.
+\]
+Solving \(\det(B-kG)=0\) with the upward normal gives
+\[
+ \begin{aligned}
+ k_1&\approx 2.06507\times10^{-3},&
+ k_2&\approx 3.75207\times10^{-5},\\
+ H&\approx 1.05130\times10^{-3},&
+ K&\approx 7.74830\times10^{-8}.
+ \end{aligned}
+\]
+The surface bends toward the upward normal in both principal directions.
+The saddle-focus label describes the equilibrium's flow.
+\end{frame}
+
+\begin{frame}{Curvature at nearby points}
+The quadratic graph gives the exact derivatives through order two at
+the equilibrium, up to numerical roundoff in the coefficients.
+\medskip
+
+For a nearby point, match higher powers in the invariance equation
+to compute a higher-degree polynomial \(h_m\). Evaluate
+\(\nabla h_m\) and \(D^2h_m\) at the point and use the graph formulas.
+\[
+  r_m(\vect{w})=
+  Dh_m(\vect{w}) \vect{f}(\vect{w},h_m(\vect{w}))-j(\vect{w},h_m(\vect{w})).
+\]
+A degree-\(m\) Taylor graph has residual \(O(\|\vect{w}\|^{m+1})\) near the
+origin. Compare the curvature at successive degrees, since the
+curvature calculation differentiates the graph twice.
+\end{frame}
+
+\begin{frame}{References}
+\small
+O.~E. \Rossler, \emph{An Equation for Continuous Chaos},
+Physics Letters A 57 (1976), 397--398.
+\href{https://doi.org/10.1016/0375-9601(76)90101-8}{Article}
+\medskip
+
+X. Cabr\'e, E. Fontich, and R. de la Llave,
+\emph{The Parameterization Method for Invariant Manifolds I.
+Manifolds Associated to Non-resonant Subspaces},
+Indiana University Mathematics Journal 52 (2003), 283--328.
+\href{https://web.mat.upc.edu/xavier.cabre/docs/indi1jour.pdf}{Paper}
+\end{frame}
+\end{document}
