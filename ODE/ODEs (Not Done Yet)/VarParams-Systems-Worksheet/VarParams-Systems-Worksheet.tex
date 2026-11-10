@@ -1,0 +1,73 @@
+\documentclass[11pt,letterpaper]{article}
+\input{WorksheetHeader.tex}
+
+\newcommand{\WorkSpace}{%
+  \par\vspace{0.7in plus 1fill}%
+  \noindent\textcolor{black!25}{\rule{\linewidth}{0.35pt}}\par
+}
+
+\begin{document}
+\WorksheetHeading{Variation of Parameters for Systems}
+
+\begin{enumerate}
+\item \textbf{Trigonometric forcing.} Solve the initial value problem
+\[
+  \vect{y}'=A\vect{y}+\vect{f}(t)
+  \qquad A=\begin{pmatrix}0&-3\\3&0\end{pmatrix}
+  \qquad \vect{f}(t)=\begin{pmatrix}\cos(3t)\\\sin(3t)\end{pmatrix}
+  \qquad \vect{y}(0)=\begin{pmatrix}2\\1\end{pmatrix}
+\]
+\begin{enumerate}
+  \item Find the eigenvalues of $A$ and an eigenvector for the eigenvalue
+  with positive imaginary part. Use it to find two real homogeneous solutions.
+  \WorkSpace
+
+  \item Use those solutions to form $\Phi(t)$ with $\Phi(0)=I$. Find
+  $\det\Phi(t)$ and $\Phi(t)^{-1}$.
+  \WorkSpace
+
+  \item Set $\vect{y}=\Phi\vect{u}$. Find $\vect{u}'(t)=\Phi(t)^{-1}\vect{f}(t)$
+  and integrate. Compare $\vect{f}(t)$ with the columns of $\Phi(t)$ before multiplying.
+  \WorkSpace
+
+  \item Use the initial condition to find the constants and write $\vect{y}(t)$.
+  \WorkSpace
+
+  \item Check the differential equation and the initial condition.
+  \WorkSpace
+\end{enumerate}
+
+\newpage
+
+\item \textbf{Power forcing.} Find the general solution on $t>0$.
+\[
+  \vect{y}'=A(t)\vect{y}+\vect{f}(t)
+  \qquad A(t)=\begin{pmatrix}0&1\\-12/t^2&6/t\end{pmatrix}
+  \qquad \vect{f}(t)=\begin{pmatrix}0\\t^3\end{pmatrix}
+\]
+The homogeneous system has the solutions
+\[
+  \vect{y}_1(t)=\begin{pmatrix}t^3\\3t^2\end{pmatrix}
+  \qquad
+  \vect{y}_2(t)=\begin{pmatrix}t^4\\4t^3\end{pmatrix}
+\]
+\begin{enumerate}
+  \item Verify that both vectors satisfy $\vect{y}'=A(t)\vect{y}$.
+  \WorkSpace
+
+  \item Form $\Phi(t)$, compute its determinant, and find $\Phi(t)^{-1}$.
+  \WorkSpace
+
+  \item Find $\vect{u}'(t)=\Phi(t)^{-1}\vect{f}(t)$ and integrate.
+  \WorkSpace
+
+  \item Write $\vect{y}(t)=\Phi(t)\vect{u}(t)$ and identify the particular
+  and complementary terms. Use $c_1$ and $c_2$ for the constants.
+  \WorkSpace
+
+  \item Check the particular solution in the nonhomogeneous system.
+  \WorkSpace
+\end{enumerate}
+\end{enumerate}
+
+\end{document}

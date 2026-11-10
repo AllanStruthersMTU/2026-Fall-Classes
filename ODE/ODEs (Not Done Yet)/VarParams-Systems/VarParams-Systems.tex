@@ -1,0 +1,406 @@
+\documentclass[11pt,aspectratio=169]{beamer}
+\ifdefined\pdfmapfile\pdfmapfile{+cm-super-t1.map}\fi
+\input{LectureHeader}
+\title{Variation of Parameters for Systems}
+\date{}
+\lecturelabel{Variation of Parameters Example}
+
+% Compact system equations for the fixed-height frame title area.
+\DeclareRobustCommand{\VariableSystemEquation}{%
+  \ensuremath{\vect{y}'=
+    \left(\begin{smallmatrix}0&1\\-6/t^2&4/t\end{smallmatrix}\right)\vect{y}
+    +\left(\begin{smallmatrix}0\\1\end{smallmatrix}\right)}}
+\DeclareRobustCommand{\RotationSystemEquation}{%
+  \ensuremath{\vect{y}'=
+    \left(\begin{smallmatrix}0&-2\\2&0\end{smallmatrix}\right)\vect{y}
+    +\left(\begin{smallmatrix}t\\0\end{smallmatrix}\right)}}
+
+% The MTU title box reserves 1em at each side.
+\DeclareRobustCommand{\SystemFrameTitle}[2]{%
+  \makebox[\dimexpr\paperwidth-2em\relax][l]{#1\quad\hfill#2}}
+
+\begin{document}
+
+\begin{frame}{Variation of Parameters for Systems}
+For $\vect{y}'=\mat{A}(t)\vect{y}+\vect{f}(t)$, the
+\keypoint{fundamental matrix} $\mat{\Phi}$ has independent complementary
+solutions as its columns, so $\mat{\Phi}'=\mat{A}\mat{\Phi}$.
+
+\medskip
+Replace the constant vector in $\vect{y}_c=\mat{\Phi}\vect{c}$ by
+$\vect{u}(t)$. Substituting $\vect{y}=\mat{\Phi}\vect{u}$ gives
+\[
+  \mat{\Phi}(t)\vect{u}'(t)=\vect{f}(t)
+  \qquad\Longrightarrow\qquad
+  \vect{u}'(t)=\mat{\Phi}(t)^{-1}\vect{f}(t)
+\]
+One particular solution is
+\[
+  \boxed{\vect{y}_p(t)=\mat{\Phi}(t)
+  \int_{t_0}^{t}\mat{\Phi}(s)^{-1}\vect{f}(s)\,ds}
+\]
+where $t_0$ is any point in the interval of the system.
+\end{frame}
+
+\begin{frame}{\SystemFrameTitle{Worked Example}{\VariableSystemEquation}}
+Find a particular solution of $\vect{y}'=\mat{A}(t)\vect{y}+\vect{f}(t)$
+on $(0,\infty)$, where
+\[
+  \mat{A}(t)=
+  \begin{pmatrix}
+    0 & 1\\
+    -6/t^2 & 4/t
+  \end{pmatrix}
+  \qquad
+  \vect{f}(t)=\begin{pmatrix}0\\1\end{pmatrix}
+\]
+The homogeneous system $\vect{y}'=\mat{A}(t)\vect{y}$ has independent
+solutions
+\[
+  \vect{y}_1(t)=\begin{pmatrix}t^2\\2t\end{pmatrix}
+  \qquad
+  \vect{y}_2(t)=\begin{pmatrix}t^3\\3t^2\end{pmatrix}
+\]
+\end{frame}
+
+\begin{frame}{\SystemFrameTitle{Verify Homogeneous Solutions}{\VariableSystemEquation}}
+For the homogeneous equation $\vect{y}'=\mat{A}(t)\vect{y}$, check both
+vectors on $t>0$.
+\[
+  \begin{aligned}
+    \mat{A}(t)\vect{y}_1(t)
+    &=
+    \begin{pmatrix}0&1\\-6/t^2&4/t\end{pmatrix}
+    \begin{pmatrix}t^2\\2t\end{pmatrix}
+    =
+    \begin{pmatrix}2t\\-6+8\end{pmatrix}
+    =
+    \begin{pmatrix}2t\\2\end{pmatrix}
+    =\vect{y}_1'(t)\\[1em]
+    \mat{A}(t)\vect{y}_2(t)
+    &=
+    \begin{pmatrix}0&1\\-6/t^2&4/t\end{pmatrix}
+    \begin{pmatrix}t^3\\3t^2\end{pmatrix}
+    =
+    \begin{pmatrix}3t^2\\-6t+12t\end{pmatrix}
+    =
+    \begin{pmatrix}3t^2\\6t\end{pmatrix}
+    =\vect{y}_2'(t)
+  \end{aligned}
+\]
+\end{frame}
+
+\begin{frame}{\SystemFrameTitle{Fundamental Matrix}{\VariableSystemEquation}}
+Use the given homogeneous solutions as columns.
+\[
+  \mat{\Phi}(t)
+  =
+  \bigl[\,\vect{y}_1(t)\quad\vect{y}_2(t)\,\bigr]
+  =
+  \begin{pmatrix}t^2&t^3\\2t&3t^2\end{pmatrix}
+\]
+\[
+  \det\mat{\Phi}(t)=3t^4-2t^4=t^4>0
+  \qquad\text{for }t>0
+\]
+Thus $\mat{\Phi}(t)$ is invertible throughout $(0,\infty)$.
+\end{frame}
+
+\begin{frame}{\SystemFrameTitle{Fundamental Matrix Inverse}{\VariableSystemEquation}}
+For an invertible $2\times2$ matrix, swap the two diagonal entries,
+negate the two off-diagonal entries, and divide the resulting matrix
+by the determinant.
+\[
+  \mat{M}=\begin{pmatrix}a&b\\c&d\end{pmatrix}
+  \qquad
+  \mat{M}^{-1}
+  =\frac{1}{ad-bc}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}
+\]
+The determinant of $\mat{\Phi}(t)$ is $t^4$, so
+\[
+  \mat{\Phi}(t)=\begin{pmatrix}t^2&t^3\\2t&3t^2\end{pmatrix}
+  \qquad
+  \mat{\Phi}(t)^{-1}
+  =\frac{1}{t^4}\begin{pmatrix}3t^2&-t^3\\-2t&t^2\end{pmatrix}
+\]
+\end{frame}
+
+\begin{frame}{\SystemFrameTitle{Variation of Parameters}{\VariableSystemEquation}}
+Write $\vect{y}=\mat{\Phi}\vect{u}$ and multiply
+\[
+  \vect{u}'(t)
+  =\mat{\Phi}(t)^{-1}\vect{f}(t)
+  =\frac{1}{t^4}
+  \begin{pmatrix}3t^2&-t^3\\-2t&t^2\end{pmatrix}
+  \begin{pmatrix}0\\1\end{pmatrix}
+\]
+\[
+  \vect{u}'(t)
+  =\frac{1}{t^4}\begin{pmatrix}-t^3\\t^2\end{pmatrix}
+  =\begin{pmatrix}-t^3/t^4\\t^2/t^4\end{pmatrix}
+  =\begin{pmatrix}-t^{-1}\\t^{-2}\end{pmatrix}
+\]
+\smallskip
+\[
+  \vect{u}'(t)
+  =\begin{pmatrix}-t^{-1}\\t^{-2}\end{pmatrix}
+  \qquad\Longrightarrow\qquad
+  \vect{u}(t)
+  =\int\begin{pmatrix}-t^{-1}\\t^{-2}\end{pmatrix}\,dt
+  =\begin{pmatrix}-\log(t)\\-1/t\end{pmatrix}
+   +\begin{pmatrix}c_1\\c_2\end{pmatrix}
+\]
+\end{frame}
+
+\begin{frame}{\SystemFrameTitle{General Solution}{\VariableSystemEquation}}
+Multiply by $\mat{\Phi}(t)$ and distribute.
+\[
+  \begin{aligned}
+    \vect{y}(t)
+    &=\mat{\Phi}(t)\vect{u}(t)
+      =\mat{\Phi}(t)\left[
+        \begin{pmatrix}-\log(t)\\-1/t\end{pmatrix}
+        +\begin{pmatrix}c_1\\c_2\end{pmatrix}\right]\\
+    \vect{y}(t)&=\begin{pmatrix}t^2&t^3\\2t&3t^2\end{pmatrix}\begin{pmatrix}-\log(t)\\-1/t\end{pmatrix}
+      +\begin{pmatrix}t^2&t^3\\2t&3t^2\end{pmatrix}\begin{pmatrix}c_1\\c_2\end{pmatrix}
+  \end{aligned}
+\]
+\[
+  \vect{y}(t)
+  =
+  \underbrace{\begin{pmatrix}
+    -t^2\log(t)-t^2\\
+    -2t\log(t)-3t
+  \end{pmatrix}}_{\text{particular solution } \vect{y}_p(t)}
+  +
+  \underbrace{c_1\vect{y}_1(t)+c_2\vect{y}_2(t)}_{\text{complementary solution}}
+\]
+\end{frame}
+
+\begin{frame}{\SystemFrameTitle{Verification}{\VariableSystemEquation}}
+Differentiate the two components of $\vect{y}_p$.
+\[
+  \vect{y}_p'(t)
+  =
+  \begin{pmatrix}
+    -2t\log(t)-3t\\
+    -2\log(t)-5
+  \end{pmatrix}
+\]
+The right-hand side of the system gives the same vector.
+\[
+  \begin{aligned}
+    \mat{A}(t)\vect{y}_p(t)+\vect{f}(t)
+    &=
+    \begin{pmatrix}
+      -2t\log(t)-3t\\
+      6\log(t)+6-8\log(t)-12+1
+    \end{pmatrix}\\
+    &=
+    \begin{pmatrix}
+      -2t\log(t)-3t\\
+      -2\log(t)-5
+    \end{pmatrix}
+    =\vect{y}_p'(t)
+  \end{aligned}
+\]
+\end{frame}
+
+\begin{frame}{\SystemFrameTitle{Constant-Coefficient Complex Eigenvalues}{\RotationSystemEquation}}
+Find the solution of the first-order initial value problem
+\[
+  \vect{y}'=\mat{A}\vect{y}+\vect{f}(t)
+  \qquad
+  \vect{y}(0)=\begin{pmatrix}1\\2\end{pmatrix}
+\]
+where
+\[
+  \mat{A}=\begin{pmatrix}0&-2\\2&0\end{pmatrix}
+  \qquad
+  \vect{f}(t)=\begin{pmatrix}t\\0\end{pmatrix}
+\]
+The characteristic polynomial of $\mat{A}$ is
+\[
+  \det(\lambda\mat{I}-\mat{A})
+  =\det\begin{pmatrix}\lambda&2\\-2&\lambda\end{pmatrix}
+  =\lambda^2+4
+\]
+The eigenvalues are $2i$ and $-2i$.
+\end{frame}
+
+\begin{frame}{\SystemFrameTitle{Eigenvector for \(\lambda=+2i\)}{\RotationSystemEquation}}
+The first row of $(\mat{A}-2i\mat{I})\vect{v}=\vect{0}$ gives
+$-2iv_1-2v_2=0$, so $v_2=-iv_1$. Choose $v_1=1$.
+\[
+  (\mat{A}-2i\mat{I})\begin{pmatrix}1\\-i\end{pmatrix}
+  =
+  \begin{pmatrix}-2i&-2\\2&-2i\end{pmatrix}
+  \begin{pmatrix}1\\-i\end{pmatrix}
+  =\begin{pmatrix}0\\0\end{pmatrix}
+\]
+The resulting complex homogeneous solution is
+\[
+  \vect{z}(t)=e^{2it}\vect{v}
+  =\bigl(\cos(2t)+i\sin(2t)\bigr)\begin{pmatrix}1\\-i\end{pmatrix}
+  =\begin{pmatrix}\cos(2t)\\\sin(2t)\end{pmatrix}
+    +i\begin{pmatrix}\sin(2t)\\-\cos(2t)\end{pmatrix}
+\]
+\end{frame}
+
+\begin{frame}{\SystemFrameTitle{Real \(\vect{y}_c\)}{\RotationSystemEquation}}
+Take $\vect{y}_1(t)=\operatorname{Re}(\vect{z}(t))$ and
+$\vect{y}_2(t)=-\operatorname{Im}(\vect{z}(t))$ to form $\mat{\Phi}(t)$.
+\[
+  \mat{\Phi}(t)
+  =\bigl[\,\vect{y}_1(t)\quad\vect{y}_2(t)\,\bigr]
+  =\begin{pmatrix}
+     \cos(2t)&-\sin(2t)\\
+     \sin(2t)&\cos(2t)
+   \end{pmatrix}
+\]
+Differentiate the entries and compare with $\mat{A}\mat{\Phi}(t)$.
+\[
+  \mat{\Phi}'(t)=
+  \begin{pmatrix}
+    -2\sin(2t)&-2\cos(2t)\\
+     2\cos(2t)&-2\sin(2t)
+  \end{pmatrix}
+  =
+  \begin{pmatrix}0&-2\\2&0\end{pmatrix}
+  \begin{pmatrix}
+    \cos(2t)&-\sin(2t)\\
+    \sin(2t)&\cos(2t)
+  \end{pmatrix}
+  =\mat{A}\mat{\Phi}(t)
+\]
+\end{frame}
+
+\begin{frame}{\SystemFrameTitle{Fundamental Matrix Inverse}{\RotationSystemEquation}}
+The determinant is
+\[
+  \det\mat{\Phi}(t)=\cos^2(2t)+\sin^2(2t)=1
+\]
+The columns are therefore independent for every $t$.
+The inverse is
+\[
+  \mat{\Phi}(t)^{-1}
+  =\begin{pmatrix}
+    \cos(2t)&\sin(2t)\\
+    -\sin(2t)&\cos(2t)
+  \end{pmatrix}
+\]
+\end{frame}
+
+\begin{frame}{\SystemFrameTitle{Variation of Parameters}{\RotationSystemEquation}}
+Multiply the inverse by the forcing vector.
+\[
+  \mat{\Phi}(s)^{-1}\vect{f}(s)
+  =
+  \begin{pmatrix}
+    \cos(2s)&\sin(2s)\\
+    -\sin(2s)&\cos(2s)
+  \end{pmatrix}
+  \begin{pmatrix}s\\0\end{pmatrix}
+  =
+  \begin{pmatrix}s\cos(2s)\\-s\sin(2s)\end{pmatrix}
+\]
+\end{frame}
+
+\begin{frame}{\SystemFrameTitle{Integration by Parts}{\RotationSystemEquation}}
+In each component, differentiate $s$ and integrate the trigonometric factor.
+\[
+  \begin{aligned}
+    \int_0^t s\cos(2s)\,ds
+    &=\left[\frac{s\sin(2s)}{2}\right]_0^t
+      -\frac12\int_0^t\sin(2s)\,ds\\
+    &=\frac{t\sin(2t)}{2}+\frac{\cos(2t)-1}{4}\\[0.8em]
+    \int_0^t -s\sin(2s)\,ds
+    &=\left[\frac{s\cos(2s)}{2}\right]_0^t
+      -\frac12\int_0^t\cos(2s)\,ds\\
+    &=\frac{t\cos(2t)}{2}-\frac{\sin(2t)}{4}
+  \end{aligned}
+\]
+\end{frame}
+
+\begin{frame}{\SystemFrameTitle{General Solution}{\RotationSystemEquation}}
+Collect the two integrals in a vector $\vect{g}(t)$.
+\[
+  \vect{g}(t)=\int_0^t\mat{\Phi}(s)^{-1}\vect{f}(s)\,ds
+  =\begin{pmatrix}
+    t\sin(2t)/2+(\cos(2t)-1)/4\\
+    t\cos(2t)/2-\sin(2t)/4
+  \end{pmatrix}
+\]
+\[
+  \vect{u}(t)=\vect{g}(t)+\begin{pmatrix}c_1\\c_2\end{pmatrix}
+\]
+Multiply by $\mat{\Phi}(t)$ and distribute.
+\[
+  \vect{y}(t)=\mat{\Phi}(t)\vect{g}(t)
+    +\mat{\Phi}(t)\begin{pmatrix}c_1\\c_2\end{pmatrix}
+\]
+\end{frame}
+
+\begin{frame}{\SystemFrameTitle{General Solution (continued)}{\RotationSystemEquation}}
+Expand the matrix product by columns.
+\[
+  \begin{aligned}
+    \vect{y}(t)
+    &=\mat{\Phi}(t)\vect{g}(t)
+      +\begin{pmatrix}
+        \cos(2t)&-\sin(2t)\\
+        \sin(2t)&\cos(2t)
+      \end{pmatrix}\begin{pmatrix}c_1\\c_2\end{pmatrix}\\[0.5em]
+    &=\mat{\Phi}(t)\vect{g}(t)
+      +c_1\begin{pmatrix}\cos(2t)\\\sin(2t)\end{pmatrix}
+      +c_2\begin{pmatrix}-\sin(2t)\\\cos(2t)\end{pmatrix}\\[0.5em]
+    &=\underbrace{\mat{\Phi}(t)\vect{g}(t)}_{\text{particular solution}}
+      +\underbrace{c_1\vect{y}_1(t)+c_2\vect{y}_2(t)}_{\text{complementary solution}}
+  \end{aligned}
+\]
+\end{frame}
+
+\begin{frame}{\SystemFrameTitle{Initial Condition \quad \(\vect{y}(0)=\left(\begin{smallmatrix}1\\2\end{smallmatrix}\right)\)}{\RotationSystemEquation}}
+\[
+  \begin{aligned}
+    \vect{y}(0)
+    &=\mat{\Phi}(0)\vect{g}(0)+\mat{\Phi}(0)\vect{c}\\
+    &=\begin{pmatrix}1&0\\0&1\end{pmatrix}\begin{pmatrix}0\\0\end{pmatrix}
+      +\begin{pmatrix}1&0\\0&1\end{pmatrix}\begin{pmatrix}c_1\\c_2\end{pmatrix}\\
+    &=\vect{c}=\begin{pmatrix}c_1\\c_2\end{pmatrix}
+      =\begin{pmatrix}1\\2\end{pmatrix}
+  \end{aligned}
+\]
+Substitute these constants into the general solution.
+\[
+  \boxed{\vect{y}(t)=\mat{\Phi}(t)
+  \begin{pmatrix}
+    1+t\sin(2t)/2+(\cos(2t)-1)/4\\
+    2+t\cos(2t)/2-\sin(2t)/4
+  \end{pmatrix}}
+\]
+\end{frame}
+
+\begin{frame}{\SystemFrameTitle{Verification}{\RotationSystemEquation}}
+Write $\vect{y}=\mat{\Phi}\vect{u}$ with
+$\vect{u}(t)=\begin{pmatrix}1\\2\end{pmatrix}+\vect{g}(t)$.
+The product rule gives
+\[
+  \begin{aligned}
+    \vect{y}'(t)
+    &=\mat{\Phi}'(t)\vect{u}(t)
+      +\mat{\Phi}(t)\begin{pmatrix}t\cos(2t)\\-t\sin(2t)\end{pmatrix}\\
+    &=\mat{A}\mat{\Phi}(t)\vect{u}(t)
+      +\mat{\Phi}(t)\mat{\Phi}(t)^{-1}\begin{pmatrix}t\\0\end{pmatrix}\\
+    &=\mat{A}\vect{y}(t)+\begin{pmatrix}t\\0\end{pmatrix}
+  \end{aligned}
+\]
+The solution has the required initial value.
+\[
+  \vect{y}(0)=
+  \begin{pmatrix}1&0\\0&1\end{pmatrix}\begin{pmatrix}1\\2\end{pmatrix}
+  =\begin{pmatrix}1\\2\end{pmatrix}
+\]
+\end{frame}
+
+\end{document}
