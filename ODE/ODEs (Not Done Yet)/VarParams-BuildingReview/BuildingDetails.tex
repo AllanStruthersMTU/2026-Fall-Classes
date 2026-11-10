@@ -1,0 +1,160 @@
+\documentclass[11pt,aspectratio=169]{beamer}
+\ifdefined\pdfmapfile\pdfmapfile{+cm-super-t1.map}\fi
+\input{LectureHeader}
+\title{Building Details}
+\date{}
+\lecturelabel{Building Details}
+
+% Building problems adapt the two cases in Week 9, BuildingWorksheet.tex.
+
+\begin{document}
+\begin{frame}{Two-Story Building}
+\begin{columns}[c,onlytextwidth]
+  \column{.61\textwidth}
+  \resizebox{\linewidth}{!}{\TwoStoryBuilding{}}
+  \column{.35\textwidth}
+  \textbf{Worked problem}
+
+  \medskip
+  The base motion $y_0(t)$ is prescribed. The two floor displacements are
+  measured to the right from rest.
+
+  \[
+    \vect{y}(0)=(0,-1)\,\mathrm{m}
+  \]
+  \[
+    \vect{y}'(0)=(0,2)\,\mathrm{m/s}
+  \]
+\end{columns}
+\end{frame}
+
+\begin{frame}{Story Forces and Floor Balances}
+\setlength{\abovedisplayskip}{5pt}
+\setlength{\belowdisplayskip}{5pt}
+\setlength{\abovedisplayshortskip}{5pt}
+\setlength{\belowdisplayshortskip}{5pt}
+Story $i$ connects levels $i-1$ and $i$. The force on the 
+upper level is
+$-f_i$ and the force on the lower level is $+f_i$, where
+\[
+  f_i=k_i(y_i-y_{i-1})+c_i(y_i'-y_{i-1}')
+\]
+\[
+  \underbrace{\frac{\mathrm{N}}{\cancel{\mathrm{m}}}
+    \cancel{\mathrm{m}}}_{\text{spring}}=\mathrm{N}
+  \qquad
+  \underbrace{\frac{\mathrm{N}\,\cancel{\mathrm{s}}}{\cancel{\mathrm{m}}}
+    \frac{\cancel{\mathrm{m}}}{\cancel{\mathrm{s}}}}_{\text{damper}}=\mathrm{N}
+  \qquad
+  \mathrm{kg}\,\frac{\mathrm{m}}{\mathrm{s}^2}=\mathrm{N}
+\]
+Substituting the story forces into Newton's law gives
+\[
+  \begin{alignedat}{2}
+    4y_1'' &=-f_1+f_2 &\quad
+      &=-4(y_1-y_0)-2(y_1'-y_0')+3(y_2-y_1)+(y_2'-y_1')\\
+    3y_2'' &=-f_2 &
+      &=\phantom{-4(y_1-y_0)-2(y_1'-y_0')}-3(y_2-y_1)-(y_2'-y_1')
+  \end{alignedat}
+\]
+\end{frame}
+
+\begin{frame}{Step-by-step algebra}
+\setlength{\abovedisplayskip}{5pt}
+\setlength{\belowdisplayskip}{5pt}
+\setlength{\abovedisplayshortskip}{5pt}
+\setlength{\belowdisplayshortskip}{5pt}
+Floor displacements are blue, velocities are red, and accelerations are green.
+\[
+  \begin{aligned}
+    4{\color{mtuGreen}y_1''}
+      &=-4({\color{blue}y_1}-y_0)-2({\color{red!75!black}y_1'}-y_0')
+        +3({\color{blue}y_2-y_1})+({\color{red!75!black}y_2'-y_1'})\\
+    3{\color{mtuGreen}y_2''}
+      &=\phantom{-4(y_1-y_0)-2(y_1'-y_0')}
+        -3({\color{blue}y_2-y_1})-({\color{red!75!black}y_2'-y_1'})
+  \end{aligned}
+\]
+
+Move every floor term to the left. Keep the prescribed base terms on the right.
+\[
+  \begin{aligned}
+    4{\color{mtuGreen}y_1''}
+      +2{\color{red!75!black}y_1'}-({\color{red!75!black}y_2'-y_1'})
+      +4{\color{blue}y_1}-3({\color{blue}y_2-y_1})
+      &=4y_0+2y_0'\\
+    3{\color{mtuGreen}y_2''}
+      +({\color{red!75!black}y_2'-y_1'})+3({\color{blue}y_2-y_1})
+      &=0
+  \end{aligned}
+\]
+Collect like terms in each floor equation.
+\[
+  \begin{alignedat}{5}
+    4{\color{mtuGreen}y_1''}
+      &{}+3{\color{red!75!black}y_1'} &&{}-{\color{red!75!black}y_2'}
+      &&{}+7{\color{blue}y_1} &&{}-3{\color{blue}y_2}
+      &&=4y_0+2y_0'\\
+    3{\color{mtuGreen}y_2''}
+      &{}-{\color{red!75!black}y_1'} &&{}+{\color{red!75!black}y_2'}
+      &&{}-3{\color{blue}y_1} &&{}+3{\color{blue}y_2}
+      &&=0
+  \end{alignedat}
+\]
+\end{frame}
+
+\begin{frame}{Floor Balances in Matrix Form}
+Collect the floor terms on the left and the prescribed base motion on the right.
+\[
+  \underbrace{\begin{pmatrix}4&0\\0&3\end{pmatrix}}_{\mat{M}}
+    {\color{mtuGreen}\begin{pmatrix}y_1''\\y_2''\end{pmatrix}}
+  +\underbrace{\begin{pmatrix}3&-1\\-1&1\end{pmatrix}}_{\mat{C}}
+    {\color{red!75!black}\begin{pmatrix}y_1'\\y_2'\end{pmatrix}}
+  +\underbrace{\begin{pmatrix}7&-3\\-3&3\end{pmatrix}}_{\mat{K}}
+    {\color{blue}\begin{pmatrix}y_1\\y_2\end{pmatrix}}
+  =\underbrace{\begin{pmatrix}4y_0+2y_0'\\0\end{pmatrix}}_{\vect{b}(t)}
+\]
+\[
+  \mat{M}\vect{y}''+\mat{C}\vect{y}'+\mat{K}\vect{y}=\vect{b}(t)
+  \qquad
+  \vect{b}(t)=\begin{pmatrix}4y_0(t)+2y_0'(t)\\0\end{pmatrix}
+\]
+$\mat{M}$ is in $\mathrm{kg}$.
+$\mat{C}$ is in $\mathrm{N\,s/m}$.
+$\mat{K}$ is in $\mathrm{N/m}$.
+$\vect{b}$ is in $\mathrm{N}$.
+Base motion is $y_0(t)=\sin(t)$ $\mathrm{m}$.
+\end{frame}
+
+\begin{frame}{First-Order version 
+		$\vect{z}=(y_1,y_2,y_1',y_2') =(y_1,y_2,v_1,v_2) $ }
+The equations $y_1'=v_1$ and $y_2'=v_2$ give the top two rows of the system.
+\[
+  \begin{pmatrix}y_1'\\y_2'\end{pmatrix}
+    =\begin{pmatrix}v_1\\v_2\end{pmatrix}
+    =\begin{pmatrix}\mat{0}&\mat{I}\end{pmatrix}\vect{z}
+\]
+Solving the ODEs for $v_1'=y_1''$ and $v_2'=y_2''$
+gives the bottom rows of the system.
+\[
+  \vect{z}'=\mat{A}\vect{z}+\vect{g}(t)
+  \qquad
+  \mat{A}=\begin{pmatrix}\mat{0}&\mat{I}\\-\mat{M}^{-1}\mat{K}&-\mat{M}^{-1}\mat{C}\end{pmatrix}
+  \qquad
+  \vect{g}(t)=\begin{pmatrix}\vect{0}\\\mat{M}^{-1}\vect{b}(t)\end{pmatrix}
+\]
+\[
+  \mat{A}=\begin{pmatrix}
+    0&0&1&0\\
+    0&0&0&1\\
+    -7/4&3/4&-3/4&1/4\\
+    1&-1&1/3&-1/3
+  \end{pmatrix}
+  \quad
+  \vect{g}(t)=\begin{pmatrix}0\\0\\(4y_0(t)+2y_0'(t))/4\\0\end{pmatrix}
+  \quad
+  \vect{z}(0)=\begin{pmatrix}0\\-1\\0\\2\end{pmatrix}
+\]
+\end{frame}
+
+\end{document}
