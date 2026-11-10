@@ -1,0 +1,78 @@
+\documentclass[11pt,aspectratio=169]{beamer}
+\ifdefined\pdfmapfile\pdfmapfile{+cm-super-t1.map}\fi
+\input{LectureHeader}
+\title{Missing Eigenvectors}
+\date{}
+\lecturelabel{Missing Eigenvectors}
+
+\begin{document}
+
+\begin{frame}{\inserttitle}
+Consider $\vect{y}'=\mat{A}_{\varepsilon}\vect{y}$ with $\varepsilon\ne 0$.
+\[
+  \mat{A}_{\varepsilon}=
+  \begin{pmatrix}\lambda&1\\0&\lambda+\varepsilon\end{pmatrix}
+\]
+The distinct eigenvalues give two independent solutions.
+\[
+  \begin{aligned}
+    \lambda_1&=\lambda
+    &\vect{V}_1&=\begin{pmatrix}1\\0\end{pmatrix}
+    &\vect{y}_{1,\varepsilon}(t)&=e^{\lambda t}\vect{V}_1\\[0.5em]
+    \lambda_2&=\lambda+\varepsilon
+    &\vect{V}_2&=\begin{pmatrix}1\\\varepsilon\end{pmatrix}
+    &\vect{y}_{2,\varepsilon}(t)&=e^{(\lambda+\varepsilon)t}\vect{V}_2
+  \end{aligned}
+\]
+As $\varepsilon\to 0$, $\vect{V}_2\to\vect{V}_1$ and both solutions
+approach $e^{\lambda t}\vect{V}_1$.
+\end{frame}
+
+\begin{frame}{A Second Solution in the Limit}
+For $\varepsilon\ne 0$, the scaled difference is also a solution.
+\[
+  \frac{\vect{y}_{2,\varepsilon}(t)-\vect{y}_{1,\varepsilon}(t)}
+       {\varepsilon}
+  =
+  e^{\lambda t}
+  \begin{pmatrix}
+    (e^{\varepsilon t}-1)/\varepsilon\\
+    e^{\varepsilon t}
+  \end{pmatrix}
+  \xrightarrow{\varepsilon\to 0}
+  e^{\lambda t}\begin{pmatrix}t\\1\end{pmatrix}
+\]
+The first entry inside the vector tends to $t$ by L'H\^opital's rule.
+
+\medskip
+For $\vect{W}=\begin{pmatrix}0\\1\end{pmatrix}$,
+$(\mat{A}_0-\lambda\mat{I})\vect{W}=\vect{V}_1$, so
+\[
+  \vect{y}_2(t)=e^{\lambda t}(t\vect{V}_1+\vect{W})
+\]
+solves $\vect{y}'=\mat{A}_0\vect{y}$. Its second entry is $e^{\lambda t}$,
+while $e^{\lambda t}\vect{V}_1$ has second entry zero.
+\end{frame}
+
+\begin{frame}{Reduction of Order}
+The trick is to let the coefficients of $\vect{V}_1$ and $\vect{W}$ vary.
+For the limiting system $\vect{y}'=\mat{A}_0\vect{y}$, set
+\[
+  \vect{y}(t)=e^{\lambda t}\bigl(a(t)\vect{V}_1+b(t)\vect{W}\bigr)
+\]
+Substitute and cancel the terms from differentiating $e^{\lambda t}$.
+Since $(\mat{A}_0-\lambda\mat{I})\vect{V}_1=0$ and
+$(\mat{A}_0-\lambda\mat{I})\vect{W}=\vect{V}_1$, we get
+\[
+  a'(t)\vect{V}_1+b'(t)\vect{W}=b(t)\vect{V}_1
+  \qquad\Longrightarrow\qquad
+  a'(t)=b(t),\quad b'(t)=0
+\]
+Choose $b(t)=1$ and $a(0)=0$ to get $a(t)=t$. This gives the same
+second solution as the limit.
+\[
+  \vect{y}_2(t)=e^{\lambda t}(t\vect{V}_1+\vect{W})
+\]
+\end{frame}
+
+\end{document}
