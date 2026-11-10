@@ -75,4 +75,48 @@ second solution as the limit.
 \]
 \end{frame}
 
+\begin{frame}{A Third Approach: The Taylor Series}
+For any square matrix \(\mat{A}\), the shift \(\mat{N}=\mat{A}-\lambda_1\mat{I}\)
+commutes with \(\lambda_1\mat{I}\). The binomial theorem therefore lets
+us factor the exponential series:
+\[
+e^{t\mat{A}}
+=
+\underbrace{\left(1+\lambda_1 t+\frac{(\lambda_1 t)^2}{2!}+\cdots\right)}_{e^{\lambda_1 t}}
+\left(\mat{I}+t\mat{N}+\frac{t^2\mat{N}^2}{2!}+\cdots\right).
+\]
+For our limiting matrix, \(\lambda_1=\lambda\) and
+\(\mat{N}=\mat{A}_0-\lambda_1\mat{I}=\begin{pmatrix}0&1\\0&0\end{pmatrix}\),
+so \(\mat{N}^2=0\) and the second series stops after the linear term.
+\[
+e^{t\mat{A}_0}
+=e^{\lambda_1 t}(\mat{I}+t\mat{N})
+=e^{\lambda_1 t}\begin{pmatrix}1&t\\0&1\end{pmatrix}.
+\]
+Applying this matrix to \(\vect{W}\) gives
+\(e^{\lambda_1 t}(\vect{W}+t\vect{V}_1)\), the same second solution.
+\end{frame}
+
+\begin{frame}{A Fourth Approach: Expand the Reduced Unknown}
+Set \(\vect{y}(t)=e^{\lambda_1 t}\vect{u}(t)\) for the limiting system.
+Substituting and canceling the exponential gives
+\[
+\vect{u}'=\mat{N}\vect{u},\qquad
+\mat{N}=\mat{A}_0-\lambda_1\mat{I},\qquad \vect{u}(0)=\vect{W}.
+\]
+Write \(\vect{u}(t)=\sum_{k=0}^{\infty}t^k\vect{u}_k\).
+Matching powers of \(t\) gives
+\[
+(k+1)\vect{u}_{k+1}=\mat{N}\vect{u}_k,\qquad
+\vect{u}_0=\vect{W},\quad
+\vect{u}_1=\mat{N}\vect{W}=\vect{V}_1,\quad
+\vect{u}_2=\tfrac12\mat{N}\vect{V}_1=0.
+\]
+The recurrence makes every higher coefficient zero. Therefore
+\[
+\vect{u}(t)=\vect{W}+t\vect{V}_1,\qquad
+\vect{y}_2(t)=e^{\lambda_1 t}\bigl(\vect{W}+t\vect{V}_1\bigr).
+\]
+\end{frame}
+
 \end{document}
