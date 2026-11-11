@@ -7,116 +7,243 @@
 
 \begin{document}
 
-\begin{frame}{\inserttitle}
-Consider $\vect{y}'=\mat{A}_{\varepsilon}\vect{y}$ with $\varepsilon\ne 0$.
+\begin{frame}{\(\vect{y}'=\mat{A}\vect{y}\qquad \mat{A}\vect{v}_i=\lambda_i\vect{v}_i\)}
+\begin{itemize}
+\item Real eigenpairs \((\lambda_i,\vect{v}_i)\) give the real solution
 \[
-  \mat{A}_{\varepsilon}=
-  \begin{pmatrix}\lambda&1\\0&\lambda+\varepsilon\end{pmatrix}
+\vect{y}_i(t)=e^{\lambda_i t}\vect{v}_i.
 \]
-The distinct eigenvalues give two independent solutions.
+\item Complex conjugate pairs 
+\(\lambda_\pm=\alpha\pm\beta i\) and
+\(\vect{v}_\pm=\vect{a}\pm\vect{b}i\)
+give the two real solutions
 \[
-  \begin{aligned}
-    \lambda_1&=\lambda
-    &\vect{V}_1&=\begin{pmatrix}1\\0\end{pmatrix}
-    &\vect{y}_{1,\varepsilon}(t)&=e^{\lambda t}\vect{V}_1\\[0.5em]
-    \lambda_2&=\lambda+\varepsilon
-    &\vect{V}_2&=\begin{pmatrix}1\\\varepsilon\end{pmatrix}
-    &\vect{y}_{2,\varepsilon}(t)&=e^{(\lambda+\varepsilon)t}\vect{V}_2
-  \end{aligned}
+\begin{aligned}
+\operatorname{re}\!\left(e^{\lambda_+t}\vect{v}_+\right)
+&=e^{\alpha t}(\vect{a}\cos(\beta t)-\vect{b}\sin(\beta t)),\\
+\operatorname{im}\!\left(e^{\lambda_+t}\vect{v}_+\right)
+&=e^{\alpha t}(\vect{a}\sin(\beta t)+\vect{b}\cos(\beta t)).
+\end{aligned}
 \]
-As $\varepsilon\to 0$, $\vect{V}_2\to\vect{V}_1$ and both solutions
-approach $e^{\lambda t}\vect{V}_1$.
+\item The real general solution is
+\(\vect{y}(t)=c_1\vect{y}_1(t)+\cdots+c_n\vect{y}_n(t)\)
+\item What can go wrong?
+\end{itemize}
 \end{frame}
 
-\begin{frame}{A Second Solution in the Limit}
-For $\varepsilon\ne 0$, the scaled difference is also a solution.
-\[
-  \frac{\vect{y}_{2,\varepsilon}(t)-\vect{y}_{1,\varepsilon}(t)}
-       {\varepsilon}
-  =
-  e^{\lambda t}
-  \begin{pmatrix}
-    (e^{\varepsilon t}-1)/\varepsilon\\
-    e^{\varepsilon t}
-  \end{pmatrix}
-  \xrightarrow{\varepsilon\to 0}
-  e^{\lambda t}\begin{pmatrix}t\\1\end{pmatrix}
-\]
-The first entry inside the vector tends to $t$ by L'H\^opital's rule.
 
-\medskip
-For $\vect{W}=\begin{pmatrix}0\\1\end{pmatrix}$,
-$(\mat{A}_0-\lambda\mat{I})\vect{W}=\vect{V}_1$, so
+\begin{frame}{Missing Eigenvectors \quad \(\vect{y}'=\mat{A}_{\varepsilon}\vect{y},\quad
+\mat{A}_{\varepsilon}=\begin{pmatrix}\lambda&1\\0&\lambda+\varepsilon\end{pmatrix}\)}
+The eigenvalues and eigenvectors are
 \[
-  \vect{y}_2(t)=e^{\lambda t}(t\vect{V}_1+\vect{W})
+\begin{aligned}
+\lambda_1&=\lambda,
+&\vect{v}_1&=\begin{pmatrix}1\\0\end{pmatrix},\\
+\lambda_2&=\lambda+\varepsilon,
+&\vect{v}_2&=\begin{pmatrix}1\\\varepsilon\end{pmatrix}.
+\end{aligned}
 \]
-solves $\vect{y}'=\mat{A}_0\vect{y}$. Its second entry is $e^{\lambda t}$,
-while $e^{\lambda t}\vect{V}_1$ has second entry zero.
+Note \(\lambda_2\to\lambda\) and \(\vect{v}_2\to\vect{v}_1\) as
+\(\varepsilon\to0\). The solutions
+\[
+\begin{aligned}
+\vect{y}_{1,\varepsilon}(t)&=e^{\lambda t}\vect{v}_1
+&\xrightarrow{\varepsilon\to0}&\;e^{\lambda t}\vect{v}_1,\\
+\vect{y}_{2,\varepsilon}(t)&=e^{(\lambda+\varepsilon)t}\vect{v}_2
+&\xrightarrow{\varepsilon\to0}&\;e^{\lambda t}\vect{v}_1.
+\end{aligned}
+\]
+We need two linearly independent (LI) solutions. The limit solutions are \textbf{not} LI.
 \end{frame}
 
-\begin{frame}{Reduction of Order}
-The trick is to let the coefficients of $\vect{V}_1$ and $\vect{W}$ vary.
-For the limiting system $\vect{y}'=\mat{A}_0\vect{y}$, set
+\begin{frame}{A Second Solution\quad
+\(\displaystyle
+\frac{\vect{y}_{2,\varepsilon}(t)-\vect{y}_{1,\varepsilon}(t)}{\varepsilon}
+=e^{\lambda t}\begin{pmatrix}(e^{\varepsilon t}-1)/\varepsilon\\e^{\varepsilon t}\end{pmatrix}
+\xrightarrow{\varepsilon\to0}e^{\lambda t}\begin{pmatrix}t\\1\end{pmatrix}
+\)}
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+\setlength{\abovedisplayshortskip}{2pt}
+\setlength{\belowdisplayshortskip}{2pt}
+\setlength{\jot}{1pt}
+\begin{itemize}
+\setlength{\itemsep}{2pt}
+\setlength{\parsep}{0pt}
+\item The title scaled difference solves
+\(\vect{y}'=\mat{A}_{\varepsilon}\vect{y}\).
+The limit is from L'H\^opital's rule.
+\item \(\vect{y}_2(t)=e^{\lambda t}(t\vect{v}_1+\vect{w})
+=e^{\lambda t}\left(t\begin{pmatrix}1\\0\end{pmatrix}+\begin{pmatrix}0\\1\end{pmatrix}\right)\)
+satisfies \(\vect{y}'=\mat{A}_0\vect{y}\).
+\item To make this construction systematic substitute
+\(\vect{y}_2=e^{\lambda t}(t\vect{v}_1+\vect{w})\) into
+\(\vect{y}'=\mat{A}\vect{y}\)
 \[
-  \vect{y}(t)=e^{\lambda t}\bigl(a(t)\vect{V}_1+b(t)\vect{W}\bigr)
+\begin{aligned}
+\vect{y}_2'
+ &=\lambda e^{\lambda t}(t\vect{v}_1+\vect{w})+e^{\lambda t}\vect{v}_1
+ =e^{\lambda t}(\lambda t\vect{v}_1+\lambda\vect{w}+\vect{v}_1)\\
+\mat{A}\vect{y}_2
+ &=e^{\lambda t}(t\mat{A}\vect{v}_1+\mat{A}\vect{w})
+ =e^{\lambda t}(\lambda t\vect{v}_1+\mat{A}\vect{w})
+ \quad\text{since }\mat{A}\vect{v}_1=\lambda\vect{v}_1\\
+ \boxed{\vect{y}_2'=\mat{A}\vect{y}_2}
+ &\ \Longrightarrow\ \boxed{\lambda t\vect{v}_1+\lambda\vect{w}+\vect{v}_1
+ =\lambda t\vect{v}_1+\mat{A}\vect{w}}\\
+ &\ \Longrightarrow\ \boxed{\lambda\vect{w}+\vect{v}_1=\mat{A}\vect{w}}
+ \ \Longrightarrow\ \boxed{(\mat{A}-\lambda\mat{I})\vect{w}=\vect{v}_1}
+\end{aligned}
 \]
-Substitute and cancel the terms from differentiating $e^{\lambda t}$.
-Since $(\mat{A}_0-\lambda\mat{I})\vect{V}_1=0$ and
-$(\mat{A}_0-\lambda\mat{I})\vect{W}=\vect{V}_1$, we get
+\item Row reduce \(\left[\begin{array}{c|c}\mat{A}_0-\lambda\mat{I}&\vect{v}_1\end{array}\right]
+=\left[\begin{array}{c|c}\begin{pmatrix}\lambda&1\\0&\lambda\end{pmatrix}-\lambda\begin{pmatrix}1&0\\0&1\end{pmatrix}&\begin{pmatrix}1\\0\end{pmatrix}\end{array}\right]
+=\left[\begin{array}{cc|c}0&1&1\\0&0&0\end{array}\right]\).
+\newline 
+So \(w_2=1\) and we can choose \(w_1=0\) to get the title solution. 
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Missing Eigenvector for \(\vect{y}'=\mat{A}\vect{y}\):
+\quad  \(\mat{A}\vect{v}_1=\lambda_1\vect{v}_1,\ \vect{v}_1\ne\vect{0}\)\quad \(\lambda_1\) repeated}
+Substitute 
+\(\vect{y}_2(t)=e^{\lambda_1 t}(t\vect{v}_1+\vect{w})\)
+if missing an eigenvector for a double eigenvalue $\lambda_1$.
 \[
-  a'(t)\vect{V}_1+b'(t)\vect{W}=b(t)\vect{V}_1
-  \qquad\Longrightarrow\qquad
-  a'(t)=b(t),\quad b'(t)=0
+\begin{aligned}
+\vect{y}_2'
+ &=\lambda_1 e^{\lambda_1 t}(t\vect{v}_1+\vect{w})
+   +e^{\lambda_1 t}\vect{v}_1\\
+ &=e^{\lambda_1 t}\boxed{\lambda_1 t\vect{v}_1+\lambda_1\vect{w}+\vect{v}_1}\\
+\mat{A}\vect{y}_2
+ &=e^{\lambda_1 t}(t\mat{A}\vect{v}_1+\mat{A}\vect{w})\\
+ &=e^{\lambda_1 t}\boxed{\lambda_1 t\vect{v}_1+\mat{A}\vect{w}}
+ \quad\text{since }\mat{A}\vect{v}_1=\lambda_1\vect{v}_1\\
+\boxed{\vect{y}_2'=\mat{A}\vect{y}_2}
+ &\ \Longrightarrow\
+ \boxed{\lambda_1 t\vect{v}_1+\lambda_1\vect{w}+\vect{v}_1
+ =\lambda_1 t\vect{v}_1+\mat{A}\vect{w}}\\
+ &\ \Longrightarrow\ \boxed{\lambda_1\vect{w}+\vect{v}_1=\mat{A}\vect{w}}
+ \ \Longrightarrow\ \boxed{(\mat{A}-\lambda_1\mat{I})\vect{w}=\vect{v}_1}
+\end{aligned}
 \]
-Choose $b(t)=1$ and $a(0)=0$ to get $a(t)=t$. This gives the same
-second solution as the limit.
+Row reducing \(\left[\begin{array}{c|c}\mat{A}-\lambda_1\mat{I}&\vect{v}_1\end{array}\right]\)
+gives \(\vect{w}\). The 2nd solution is
+\(\boxed{\vect{y}_2(t)=e^{\lambda_1 t}(t\vect{v}_1+\vect{w})}\).
+\end{frame}
+
+\begin{frame}{Double Eigenvalues: Matrices to Row Reduce}
+Row reduce to find \(\vect{v}_1\):
 \[
-  \vect{y}_2(t)=e^{\lambda t}(t\vect{V}_1+\vect{W})
+\left[\begin{array}{c|c}
+\mat{A}-\lambda_1\mat{I}&\vect{0}
+\end{array}\right],
+\qquad
+(\mat{A}-\lambda_1\mat{I})\vect{v}_1=\vect{0}.
+\]
+Row reduce to find \(\vect{w}\):
+\[
+\left[\begin{array}{c|c}
+\mat{A}-\lambda_1\mat{I}&\vect{v}_1
+\end{array}\right],
+\qquad
+(\mat{A}-\lambda_1\mat{I})\vect{w}=\vect{v}_1.
+\]
+Two linearly independent solutions are
+\[
+\vect{y}_1(t)=e^{\lambda_1 t}\vect{v}_1,\qquad
+\vect{y}_2(t)=e^{\lambda_1 t}(t\vect{v}_1+\vect{w}).
 \]
 \end{frame}
 
-\begin{frame}{A Third Approach: The Taylor Series}
-For any square matrix \(\mat{A}\), the shift \(\mat{N}=\mat{A}-\lambda_1\mat{I}\)
-commutes with \(\lambda_1\mat{I}\). The binomial theorem therefore lets
-us factor the exponential series:
+\begingroup
+\setbeamertemplate{frametitle}{%
+  \nointerlineskip
+  \begin{beamercolorbox}[wd=\paperwidth,ht=1.25cm,dp=0.6cm,leftskip=1em,rightskip=1em,vmode]{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle\par
+  \end{beamercolorbox}
+}
+\begin{frame}{Worked Example\quad \(\vect{y}'=\mat{A}\vect{y},\quad \mat{A}=\begin{pmatrix}4&1&0\\-1&2&0\\0&0&-2\end{pmatrix}\)}
+\small
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+\setlength{\jot}{1pt}
+\renewcommand{\arraystretch}{0.85}
 \[
-e^{t\mat{A}}
-=
-\underbrace{\left(1+\lambda_1 t+\frac{(\lambda_1 t)^2}{2!}+\cdots\right)}_{e^{\lambda_1 t}}
-\left(\mat{I}+t\mat{N}+\frac{t^2\mat{N}^2}{2!}+\cdots\right).
+\det(\lambda\mat{I}-\mat{A})=(\lambda+2)(\lambda-3)^2=0\ \Longrightarrow\ \boxed{\lambda_1=3,\ \lambda_2=3},\ \lambda_3=-2
 \]
-For our limiting matrix, \(\lambda_1=\lambda\) and
-\(\mat{N}=\mat{A}_0-\lambda_1\mat{I}=\begin{pmatrix}0&1\\0&0\end{pmatrix}\),
-so \(\mat{N}^2=0\) and the second series stops after the linear term.
+For \(\lambda_3=-2\), row reduce to find \(\vect{v}_3\):
 \[
-e^{t\mat{A}_0}
-=e^{\lambda_1 t}(\mat{I}+t\mat{N})
-=e^{\lambda_1 t}\begin{pmatrix}1&t\\0&1\end{pmatrix}.
+\left[\begin{array}{c|c}\mat{A}-(-2)\mat{I}&\begin{pmatrix}0\\0\\0\end{pmatrix}\end{array}\right]=\left[\begin{array}{rrr|r}6&1&0&0\\-1&4&0&0\\0&0&0&0\end{array}\right]
+\longrightarrow
+\left[\begin{array}{rrr|r}1&0&0&0\\0&1&0&0\\0&0&0&0\end{array}\right]
+\ \Longrightarrow\ \vect{v}_3=\begin{pmatrix}0\\0\\1\end{pmatrix}
 \]
-Applying this matrix to \(\vect{W}\) gives
-\(e^{\lambda_1 t}(\vect{W}+t\vect{V}_1)\), the same second solution.
-\end{frame}
-
-\begin{frame}{A Fourth Approach: Expand the Reduced Unknown}
-Set \(\vect{y}(t)=e^{\lambda_1 t}\vect{u}(t)\) for the limiting system.
-Substituting and canceling the exponential gives
+\par\medskip
+So
 \[
-\vect{u}'=\mat{N}\vect{u},\qquad
-\mat{N}=\mat{A}_0-\lambda_1\mat{I},\qquad \vect{u}(0)=\vect{W}.
-\]
-Write \(\vect{u}(t)=\sum_{k=0}^{\infty}t^k\vect{u}_k\).
-Matching powers of \(t\) gives
-\[
-(k+1)\vect{u}_{k+1}=\mat{N}\vect{u}_k,\qquad
-\vect{u}_0=\vect{W},\quad
-\vect{u}_1=\mat{N}\vect{W}=\vect{V}_1,\quad
-\vect{u}_2=\tfrac12\mat{N}\vect{V}_1=0.
-\]
-The recurrence makes every higher coefficient zero. Therefore
-\[
-\vect{u}(t)=\vect{W}+t\vect{V}_1,\qquad
-\vect{y}_2(t)=e^{\lambda_1 t}\bigl(\vect{W}+t\vect{V}_1\bigr).
+\boxed{\vect{y}_3(t)=e^{\lambda_3 t}\vect{v}_3=e^{-2t}\begin{pmatrix}0\\0\\1\end{pmatrix}}
 \]
 \end{frame}
 
+\begin{frame}{Worked Example: \(\lambda_1=3\)\quad \(\vect{y}'=\mat{A}\vect{y},\quad \mat{A}=\begin{pmatrix}4&1&0\\-1&2&0\\0&0&-2\end{pmatrix}\)}
+\small
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+\setlength{\jot}{1pt}
+\renewcommand{\arraystretch}{0.85}
+For \(\lambda_1=3\), row reduce to find \(\vect{v}_1\)
+\[
+\left[\begin{array}{c|c}\mat{A}-(3)\mat{I}&\begin{pmatrix}0\\0\\0\end{pmatrix}\end{array}\right]=\left[\begin{array}{rrr|r}1&1&0&0\\-1&-1&0&0\\0&0&-5&0\end{array}\right]
+\longrightarrow
+\left[\begin{array}{rrr|r}1&1&0&0\\0&0&0&0\\0&0&1&0\end{array}\right]
+\ \Longrightarrow\ \vect{v}_1=\begin{pmatrix}1\\-1\\0\end{pmatrix}
+\]
+\par\medskip
+There is one independent eigenvector and one solution
+\[
+\boxed{\vect{y}_1(t)=e^{\lambda_1 t}\vect{v}_1=e^{3t}\begin{pmatrix}1\\-1\\0\end{pmatrix}}
+\]
+To find the second solution \(\vect{y}_2(t)=e^{\lambda_1 t}(t\vect{v}_1+\vect{w})\) row reduce to find \(\vect{w}\)
+\[
+\left[\begin{array}{c|c}\mat{A}-(3)\mat{I}&\vect{v}_1\end{array}\right]=\left[\begin{array}{rrr|r}1&1&0&1\\-1&-1&0&-1\\0&0&-5&0\end{array}\right]
+\longrightarrow
+\left[\begin{array}{rrr|r}1&1&0&1\\0&0&0&0\\0&0&1&0\end{array}\right]
+\ \Longrightarrow\ \vect{w}=\begin{pmatrix}1\\0\\0\end{pmatrix}
+\]
+\end{frame}
+
+\begin{frame}{Worked Example: \(\lambda_1=3\)\quad \(\vect{y}'=\mat{A}\vect{y},\quad \mat{A}=\begin{pmatrix}4&1&0\\-1&2&0\\0&0&-2\end{pmatrix}\)}
+\small
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+\setlength{\jot}{1pt}
+\renewcommand{\arraystretch}{0.85}
+To find the second solution \(\vect{y}_2(t)=e^{\lambda_1 t}(t\vect{v}_1+\vect{w})\) row reduce to find \(\vect{w}\)
+\[
+\left[\begin{array}{c|c}\mat{A}-(3)\mat{I}&\vect{v}_1\end{array}\right]=\left[\begin{array}{rrr|r}1&1&0&1\\-1&-1&0&-1\\0&0&-5&0\end{array}\right]
+\longrightarrow
+\left[\begin{array}{rrr|r}1&1&0&1\\0&0&0&0\\0&0&1&0\end{array}\right]
+\ \Longrightarrow\ \vect{w}=\begin{pmatrix}1\\0\\0\end{pmatrix}
+\]
+We need \(w_1+w_2=1,\ w_3=0\). With \(w_2=0\) 
+the general solution is
+\[
+\begin{aligned}
+\vect{y}(t)
+ &=c_1e^{3t}\vect{v}_1+c_2e^{3t}(t\vect{v}_1+\vect{w})+c_3e^{-2t}\vect{v}_3\\
+ &=c_1e^{3t}\begin{pmatrix}1\\-1\\0\end{pmatrix}
+   +c_2e^{3t}\begin{pmatrix}t+1\\-t\\0\end{pmatrix}
+   +c_3e^{-2t}\begin{pmatrix}0\\0\\1\end{pmatrix}\\
+ &=\underbrace{\begin{pmatrix}
+ e^{3t}&(t+1)e^{3t}&0\\
+ -e^{3t}&-t e^{3t}&0\\
+ 0&0&e^{-2t}
+ \end{pmatrix}}_{\text{fundamental matrix }\Phi(t)}
+ \begin{pmatrix}c_1\\c_2\\c_3\end{pmatrix}
+\end{aligned}
+\]
+\end{frame}
+\endgroup
+
+% Other approaches are preserved in MissingEigenvectorsOtherApproaches.tex.
 \end{document}
