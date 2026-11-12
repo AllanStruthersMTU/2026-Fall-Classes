@@ -1,0 +1,47 @@
+\documentclass[11pt,letterpaper]{article}
+\input{WorksheetHeader.tex}
+\input{Figures/TankDiagram.tex}
+\usepackage{bm}
+\newcommand{\mat}[1]{\bm{#1}}
+\newcommand{\SystemBlank}[2]{%
+  \vcenter{\hbox{$\boxed{\rule{0pt}{#2}\makebox[#1]{}}$}}}
+\newcommand{\VectorBlank}{\SystemBlank{4.16in}{1.04in}}
+\begin{document}
+\WorksheetHeading{In-Class Worksheet Tuesday/Wednesday}
+Do not solve explicitly for $y$.
+\begin{enumerate}
+\item Linear\qquad $ty'+2y=e^t\qquad y(1)=0$
+\par Intermediate step\quad $\VectorBlank$
+\vfill
+\noindent Answer\quad $\VectorBlank$
+\item Separable\qquad $y'=2t\cos(t^2)(1+y^2)\qquad y(0)=0$
+\par Intermediate step\quad $\VectorBlank$
+\vfill
+\noindent Answer\quad $\VectorBlank$
+\end{enumerate}
+\newpage
+\noindent\resizebox{\linewidth}{!}{\ThreeTankDiagram{%
+  capacity1=100,volume1=50,concentration1=1,
+  capacity2=120,volume2=60,concentration2=2,
+  capacity3=100,volume3=40,concentration3=1,
+  inflow=2,inflowconcentration=2,
+  flow12=4,flow21=2,flow23=3,flow32=1,outflow=2,
+  saltRate1=2,saltRate2=1,saltRate3=2}}
+\par Well-mixed tanks, $t$ in min, $\vect{v}(t)$ in L, and salt $\vect{s}(t)$ in g. Dry Salt added at shown rates.
+Set up $\vect{s}'=\mat{A}\vect{s}+\vect{b}$.
+\begin{enumerate}
+\item $\vect{v}(t)=\SystemBlank{1.8in}{0.8in}\ \mathrm{L}\qquad
+\vect{s}(0)=\SystemBlank{1.8in}{0.8in}\ \mathrm{g}$
+\item $\mat{A}=\SystemBlank{3.0in}{1.2in}\ \mathrm{min}^{-1}\qquad
+\vect{b}=\SystemBlank{1.8in}{1.2in}\ \mathrm{g/min}$
+\item A suitable UC form is $\vect{s}_p(t)=\SystemBlank{3.2in}{0.8in}$
+\item To determine the UC coefficients you would row reduce
+\par $\mat{M}_{\mathrm{UC}}=\SystemBlank{3.2in}{0.8in}$
+\end{enumerate}
+% Instructor checks: v=(50,60,40) L, s(0)=(50,120,40) g.
+% Liquid balances: 2+2-4=0, 4+1-2-3=0, 3-1-2=0 L/min.
+% A=[-4/50,2/60,0;4/50,-5/60,1/40;0,3/60,-3/40] min^{-1}.
+% b=(6,1,2) g/min. Constant UC form a, augmented matrix [A|-b].
+% Linear: (t^2 y)'=t e^t, t^2 y=(t-1)e^t for t>0.
+% Separable: arctan(y)=sin(t^2), locally about t=0.
+\end{document}

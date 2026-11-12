@@ -1,0 +1,67 @@
+\documentclass[11pt,aspectratio=169]{beamer}
+\ifdefined\pdfmapfile\pdfmapfile{+cm-super-t1.map}\fi
+\input{LectureHeader}
+\title{Exam Two --- November 19}
+\date{}
+\lecturelabel{Exam Two}
+\begin{document}
+\begin{frame}{\inserttitle}
+The second exam covers tanks, buildings, 1\textsuperscript{st}-order linear equations, 1\textsuperscript{st}-order separable equations, 1\textsuperscript{st}-order constant-coefficient linear systems, and variation of parameters.
+  \begin{itemize}
+  	\item This includes $y_c$, $y_p$, and initial conditions.
+  	\item The exam will be like HW (with simpler boxes) stuck together.
+  	\item Four questions, on both sides of two sheets of paper, totaling 50 points.
+  	\item You can write anything you want on a notecard up to $4\times6$ inches. 
+  	% \item The exam is in class on November 5.
+  	% \item We finish exam material October 29.
+  	% \item Monday, Tuesday, and Wednesday mostly review with some new material.
+
+  \end{itemize}
+
+The exam is intended to be very predictable.
+\end{frame}
+\begin{frame}{Finding $\vect{y}_c$ for $\vect{y}'=\mat{A}\vect{y}+\vect{f}(t)$}
+\begin{itemize}
+\item Real eigenpairs $\mat{A}\vect{v}_i=\lambda_i\vect{v}_i$ with $n$ independent eigenvectors
+\[
+\vect{y}_c(t)=c_1e^{\lambda_1t}\vect{v}_1+\cdots+c_ne^{\lambda_nt}\vect{v}_n
+\]
+\item Complex eigenvalue $\alpha+\beta i$ and eigenvector $\vect{a}+\vect{b}i$
+\[
+\begin{aligned}
+\vect{y}_c(t)=\phantom{{}+{}}&c_1e^{\alpha t}\bigl(\vect{a}\cos(\beta t)-\vect{b}\sin(\beta t)\bigr)\\
+{}+{}&c_2e^{\alpha t}\bigl(\vect{a}\sin(\beta t)+\vect{b}\cos(\beta t)\bigr)
+\end{aligned}
+\]
+\item Double eigenvalue $\lambda_1$ with only one eigenvector $\vect{v}_1$
+\[
+(\mat{A}-\lambda_1\mat{I})\vect{w}=\vect{v}_1
+\qquad\text{solutions}\qquad
+c_1e^{\lambda_1t}\vect{v}_1+c_2e^{\lambda_1t}(t\vect{v}_1+\vect{w})
+\]
+\end{itemize}
+\end{frame}
+\begin{frame}{Finding $\vect{y}_p$ for $\vect{y}'=\mat{A}\vect{y}+\vect{f}(t)$}
+\begin{itemize}
+\item Undetermined coefficients. Guess the form of $\vect{y}_p$ from
+$\vect{f}$ and substitute into the ODE then match coefficients. 
+\begin{itemize}
+\item Polynomials. $\vect{f}(t)=\begin{pmatrix}t^2+1\\2t\end{pmatrix}\ \longrightarrow\ \vect{y}_p=\vect{a}_2t^2+\vect{a}_1t+\vect{a}_0$
+\item Exponentials. $\vect{f}(t)=e^{2t}\begin{pmatrix}1\\3\end{pmatrix}\ \longrightarrow\ \vect{y}_p=\vect{a}e^{2t}$
+\item Sinusoids. $\vect{f}(t)=\begin{pmatrix}\sin(2t)\\\cos(2t)\end{pmatrix}\ \longrightarrow\ \vect{y}_p=\vect{a}\cos(2t)+\vect{b}\sin(2t)$
+\end{itemize}
+\item Variation of parameters. Form the fundamental matrix 
+$
+\Phi(t)=\left[\vect{y}_1(t)\ \cdots\ \vect{y}_n(t)\right]
+$
+\begin{itemize}
+\item Let $\vect{y}_p(t)=\Phi(t)\vect{u}(t)$ and solve
+\[
+\vect{u}'(t)=\Phi(t)^{-1}\vect{f}(t)
+\qquad
+\vect{y}_p(t)=\Phi(t)\left(\int_{}^{t}\Phi(s)^{-1}\vect{f}(s)\,ds+\vect{C}\right)
+\]
+\end{itemize}
+\end{itemize}
+\end{frame}
+\end{document}
