@@ -1,0 +1,124 @@
+\documentclass[11pt,letterpaper]{article}
+\input{WorksheetHeader.tex}
+
+% Framed solution box at 130% of the Week 9 writing-area dimensions.
+\newcommand{\AnswerField}[1]{%
+  \stepcounter{keyfield}%
+  \makebox[5.5em][r]{$#1$\hspace{0.35em}}%
+  $\vcenter{\hbox{\fbox{\parbox[c][1.105in][c]{2.275in}{\strut\smash{\makebox[0pt][l]{\parbox{2.275in}{\centering\small $\csname keyanswer\arabic{keyfield}\endcsname$}}}}}}}$%
+}
+
+\newcommand{\SolveSystem}[2]{%
+  \item[] Solve $\displaystyle
+    \vect{y}'=A\vect{y}+\vect{f}(t)
+    \quad A=\begin{pmatrix}#1\end{pmatrix}
+    \quad \vect{f}(t)=#2$
+  \par\vfill
+  \begingroup
+  \setlength{\parskip}{0pt}
+  \renewcommand{\labelenumii}{\arabic{enumii}.}
+  \begin{enumerate}
+    \setlength{\itemsep}{0pt}
+    \item \AnswerField{\vect{y}_c=}\qquad\AnswerField{\Phi(t)=}
+    \par\vfill
+    \item \AnswerField{\det\Phi(t)=}\qquad\AnswerField{\Phi(t)^{-1}=}
+    \par\vfill
+    \item \AnswerField{\vect{u}'(t)=}
+  \end{enumerate}
+  \endgroup
+  \par\vfill
+}
+
+% Answers are smashed inside the original fixed-size boxes.
+% Supporting work is overlaid and contributes no vertical or horizontal space.
+\newcounter{keyfield}
+\newcommand{\KeyAnswer}[1]{\expandafter\newcommand\csname keyanswer#1\endcsname}
+\KeyAnswer{1}{e^t\!\left[c_1\begin{pmatrix}\cos(3t)\\\sin(3t)\end{pmatrix}
++c_2\begin{pmatrix}-\sin(3t)\\\cos(3t)\end{pmatrix}\right]}
+\KeyAnswer{2}{e^t\begin{pmatrix}\cos(3t)&-\sin(3t)\\\sin(3t)&\cos(3t)\end{pmatrix}}
+\KeyAnswer{3}{e^{2t}}
+\KeyAnswer{4}{e^{-t}\begin{pmatrix}\cos(3t)&\sin(3t)\\-\sin(3t)&\cos(3t)\end{pmatrix}}
+\KeyAnswer{5}{\Phi(t)^{-1}\vect{f}(t)}
+\KeyAnswer{6}{c_1e^t\begin{pmatrix}1\\2\end{pmatrix}
++c_2e^{-t}\begin{pmatrix}3\\4\end{pmatrix}}
+\KeyAnswer{7}{\begin{pmatrix}e^t&3e^{-t}\\2e^t&4e^{-t}\end{pmatrix}}
+\KeyAnswer{8}{-2}
+\KeyAnswer{9}{-\frac12\begin{pmatrix}4e^{-t}&-3e^{-t}\\-2e^t&e^t\end{pmatrix}}
+\KeyAnswer{10}{\Phi(t)^{-1}\vect{f}(t)}
+\AddToHook{shipout/foreground}{%
+ \begin{tikzpicture}[remember picture,overlay]
+ \ifnum\value{page}=1
+ \node[anchor=north west,inner sep=0pt] at
+ ([xshift=0.85in,yshift=-2.10in]current page.north west)
+ {\begin{minipage}{6.9in}\small
+$\lambda=\alpha+\beta i=1+3i\quad\Longrightarrow\quad \alpha=1,\ \beta=3
+\qquad
+\vect{V}=\vect{A}+i\vect{B}
+=\begin{pmatrix}1\\-i\end{pmatrix}
+=\begin{pmatrix}1\\0\end{pmatrix}+i\begin{pmatrix}0\\-1\end{pmatrix}$\\[4pt]
+$\vect{Y}_1=e^{\alpha t}\bigl(\vect{A}\cos(\beta t)-\vect{B}\sin(\beta t)\bigr)
+=e^t\begin{pmatrix}\cos(3t)\\\sin(3t)\end{pmatrix}$\\[4pt]
+$\vect{Y}_2=e^{\alpha t}\bigl(\vect{A}\sin(\beta t)+\vect{B}\cos(\beta t)\bigr)
+=e^t\begin{pmatrix}\sin(3t)\\-\cos(3t)\end{pmatrix}
+\qquad \Phi=[\,\vect{Y}_1\ \ -\vect{Y}_2\,]$
+\end{minipage}};
+ \node[anchor=north west,inner sep=0pt] at
+ ([xshift=4.9in,yshift=-6.85in]current page.north west)
+ {\begin{minipage}{2.65in}\small\centering
+ $M=\begin{pmatrix}A&B\\C&D\end{pmatrix}$,\quad $\det M=AD-BC$\\[4pt]
+ $M^{-1}=\dfrac{1}{AD-BC}\begin{pmatrix}D&-B\\-C&A\end{pmatrix}$\\[4pt]
+ $AD-BC\ne0$
+ \end{minipage}};
+ \node[anchor=south west,inner sep=0pt] at
+ ([xshift=0.85in,yshift=0.55in]current page.south west)
+ {\begin{minipage}{6.9in}\small
+ $\displaystyle
+ \Phi^{-1}\vect{f}
+ =e^{-t}\begin{pmatrix}\cos(3t)&\sin(3t)\\-\sin(3t)&\cos(3t)\end{pmatrix}
+ \begin{pmatrix}e^t\sec(3t)\\0\end{pmatrix}
+ =\begin{pmatrix}1\\-\tan(3t)\end{pmatrix}
+ \qquad
+ \vect{u}=\begin{pmatrix}t\\\frac13\ln|\cos(3t)|\end{pmatrix}+\begin{pmatrix}c_1\\c_2\end{pmatrix}$\\[5pt]
+ $\displaystyle\boxed{\vect{y}=\vect{y}_c+
+ e^t\begin{pmatrix}t\cos(3t)-\frac13\sin(3t)\ln|\cos(3t)|\\
+ t\sin(3t)+\frac13\cos(3t)\ln|\cos(3t)|\end{pmatrix}}$
+ \quad $\cos(3t)\ne0$
+ \end{minipage}};
+ \else
+ \node[anchor=north west,inner sep=0pt] at
+ ([xshift=0.85in,yshift=-1.35in]current page.north west)
+ {\begin{minipage}{6.9in}\small
+ $\lambda_1=1,\quad \vect{V}_1=\begin{pmatrix}1\\2\end{pmatrix}
+ \qquad \lambda_2=-1,\quad \vect{V}_2=\begin{pmatrix}3\\4\end{pmatrix}$\\[4pt]
+ $\vect{Y}_1=e^t\vect{V}_1,\quad \vect{Y}_2=e^{-t}\vect{V}_2,\quad
+ \Phi=[\,\vect{Y}_1\ \ \vect{Y}_2\,],\quad
+ \vect{y}_c=c_1\vect{Y}_1+c_2\vect{Y}_2$
+ \end{minipage}};
+ \node[anchor=south west,inner sep=0pt] at
+ ([xshift=0.85in,yshift=0.55in]current page.south west)
+ {\begin{minipage}{6.9in}\small
+ $\displaystyle
+ \Phi^{-1}\vect{f}
+ =-\frac12\begin{pmatrix}4e^{-t}&-3e^{-t}\\-2e^t&e^t\end{pmatrix}
+ \frac{e^t}{1+t^2}\begin{pmatrix}1\\2\end{pmatrix}
+ =-\frac{1}{2(1+t^2)}\begin{pmatrix}4-6\\-2e^{2t}+2e^{2t}\end{pmatrix}
+ =\begin{pmatrix}1/(1+t^2)\\0\end{pmatrix}$\\[5pt]
+ $\displaystyle\vect{u}=\begin{pmatrix}\arctan(t)\\0\end{pmatrix}+\begin{pmatrix}c_1\\c_2\end{pmatrix}$\\[5pt]
+ $\displaystyle\boxed{\vect{y}=e^t(c_1+\arctan(t))\begin{pmatrix}1\\2\end{pmatrix}
+ +c_2e^{-t}\begin{pmatrix}3\\4\end{pmatrix}}$
+ \end{minipage}};
+ \fi
+ \end{tikzpicture}%
+}
+\begin{document}
+\WorksheetHeading{Variation of Parameters}
+
+\begin{enumerate}
+\SolveSystem{1&-3\\3&1}{\begin{pmatrix}e^t\sec(3t)\\0\end{pmatrix}}
+
+\newpage
+
+\SolveSystem{-5&3\\-8&5}{\frac{e^t}{1+t^2}\begin{pmatrix}1\\2\end{pmatrix}}
+\end{enumerate}
+
+\end{document}
