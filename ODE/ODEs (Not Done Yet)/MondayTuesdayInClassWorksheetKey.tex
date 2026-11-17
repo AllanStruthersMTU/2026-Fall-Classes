@@ -1,0 +1,71 @@
+\documentclass[12pt,letterpaper]{article}
+\input{WorksheetHeader.tex}
+\usepackage{bm}
+\newcommand{\mat}[1]{\bm{#1}}
+\newcommand{\VectorKey}[1]{\KeyBox{4.992in}{1.248in}{#1}}
+\newcommand{\AnswerField}[2]{%
+  \makebox[4em][r]{$#1$\hspace{0.20em}}%
+  $\KeyBox{2.73in}{1.326in}{#2}$}
+% Fixed dimensions match the student answer boxes.
+\newcommand{\KeyBox}[3]{%
+  \vcenter{\hbox{$\boxed{\parbox[c][#2][c]{#1}{\centering\small
+    \setlength{\arraycolsep}{3pt}\renewcommand{\arraystretch}{0.95}%
+    \ensuremath{\displaystyle #3}}}$}}}
+
+\begin{document}
+\WorksheetHeading{Monday/Tuesday Worksheet Key}
+$\vect{y}'=\mat{A}\vect{y}\quad
+\mat{A}=\begin{pmatrix}2&1&1\\0&2&0\\0&0&-1\end{pmatrix}\quad
+\vect{y}(0)=\vect{y}_0=\begin{pmatrix}1\\0\\2\end{pmatrix}$
+\par Eigenvalues $\lambda_1=\lambda_2=2$, $\lambda_3=-1$ with
+$\vect{v}_1=\begin{pmatrix}1\\0\\0\end{pmatrix}$ and
+$\vect{v}_3=\begin{pmatrix}-1\\0\\3\end{pmatrix}$\hfill
+Note, only one eigenvector for $\lambda_1=2$.
+\begin{enumerate}
+\item The form for $\vect{y}_c$ is (use $\vect{w}$ for the additional vector)
+\par $\vect{y}_c(t)=\VectorKey{c_1e^{2t}\vect{v}_1+c_2e^{2t}(t\vect{v}_1+\vect{w})+c_3e^{-t}\vect{v}_3}$
+\vfill
+\item To find $\vect{w}$ you would row reduce
+\par $\mat{M}_w=\VectorKey{\left[\begin{array}{c|c}
+\mat{A}-2\mat{I}&\vect{v}_1
+\end{array}\right]\qquad\text{or}\qquad
+\left[\begin{array}{rrr|r}
+0&1&1&1\\0&0&0&0\\0&0&-3&0
+\end{array}\right]}$
+\par{\footnotesize $(\mat{A}-2\mat{I})\vect{w}=\vect{v}_1$. One choice is $\vect{w}=(0,1,0)$.} 
+\vfill
+\item To satisfy the IC you would row reduce
+\par $\mat{M}_{\mathrm{IC}}=\VectorKey{\left[\begin{array}{ccc|c}
+\vect{v}_1&\vect{w}&\vect{v}_3&\vect{y}_0
+\end{array}\right]\qquad\text{or}\qquad
+\left[\begin{array}{rrr|r}
+1&0&-1&1\\0&1&0&0\\0&0&3&2
+\end{array}\right]}$
+\end{enumerate}
+\vfill
+\newpage
+Solve using variation of parameters
+\[
+\vect{y}'=\mat{A}\vect{y}+\vect{f}(t)
+\qquad \mat{A}=\begin{pmatrix}-5&3\\-8&5\end{pmatrix}
+\qquad \vect{f}(t)=\begin{pmatrix}0\\3e^t\end{pmatrix}
+\]
+Eigenpairs $1,\,\begin{pmatrix}1\\2\end{pmatrix}$ and
+$-1,\,\begin{pmatrix}3\\4\end{pmatrix}$
+\par\vfill
+\begin{enumerate}
+\item \AnswerField{\vect{y}_c(t)=}{c_1e^t\begin{pmatrix}1\\2\end{pmatrix}+c_2e^{-t}\begin{pmatrix}3\\4\end{pmatrix}}\hfill\AnswerField{\Phi(t)=}{\begin{pmatrix}e^t&3e^{-t}\\2e^t&4e^{-t}\end{pmatrix}}
+\par\vfill
+\item \AnswerField{\det\Phi(t)=}{\begin{aligned}
+&4e^t e^{-t}-6e^{-t}e^t\\
+&=4e^0-6e^0\\
+&=4-6=-2
+\end{aligned}}\hfill\AnswerField{\Phi(t)^{-1}=}{-\tfrac12\begin{pmatrix}4e^{-t}&-3e^{-t}\\-2e^t&e^t\end{pmatrix}}
+\par{\footnotesize For $ad-bc\ne 0$,
+$\begin{pmatrix}a&b\\c&d\end{pmatrix}^{-1}
+=\dfrac{1}{ad-bc}\begin{pmatrix}d&-b\\-c&a\end{pmatrix}$.}
+\par\vfill
+\item \AnswerField{\vect{u}'(t)=}{\Phi(t)^{-1}\vect{f}(t)\quad\text{or}\quad\begin{pmatrix}9/2\\-3e^{2t}/2\end{pmatrix}}
+\end{enumerate}
+\par\vfill
+\end{document}

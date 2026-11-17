@@ -1,0 +1,60 @@
+\documentclass[11pt,letterpaper]{article}
+\input{WorksheetHeader.tex}
+\input{Figures/TankDiagram.tex}
+\usepackage{bm}
+\newcommand{\mat}[1]{\bm{#1}}
+\newcommand{\VectorKey}[1]{\KeyBox{4.16in}{1.04in}{#1}}
+% Fixed dimensions match the student answer boxes.
+\newcommand{\KeyBox}[3]{%
+  \vcenter{\hbox{$\boxed{\parbox[c][#2][c]{#1}{\centering\small
+    \setlength{\arraycolsep}{3pt}\renewcommand{\arraystretch}{0.95}%
+    \ensuremath{\displaystyle #3}}}$}}}
+
+\begin{document}
+\WorksheetHeading{Tuesday/Wednesday Worksheet Key}
+Do not solve explicitly for $y$.
+\begin{enumerate}
+\item Linear\qquad $ty'+2y=e^t\qquad y(1)=0$
+\par Intermediate step\quad $\VectorKey{(t^2y)'=te^t}$
+\par{\footnotesize Write $y'+(2/t)y=e^t/t$ on $t>0$ since the initial condition is at $t=1$.
+\[
+\mu(t)=\exp\!\left(\int \frac{2}{t}\,dt\right)
+=\exp(2\ln(t))
+=\exp\!\left(\ln(t^2)\right)
+=t^2
+\]
+Integration gives $t^2y=(t-1)e^t+C$. Since $y(1)=0$, $C=0$.}
+\vfill
+\noindent Answer\quad $\VectorKey{t^2y=(t-1)e^t\quad(t>0)}$
+\item Separable\qquad $y'=2t\cos(t^2)(1+y^2)\qquad y(0)=0$
+\par Intermediate step\quad $\VectorKey{\int\frac{dy}{1+y^2}=\int 2t\cos(t^2)\,dt}$
+\par{\footnotesize Use $u=t^2$ on the right. Then $\arctan(y)=\sin(t^2)+C$, and $y(0)=0$ gives $C=0$.}
+\vfill
+\noindent Answer\quad $\VectorKey{\arctan(y)=\sin(t^2)}$
+\end{enumerate}
+\newpage
+\noindent\resizebox{\linewidth}{!}{\ThreeTankDiagram{%
+  capacity1=100,volume1=50,concentration1=1,
+  capacity2=120,volume2=60,concentration2=2,
+  capacity3=100,volume3=40,concentration3=1,
+  inflow=2,inflowconcentration=2,
+  flow12=4,flow21=2,flow23=3,flow32=1,outflow=2,
+  saltRate1=2,saltRate2=1,saltRate3=2}}
+\par Well-mixed tanks, $t$ in min, $\vect{v}(t)$ in L, and salt $\vect{s}(t)$ in g. Dry Salt added at shown rates.
+Set up $\vect{s}'=\mat{A}\vect{s}+\vect{b}$.
+\begin{enumerate}
+\item $\vect{v}(t)=\KeyBox{1.8in}{0.8in}{\begin{pmatrix}50\\60\\40\end{pmatrix}}\ \mathrm{L}\qquad
+\vect{s}(0)=\KeyBox{1.8in}{0.8in}{\begin{pmatrix}50\\120\\40\end{pmatrix}}\ \mathrm{g}$
+\par{\footnotesize All three liquid balances vanish since $(2+2-4,\ 4+1-2-3,\ 3-1-2)=(0,0,0)$ in L/min.}
+\item $\mat{A}=\KeyBox{3.0in}{1.2in}{\begin{pmatrix}
+-4/50&2/60&0\\4/50&-5/60&1/40\\0&3/60&-3/40
+\end{pmatrix}}\ \mathrm{min}^{-1}\qquad
+\vect{b}=\KeyBox{1.8in}{1.2in}{\begin{pmatrix}6\\1\\2\end{pmatrix}}\ \mathrm{g/min}$
+\par{\footnotesize Flow times concentration gives $(\mathrm{L/min})(\mathrm{g/L})=\mathrm{g/min}$.
+For example, $s_1'=-4s_1/50+2s_2/60+6$. Its constant input is $2(2)+2=6$ in g/min.}
+\item A suitable UC form is $\vect{s}_p(t)=\KeyBox{3.2in}{0.8in}{\begin{pmatrix}a_1\\a_2\\a_3\end{pmatrix}}$
+\item To determine the UC coefficients you would row reduce
+\par $\mat{M}_{\mathrm{UC}}=\KeyBox{3.2in}{0.8in}{\left[\begin{array}{c|c}\mat{A}&-\vect{b}\end{array}\right]}$
+\par{\footnotesize Since $\vect{s}_p'(t)=\vect{0}$, solve $\mat{A}\vect{a}=-\vect{b}$.}
+\end{enumerate}
+\end{document}
