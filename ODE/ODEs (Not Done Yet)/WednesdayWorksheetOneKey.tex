@@ -1,0 +1,128 @@
+\documentclass[11pt,letterpaper]{article}
+\input{WorksheetHeader.tex}
+\newcommand{\keybox}[3]{%
+  \vcenter{\hbox{$\boxed{\parbox[c][#2][c]{#1}{\centering\small
+    \setlength{\arraycolsep}{3pt}\ensuremath{\displaystyle #3}}}$}}}
+\input{Figures/TwoTankDiagram.tex}
+\input{Figures/TwoStoryBuilding.tex}
+
+
+\newsavebox{\AnswerAreaBox}
+\newenvironment{answerarea}{%
+  \par\noindent\begin{lrbox}{\AnswerAreaBox}\begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}%
+  \setlength{\abovedisplayskip}{4pt}\setlength{\belowdisplayskip}{4pt}%
+  \setlength{\abovedisplayshortskip}{4pt}\setlength{\belowdisplayshortskip}{4pt}%
+}{%
+  \end{minipage}\end{lrbox}\fbox{\usebox{\AnswerAreaBox}}\par
+}
+
+\begin{document}
+\WorksheetHeading{Wednesday Worksheet One Key}
+\begin{enumerate}
+\item The two tanks are well-mixed. Time is in minutes, volume is in liters,
+and salt mass is in grams.
+
+\noindent\resizebox{0.76\linewidth}{!}{\TwoTankDiagram{%
+  capacity1=90,capacity2=110,volume1=45,volume2=70,
+  initialSalt1=135,initialSalt2=105,inflow=7,inflowconcentration=4,
+  flow12=12,flow21=5,outflow=7,saltRate1=3,saltRate2=6}}
+
+Fill in the missing entries for $\vect{s}'=A\vect{s}+\vect{b}$.
+\begin{answerarea}
+\[
+\vect{v}(t)=\begin{pmatrix}45\\70\end{pmatrix}\ \mathrm{L}
+\qquad
+\vect{s}(0)=\begin{pmatrix}135\\105\end{pmatrix}\ \mathrm{g}
+\]
+\[
+A=\begin{pmatrix}-12/45&5/70\\12/45&-12/70\end{pmatrix}
+  \ \mathrm{min}^{-1}
+\qquad
+\vect{b}=\begin{pmatrix}7(4)+3\\6\end{pmatrix}\ \mathrm{g/min}
+\]
+
+\end{answerarea}
+{\footnotesize Both volumes are constant since $7+5=12$.}
+\vfill
+\item The diagram shows a two-story building. The floor displacements
+$\vect{y}(t)$ are in meters and time is in seconds. Fill in the missing
+entries in $M\vect{y}''+C\vect{y}'+K\vect{y}=\vect{f}(t)$, where
+$\vect{f}(t)=\begin{pmatrix}27\sin(2t)+30\cos(2t)\\0\end{pmatrix}\ \mathrm{N}$.
+
+\noindent\makebox[\linewidth][c]{%
+  \resizebox{0.40\linewidth}{!}{\TwoStoryBuilding{%
+    basemotion={3\sin(2t)},mass1=8,mass2=5,stiffness1=9,stiffness2=11,
+    damping1=5,damping2=7}}}
+\begin{answerarea}
+\[
+M=\begin{pmatrix}8&0\\0&5\end{pmatrix}
+\quad
+C=\begin{pmatrix}12&-7\\-7&7\end{pmatrix}
+\quad
+K=\begin{pmatrix}20&-11\\-11&11\end{pmatrix}
+\]
+\[
+\begin{pmatrix}y_1\\y_2\\y_1'\\y_2'\end{pmatrix}'=
+\begin{pmatrix}
+0_{2\times2}&I_2\\
+-M^{-1}K&-M^{-1}C
+\end{pmatrix}
+\begin{pmatrix}y_1\\y_2\\y_1'\\y_2'\end{pmatrix}
++\underbrace{\begin{pmatrix}0\\0\\M^{-1}\vect{f}(t)\end{pmatrix}}_{\vect{g}(t)}
+\]
+\end{answerarea}
+
+\newpage
+\setlength{\parskip}{3pt}
+\item Use variation of parameters for $\vect{y}'=A\vect{y}+\vect{f}(t)$.
+\[
+A=\begin{pmatrix}2&-9\\4&-10\end{pmatrix}
+\qquad
+\vect{f}(t)=e^{-4t}\begin{pmatrix}5\\3\end{pmatrix}
+\qquad
+\lambda_1=\lambda_2=-4,\quad
+\vect{v}_1=\begin{pmatrix}3\\2\end{pmatrix}
+\]
+\begin{enumerate}
+\item Compute a 2\textsuperscript{ND} LI solution and a fundamental matrix. Use $\vect{w}$ for the additional vector.
+\par $\vect{y}_2(t)=\keybox{2.05in}{0.80in}{e^{-4t}\begin{pmatrix}2+3t\\1+2t\end{pmatrix}}
+\qquad\Phi(t)=\keybox{3.15in}{0.80in}{e^{-4t}\begin{pmatrix}3&2+3t\\2&1+2t\end{pmatrix}}$
+\par{\footnotesize $(A+4I)\vect{w}=\vect{v}_1$ gives one choice $\vect{w}=\begin{pmatrix}2\\1\end{pmatrix}$. Then $\vect{y}_2(t)=e^{-4t}(t\vect{v}_1+\vect{w})$.}
+\item To make $\vect{y}_p(t)=\Phi(t)\vect{u}(t)$ a solution, we need
+\par $\vect{u}'(t)=\keybox{2.65in}{0.80in}{\Phi(t)^{-1}\vect{f}(t)\quad\text{or}\quad\begin{pmatrix}1-t\\1\end{pmatrix}}$
+\par{\footnotesize Integrate to get
+$\vect{u}(t)=\begin{pmatrix}t-t^2/2\\t\end{pmatrix}+\begin{pmatrix}c_1\\c_2\end{pmatrix}$.}
+\par\vfill
+\noindent Not on the exam\par
+\noindent $\vect{y}(t)=\keybox{4.85in}{0.80in}{\Phi(t)\begin{pmatrix}c_1+t-t^2/2\\c_2+t\end{pmatrix}}$
+\end{enumerate}
+\item Use variation of parameters for $\vect{y}'=A\vect{y}+\vect{f}(t)$.
+\[
+A=\begin{pmatrix}-5&6\\-6&-5\end{pmatrix}
+\qquad
+\vect{f}(t)=e^{-5t}\begin{pmatrix}7\\-4\end{pmatrix}
+\qquad
+\lambda=\underbrace{-5}_{\alpha}+\underbrace{6}_{\beta}i,\quad
+\vect{v}=\underbrace{\begin{pmatrix}4\\3\end{pmatrix}}_{\vect{a}}
++i\underbrace{\begin{pmatrix}-3\\4\end{pmatrix}}_{\vect{b}}
+\]
+\begin{enumerate}
+\item A real fundamental matrix is
+\par $\Phi(t)=\keybox{5.8in}{0.80in}{e^{-5t}\begin{pmatrix}
+4\cos(6t)+3\sin(6t)&4\sin(6t)-3\cos(6t)\\
+3\cos(6t)-4\sin(6t)&3\sin(6t)+4\cos(6t)
+\end{pmatrix}}$
+\item To make $\vect{y}_p(t)=\Phi(t)\vect{u}(t)$ a solution, we need
+\par $\vect{u}'(t)=\keybox{2.65in}{0.68in}{\Phi(t)^{-1}\vect{f}(t)}
+$
+\par{\footnotesize Use $\int\cos(6t)\,dt=\sin(6t)/6$ and $\int\sin(6t)\,dt=-\cos(6t)/6$. This gives
+$\vect{u}(t)=\frac{1}{150}\begin{pmatrix}
+16\sin(6t)-37\cos(6t)\\-16\cos(6t)-37\sin(6t)
+\end{pmatrix}$ plus a constant vector.}
+\par\vfill
+\noindent Not on the exam\par
+\noindent $\vect{y}(t)=\keybox{4.85in}{0.80in}{\Phi(t)\begin{pmatrix}c_1\\c_2\end{pmatrix}
++\frac{e^{-5t}}{6}\begin{pmatrix}-4\\-7\end{pmatrix}}$
+\end{enumerate}
+\end{enumerate}
+\end{document}

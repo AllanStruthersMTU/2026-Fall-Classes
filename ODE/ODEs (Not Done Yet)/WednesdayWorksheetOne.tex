@@ -1,0 +1,115 @@
+\documentclass[11pt,letterpaper]{article}
+\input{WorksheetHeader.tex}
+\newcommand{\workbox}[2]{%
+  \vcenter{\hbox{$\boxed{\rule{0pt}{#2}\makebox[#1]{}}$}}}
+\input{Figures/TwoTankDiagram.tex}
+\input{Figures/TwoStoryBuilding.tex}
+
+\newcommand{\matrixentry}{\makebox[0.38in]{}\rule[-0.08in]{0pt}{0.25in}}
+\newsavebox{\AnswerAreaBox}
+\newenvironment{answerarea}{%
+  \par\noindent\begin{lrbox}{\AnswerAreaBox}\begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}%
+  \setlength{\abovedisplayskip}{4pt}\setlength{\belowdisplayskip}{4pt}%
+  \setlength{\abovedisplayshortskip}{4pt}\setlength{\belowdisplayshortskip}{4pt}%
+}{%
+  \end{minipage}\end{lrbox}\fbox{\usebox{\AnswerAreaBox}}\par
+}
+
+\begin{document}
+\WorksheetHeading{Wednesday Worksheet One}
+\begin{enumerate}
+\item The two tanks are well-mixed. Time is in minutes, volume is in liters,
+and salt mass is in grams.
+
+\noindent\resizebox{0.76\linewidth}{!}{\TwoTankDiagram{%
+  capacity1=90,capacity2=110,volume1=45,volume2=70,
+  initialSalt1=135,initialSalt2=105,inflow=7,inflowconcentration=4,
+  flow12=12,flow21=5,outflow=7,saltRate1=3,saltRate2=6}}
+
+Fill in the missing entries for $\vect{s}'=A\vect{s}+\vect{b}$.
+\begin{answerarea}
+\[
+\vect{v}(t)=\begin{pmatrix}45\\\matrixentry\end{pmatrix}\ \mathrm{L}
+\qquad
+\vect{s}(0)=\begin{pmatrix}\matrixentry\\105\end{pmatrix}\ \mathrm{g}
+\]
+\[
+A=\begin{pmatrix}-12/45&\matrixentry\\\matrixentry&\matrixentry\end{pmatrix}
+  \ \mathrm{min}^{-1}
+\qquad
+\vect{b}=\begin{pmatrix}\matrixentry\\\matrixentry\end{pmatrix}\ \mathrm{g/min}
+\]
+
+\end{answerarea}
+\vfill
+\item The diagram shows a two-story building. The floor displacements
+$\vect{y}(t)$ are in meters and time is in seconds. Fill in the missing
+entries in $M\vect{y}''+C\vect{y}'+K\vect{y}=\vect{f}(t)$, where
+$\vect{f}(t)=\begin{pmatrix}27\sin(2t)+30\cos(2t)\\0\end{pmatrix}\ \mathrm{N}$.
+
+\noindent\makebox[\linewidth][c]{%
+  \resizebox{0.40\linewidth}{!}{\TwoStoryBuilding{%
+    basemotion={3\sin(2t)},mass1=8,mass2=5,stiffness1=9,stiffness2=11,
+    damping1=5,damping2=7}}}
+\begin{answerarea}
+\[
+M=\begin{pmatrix}\matrixentry&0\\0&\matrixentry\end{pmatrix}
+\quad
+C=\begin{pmatrix}\matrixentry&\matrixentry\\-7&\matrixentry\end{pmatrix}
+\quad
+K=\begin{pmatrix}\matrixentry&\matrixentry\\-11&\matrixentry\end{pmatrix}
+\]
+\[
+\begin{pmatrix}y_1\\y_2\\y_1'\\y_2'\end{pmatrix}'=
+\begin{pmatrix}
+\matrixentry&\matrixentry&\matrixentry&\matrixentry\\
+\matrixentry&\matrixentry&\matrixentry&\matrixentry\\
+\matrixentry&\matrixentry&\matrixentry&\matrixentry\\
+\matrixentry&\matrixentry&\matrixentry&\matrixentry
+\end{pmatrix}
+\begin{pmatrix}y_1\\y_2\\y_1'\\y_2'\end{pmatrix}
++\vect{g}(t)
+\]
+\end{answerarea}
+
+\newpage
+\item Use variation of parameters for $\vect{y}'=A\vect{y}+\vect{f}(t)$.
+\[
+A=\begin{pmatrix}2&-9\\4&-10\end{pmatrix}
+\qquad
+\vect{f}(t)=e^{-4t}\begin{pmatrix}5\\3\end{pmatrix}
+\qquad
+\lambda_1=\lambda_2=-4,\quad
+\vect{v}_1=\begin{pmatrix}3\\2\end{pmatrix}
+\]
+\begin{enumerate}
+\item Compute a 2\textsuperscript{ND} LI solution and a fundamental matrix. Use $\vect{w}$ for the additional vector.
+\par $\vect{y}_2(t)=\workbox{2.05in}{0.80in}\qquad\Phi(t)=\workbox{3.15in}{0.80in}$
+\item To make $\vect{y}_p(t)=\Phi(t)\vect{u}(t)$ a solution, we need
+\par $\vect{u}'(t)=\workbox{2.65in}{0.80in}
+$
+\par\vfill
+\noindent Not on the exam\par
+\noindent $\vect{y}(t)=\workbox{4.85in}{0.85in}$
+\end{enumerate}
+\item Use variation of parameters for $\vect{y}'=A\vect{y}+\vect{f}(t)$.
+\[
+A=\begin{pmatrix}-5&6\\-6&-5\end{pmatrix}
+\qquad
+\vect{f}(t)=e^{-5t}\begin{pmatrix}7\\-4\end{pmatrix}
+\qquad
+\lambda=-5+6i,\quad
+\vect{v}=\begin{pmatrix}4-3i\\3+4i\end{pmatrix}
+\]
+\begin{enumerate}
+\item A real fundamental matrix is
+\par $\Phi(t)=\workbox{5.8in}{0.80in}$
+\item To make $\vect{y}_p(t)=\Phi(t)\vect{u}(t)$ a solution, we need
+\par $\vect{u}'(t)=\workbox{2.65in}{0.90in}
+$
+\par\vfill
+\noindent Not on the exam\par
+\noindent $\vect{y}(t)=\workbox{4.85in}{0.85in}$
+\end{enumerate}
+\end{enumerate}
+\end{document}
